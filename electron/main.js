@@ -1,6 +1,13 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
+
+import {
+  saveCandidate,
+  saveAssessmentResult,
+  saveCertificate,
+  getAllCandidates,
+} from "./database.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +31,22 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, "../dist/index.html"));
   }
 }
+
+ipcMain.handle("db:saveCandidate", (_event, candidate) => {
+  return saveCandidate(candidate);
+});
+
+ipcMain.handle("db:saveAssessmentResult", (_event, result) => {
+  return saveAssessmentResult(result);
+});
+
+ipcMain.handle("db:saveCertificate", (_event, certificate) => {
+  return saveCertificate(certificate);
+});
+
+ipcMain.handle("db:getAllCandidates", () => {
+  return getAllCandidates();
+});
 
 app.whenReady().then(() => {
   createWindow();
