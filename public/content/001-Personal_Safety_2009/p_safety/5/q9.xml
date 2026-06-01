@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Protection and Environment work consists of which four elements?</txt>
+      <txt crct="35" c="X">Information / Training</txt>
+      <txt crct="73" c="X">Jubilees and celebrations</txt>
+      <txt crct="87" c="X">Protective Equipment</txt>
+      <txt crct="100" c="X">Following up Reports</txt>
+      <txt crct="38" c="X">Seasickness protection</txt>
+      <txt crct="81" c="X">Looking for oil spills</txt>
+      <txt crct="65" c="X">Maintenance</txt>
+      <txt crct="61" c="X">Drug testing the crew</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">防护和环境工作有那四部分组成？</txt>
+      <txt crct="3" c="X">信息／培训</txt>
+      <txt crct="41" c="X">周年纪念和庆典</txt>
+      <txt crct="75" c="X">保护设备</txt>
+      <txt crct="28" c="X">跟踪报告</txt>
+      <txt crct="72" c="X">晕船保护</txt>
+      <txt crct="33" c="X">查找溢油</txt>
+      <txt crct="91" c="X">维修保养</txt>
+      <txt crct="15" c="X">船员毒品测试</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Из каких четырёх элементов состоит охрана труда?</txt>
+      <txt crct="91" c="X">Информация / тренировки</txt>
+      <txt crct="67" c="X">Юбилеи и торжества</txt>
+      <txt crct="99" c="X">Спецодежда и оборудование</txt>
+      <txt crct="56" c="X">Устранение недостатков указанных в отчетах и рапортах</txt>
+      <txt crct="10" c="X">Предупреждение заболеваний</txt>
+      <txt crct="41" c="X">Предотвращение переливов нефтепродуктов</txt>
+      <txt crct="99" c="X">Работы по поддержанию технического состояния</txt>
+      <txt crct="43" c="X">Проверка экипажа на наличие наркотиков</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

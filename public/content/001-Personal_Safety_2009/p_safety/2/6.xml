@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Hazardous sources precaution</title>
+    <pics>
+      <pic preload="X" noFade="X" y="100" x="441">PS0206.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic hotid="1" hot="H" noFade="X" y="348" x="75">PS0202c.jpg</pic>
+      <pic preload="X" hotid="2" hot="H" noFade="X" y="394" x="75">PS0202c.jpg</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>39.mp3</snd>
+      <snd>40.mp3</snd>
+      <snd>41.mp3</snd>
+      <snd>42.mp3</snd>
+      <snd>43.mp3</snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" y="300" x="80">Such hazardous situations can be avoided by:</txt>
+      <txt c="X" s="2" y="350" x="100">Obtaining information about health hazards</txt>
+      <txt c="X" s="2" y="400" x="100">Obtain information about health precautions</txt>
+      <txt c="X" s="1" y="500" x="90">Click the text boxes for further information!</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>During any operation it is very important that the personnel involved are familiar with the precautions to be taken when handling hazardous sources. This requires "knowhow" about actual source and its possible influence on health.</sndTxt>
+      <sndTxt>Let us look at a well-known operation; painting. Any kind of paint contains thinners that may affect your health if inhaled. Bunker oil may also contain toxic vapours. </sndTxt>
+      <sndTxt>Such hazardous situations can be avoided by:</sndTxt>
+      <sndTxt>Obtaining information about health hazards</sndTxt>
+      <sndTxt>Obtaining information about health precautions</sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Hazardous sources precaution</title>
+    <pics>
+      <pic preload="X" noFade="X" y="100" x="441">PS0206.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic hotid="3" hot="H" noFade="X" y="348" x="75">PS0202c.jpg</pic>
+      <pic preload="X" hotid="4" hot="H" noFade="X" y="394" x="75">PS0202c.jpg</pic>
+      <pic noFade="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>CH.39.mp3</snd>
+      <snd>CH.40.mp3</snd>
+      <snd>CH.41.mp3</snd>
+      <snd>CH.42.mp3</snd>
+      <snd>CH.43.mp3</snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" y="300" x="80">一些可以避免的危险情况：</txt>
+      <txt c="X" s="2" y="350" x="100">获取有关健康危害的信息：</txt>
+      <txt c="X" s="2" y="400" x="100">获取有关保健的信息：</txt>
+      <txt c="X" s="1" y="500" x="90">点击文本框，索取补充材料！</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>在任何处理危险源的操作过程中，相关人员应熟悉需要采取的防范措施，这一点很重要。还需要了解危险的真正来源及其对人体健康可能产生的影响。</sndTxt>
+      <sndTxt>让我们看一下刷漆这一项众所周知的工作。每种漆料中都含有稀释剂，如果吸入的话，就会影响到你的健康。燃料油也有可能含有有毒的挥发物。</sndTxt>
+      <sndTxt>一些可以避免的危险情况</sndTxt>
+      <sndTxt>获取有关健康危害的信息</sndTxt>
+      <sndTxt>获取有关保健的信息</sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Меры предосторожности</title>
+    <pics>
+      <pic preload="X" noFade="X" y="100" x="441">PS0206.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic hotid="5" hot="H" noFade="X" y="348" x="75">PS0202c.jpg</pic>
+      <pic preload="X" hotid="6" hot="H" noFade="X" y="394" x="75">PS0202c.jpg</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>RU.39.mp3</snd>
+      <snd>RU.40.mp3</snd>
+      <snd>RU.41.mp3</snd>
+      <snd>RU.42.mp3</snd>
+      <snd>RU.43.mp3</snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" y="300" x="80">Такие опасные ситуации можно избежать при помощи:</txt>
+      <txt c="X" s="2" y="352" x="108">Получения информации о вреде здоровью</txt>
+      <txt c="X" s="2" y="396" x="80">Получение информации о мерах предосторожности</txt>
+      <txt c="X" s="1" y="500" x="90">! Щёлкните по текстовым квадратикам для дополнительной информации</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Во время производства любых работ, связанных с источниками опасности, очень важно, чтобы работники были достаточно осведомлены о мерах  предосторожности. В этом случае необходимы знания как об источнике опасности, так и о его влиянии на организм человека.</sndTxt>
+      <sndTxt>Давайте взглянем на хорошо всем известную операцию – покраску. Любая краска содержит растворитель, котрый при вдыхании может оказать неблагоприятное влияние на ваш организм. Топливо также может содержать ядовитые пары. </sndTxt>
+      <sndTxt>Такие опасные ситуации можно избежать при помощи:</sndTxt>
+      <sndTxt>Получения информации о вреде здоровью</sndTxt>
+      <sndTxt>Получение информации о мерах предосторожности</sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages>
+    <page id="1">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X" noFade="X" y="62" x="390">PS020601a.swf</pic>
+      </pics>
+      <sounds>
+        <snd>44.mp3</snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" y="400" x="100">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Personnel working with paint or chemicals used for cleaning and other purposes should be aware of the dangers associated with inhaling the vapours from such products and the effect of chemicals on the skin. One should also seek information about health hazards. Information about health hazards is given in datasheets, which according to the seamen’s act are always required to be available onboard.</sndTxt>
+      </soundTexts>
+    </page>
+    <page id="2">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic noFade="X" y="61" x="401">PS020601b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>45.mp3</snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" y="400" x="100">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Information about health precautions is available from various sources, for instance the International Maritime Dangerous Goods Code supplement. You can also ask your work leader for guidance.</sndTxt>
+      </soundTexts>
+    </page>
+    <page id="3">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X" noFade="X" y="62" x="390">PS020601a.swf</pic>
+      </pics>
+      <sounds>
+        <snd>CH.44.mp3</snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" y="400" x="100">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>使用用于清洁或其他的目的油漆或化学品的工作人员应该知道吸入该物品挥发物的危险性以及化学品对皮肤的影响。还要寻找关于健康危险的信号。根据相关船员规定的要求，船上必须提供关于健康危险信息的数据表。</sndTxt>
+      </soundTexts>
+    </page>
+    <page id="4">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic noFade="X" y="61" x="401">PS020601b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>CH.45.mp3</snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" y="400" x="100">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>有关保健的信息可来自各个方面，比如国际海危险品规则附录。你也可以寻找上级的指导。</sndTxt>
+      </soundTexts>
+    </page>
+    <page id="5">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X" noFade="X" y="62" x="390">PS020601a.swf</pic>
+      </pics>
+      <sounds>
+        <snd>RU.44.mp3</snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" y="400" x="100">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Персонал, работающий с красками или химическими препаратами для очистки или других целей должен осознавать опасность вдыхания паров этих продуктов, а также действие химикатов на кожу. Работник должен знать о вредных факторах влияющих на его здоровье. Такая информация содержится в формулярах, которые всегда должны иметься на борту судна.</sndTxt>
+      </soundTexts>
+    </page>
+    <page id="6">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic noFade="X" y="61" x="401">PS020601b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>RU.45.mp3</snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" y="400" x="100">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Информация о мерах предосторожности имеется в различных источниках, например в приложении к Кодексу Перевозки Опасных Грузов. Вы можете также получить эту информацию от руководителя ваших работ.</sndTxt>
+      </soundTexts>
+    </page>
+  </subpages>
+</pages>

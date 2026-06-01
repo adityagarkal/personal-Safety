@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Chemical health hazards - objectives</title>
+    <pics>
+      <pic preload="X" noFade="X" y="0" x="0">PS0409.jpg</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>182.mp3</snd>
+      <snd>183.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="375" x="170">Seamen are to be protected from chemical health hazards</txt>
+      <txt c="X" s="2" w="450" y="400" x="170">Where chemical substances are stored or used, the seaman is to be protected and has to be able to protect himself from accidents, injury and particular discomfort as well as the risk of long term diseases.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Seamen are to be protected from chemical health hazards</sndTxt>
+      <sndTxt>Where chemical substances are stored or used, the seaman is to be protected and has to be able to protect himself from accidents, injury and particular discomfort as well as the risk of long term diseases.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Chemical health hazards - objectives</title>
+    <pics>
+      <pic preload="X" noFade="X" y="0" x="0">PS0409.jpg</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.182.mp3</snd>
+      <snd>CH.183.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="375" x="170">应保护船员健康免受化学品伤害</txt>
+      <txt c="X" s="2" w="450" y="400" x="170">在储存和使用化学物质的地方，船员应该能够保护他们自己以避免意外事故、受伤、特别的不适或长期疾病的风险。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>应保护船员健康免受化学品伤害</sndTxt>
+      <sndTxt>在储存和使用化学物质的地方，船员应该能够保护他们自己以避免意外事故、受伤、特别的不适或长期疾病的风险。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Опасность использования химических веществ - цели и задачи</title>
+    <pics>
+      <pic preload="X" noFade="X" y="0" x="0">PS0409.jpg</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.182.mp3</snd>
+      <snd>RU.183.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="375" x="170">Моряки должны быть защищены от воздействия вредных химических веществ</txt>
+      <txt c="X" s="2" w="450" y="400" x="170">Моряк должен быть защищён, а также  иметь возможность защитить себя и свой организм от травм, вредных последствий   кратковременного и  долговременного воздействия химических веществ, хранящихся или используемых на борту судна.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Моряки должны быть защищены от воздействия вредных химических веществ</sndTxt>
+      <sndTxt>Моряк должен быть защищён, а также  иметь возможность защитить себя и свой организм от травм, вредных последствий   кратковременного и  долговременного воздействия химических веществ, хранящихся или используемых на борту судна.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

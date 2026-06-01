@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Safe working practices and the working environment</title>
+    <pics>
+      <pic noFade="X" y="100" x="120">PS0108a.swf</pic>
+      <pic noFade="X" y="350" x="120">PS0108b.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>20.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="300" y="290" x="400">You will be given an introduction to safe working practices on board and how to use the safety equipment.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>You will be given an introduction to safe working practices on board and how to use the safety equipment.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Safe working practices and the working environment</title>
+    <pics>
+      <pic noFade="X" y="100" x="120">PS0108a.swf</pic>
+      <pic noFade="X" y="350" x="120">PS0108b.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>CH.20.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="300" y="290" x="400">您将得到船上安全工作规则的简介和如何使用安全设备的指示。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>您将得到船上安全工作规则的简介和如何使用安全设备的指示。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Правила техники безопасности и охраны труда</title>
+    <pics>
+      <pic noFade="X" y="100" x="120">PS0108a.swf</pic>
+      <pic noFade="X" y="350" x="120">PS0108b.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>RU.20.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="300" y="290" x="400">На борту судна вас ознакомят с правилами техники безопасности и как использовать средства безопасности</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>На На борту судна вас ознакомят с правилами техники безопасности и как использовать средства безопасности.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

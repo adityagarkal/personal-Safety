@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Learning objectives</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic noFade="X" y="180" x="100">bullet.swf</pic>
+      <pic noFade="X" y="210" x="100">bullet.swf</pic>
+      <pic noFade="X" y="240" x="100">bullet.swf</pic>
+      <pic noFade="X" y="270" x="100">bullet.swf</pic>
+    </pics>
+    <sounds>
+      <snd>129.mp3</snd>
+      <snd>130.mp3</snd>
+      <snd>131.mp3</snd>
+      <snd>132.mp3</snd>
+      <snd>133.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="150" x="100">This chapter should give an introduction to:</txt>
+      <txt c="X" s="2" y="180" x="130">The connection between near-accidents and serious or major injury.</txt>
+      <txt c="X" s="2" y="210" x="130">Different types of accidents and injuries, and how to avoid them.</txt>
+      <txt c="X" s="2" y="240" x="130">Chemical health hazards.</txt>
+      <txt c="X" s="2" y="270" x="130">Ergonomics.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>This chapter should give an introduction to:</sndTxt>
+      <sndTxt>The connection between near-accidents and serious or major injury.</sndTxt>
+      <sndTxt>Different types of accidents and injuries, and how to avoid them.</sndTxt>
+      <sndTxt>Chemical health hazards.</sndTxt>
+      <sndTxt>Ergonomics.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Learning objectives</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic noFade="X" y="182" x="100">bullet.swf</pic>
+      <pic noFade="X" y="214" x="100">bullet.swf</pic>
+      <pic noFade="X" y="242" x="100">bullet.swf</pic>
+      <pic noFade="X" y="270" x="100">bullet.swf</pic>
+    </pics>
+    <sounds>
+      <snd>CH.129.mp3</snd>
+      <snd>CH.130.mp3</snd>
+      <snd>CH.131.mp3</snd>
+      <snd>CH.132.mp3</snd>
+      <snd>CH.133.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="150" x="100">本章将详细介绍：</txt>
+      <txt c="X" s="2" y="180" x="130">未遂事故与重伤或主要伤害之间有着紧密联系。</txt>
+      <txt c="X" s="2" y="210" x="130">如何避免不同类型的事故和伤害。</txt>
+      <txt c="X" s="2" y="240" x="130">化学品对健康的危害。</txt>
+      <txt c="X" s="2" y="270" x="130">人机工程学。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>本章将详细介绍：</sndTxt>
+      <sndTxt>未遂事故与重伤或主要伤害之间有着紧密联系。</sndTxt>
+      <sndTxt>如何避免不同类型的事故和伤害。 </sndTxt>
+      <sndTxt>化学品对健康的危害。</sndTxt>
+      <sndTxt>人机工程学。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Цели обучения</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic noFade="X" y="180" x="100">bullet.swf</pic>
+      <pic noFade="X" y="210" x="100">bullet.swf</pic>
+      <pic noFade="X" y="240" x="100">bullet.swf</pic>
+      <pic noFade="X" y="270" x="100">bullet.swf</pic>
+    </pics>
+    <sounds>
+      <snd>RU.129.mp3</snd>
+      <snd>RU.130.mp3</snd>
+      <snd>RU.131.mp3</snd>
+      <snd>RU.132.mp3</snd>
+      <snd>RU.133.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="150" x="100">В этой части мы рассмотрим:</txt>
+      <txt c="X" s="2" y="180" x="130">Связь между потенциальным несчастным случаем и серьёзным происшествием.</txt>
+      <txt c="X" s="2" y="210" x="130">Типы различных инцидентов и травм и как их избежать</txt>
+      <txt c="X" s="2" y="240" x="130">Вредные для здоровья факторы при использовании химии</txt>
+      <txt c="X" s="2" y="270" x="130">Эргономика</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>В этой части мы рассмотрим:</sndTxt>
+      <sndTxt>Связь между потенциальным несчастным случаем и серьёзным происшествием.</sndTxt>
+      <sndTxt>Типы различных инцидентов и травм и как их избежать</sndTxt>
+      <sndTxt>Вредные для здоровья факторы при использовании химии</sndTxt>
+      <sndTxt>Эргономика</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

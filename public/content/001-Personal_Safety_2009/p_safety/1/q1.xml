@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">What is the intention of the Safety Meeting?</txt>
+      <txt crct="16" c="X">The intention of this meeting is to gather the off duty crew so that they can get  to know each other better, which will affect safety onboard.</txt>
+      <txt crct="77" c="X">The intention of this meeting is to assign planned work to the crew, and to insure that checklists and permits have been filled in before the work starts.</txt>
+      <txt crct="9" c="X">The intention of this meeting is to inform and train the crew in safety matters and to get the crew to participate in discussions and make their own suggestions for improvements.</txt>
+      <txt crct="63" c="X">The intention of this meeting is to discuss the activities ashore.</txt>
+      <txt crct="C" c="X" s="2">Правильно</txt>
+      <txt crct="I" c="X" s="2">Неверно</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">安全会议的目的是什么？</txt>
+      <txt crct="36" c="X">会议的目的是集中那些不值班的船员，让他们更加熟悉彼此，这样会对船上的安全产生影响。</txt>
+      <txt crct="53" c="X">会议的目的是根据工作计划派遣船员，并确保在工作开始前填写好检查单和许可单。</txt>
+      <txt crct="71" c="X">会议的目的是通知并对船员进行安全问题培训，让船员参与讨论，提出改进意见。</txt>
+      <txt crct="43" c="X">会议的目的是讨论上岸后的活动。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Какова цель собраний по технике безопасности?</txt>
+      <txt crct="6" c="X">Целью собрания является сбор экипажа, свободного от работ, для знакомства друг с другом, что в свою очередь улучшит безопасность труда на борту.</txt>
+      <txt crct="21" c="X">Цель собрания состоит в том, чтобы организовать план работы экипажа и убедиться в том, что до начала производства работ все чек листы и разрешения заполнены должным образом .</txt>
+      <txt crct="91" c="X">Цель собрания - обучение моряков принципам техники безопасности, а также поощрение их участия в дискуссиях и идеях по улучшению техники безопасности.</txt>
+      <txt crct="43" c="X">Цель совещания – обсудить береговые работы</txt>
+      <txt crct="I" c="X" s="2">Неверно</txt>
+      <txt crct="C" c="X" s="2">Правильно</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

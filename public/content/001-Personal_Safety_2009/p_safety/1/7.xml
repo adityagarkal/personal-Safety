@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Company and vessel policies and procedures</title>
+    <pics>
+      <pic noFade="X" y="131" x="135">PS0106.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>18.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="600" y="500" x="130">You will be given information about Company and vessel policy and procedures</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>You will be given information about Company and vessel policy and procedures</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Company and vessel policies and procedures</title>
+    <pics>
+      <pic noFade="X" y="131" x="135">PS0106.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.18.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="600" y="500" x="130">你将会得到有关公司和船舶的方针和规程方面的信息。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>你将会得到有关公司和船舶的方针和规程方面的信息。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Инструкции и руководства компании и судна</title>
+    <pics>
+      <pic noFade="X" y="131" x="135">PS0106.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.18.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="600" y="500" x="130">Вы получите информацию о Компании, судовых инструкциях и руководствах.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Вы получите информацию о Компании, судовых инструкциях и руководствах.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

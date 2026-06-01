@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Chemical health hazards - symptoms and diseases</title>
+    <pics>
+      <pic preload="X" noFade="X" y="160" x="281">PS0411a.swf</pic>
+      <pic>
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="350" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="450" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X">
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="350" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="450" x="590">PS0411b.swf</pic>
+    </pics>
+    <sounds>
+      <snd>185.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>185b.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" y="65" x="245">Some symptoms of injuries by exposure to chemicals are listed below.</txt>
+      <txt c="X" s="1" y="100" x="130">Symptoms:</txt>
+      <txt c="X" s="2" y="175" x="130">Tiredness</txt>
+      <txt c="X" s="2" y="275" x="130">Forgetfulness</txt>
+      <txt c="X" s="2" y="375" x="130">Aggressiveness</txt>
+      <txt c="X" s="2" y="475" x="130">Dizziness</txt>
+      <txt c="X" s="1" y="100" x="580">Possible delay diseases:</txt>
+      <txt c="X" s="2" y="175" x="610">Cancer</txt>
+      <txt c="X" s="2" y="260" x="610">Necrosis of the brain</txt>
+      <txt c="X" s="2" y="375" x="610">Heart disease</txt>
+      <txt c="X" s="2" y="475" x="610">Asthma/allergies</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Some symptoms of injuries by exposure to chemicals are listed below.</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Exposure to chemicals may lead to delayed diseases.</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Chemical health hazards - symptoms and diseases</title>
+    <pics>
+      <pic preload="X" noFade="X" y="160" x="281">PS0411a.swf</pic>
+      <pic>
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="350" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="450" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X">
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="350" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="450" x="590">PS0411b.swf</pic>
+    </pics>
+    <sounds>
+      <snd>CH.185.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>CH.185b.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" y="65" x="245">接触化学品引起的伤害症状，列举如下：</txt>
+      <txt c="X" s="1" y="100" x="130">症状</txt>
+      <txt c="X" s="2" y="175" x="130">疲劳</txt>
+      <txt c="X" s="2" y="275" x="130">健忘</txt>
+      <txt c="X" s="2" y="375" x="130">好斗</txt>
+      <txt c="X" s="2" y="475" x="130">头晕</txt>
+      <txt c="X" s="1" y="100" x="580">可能会延迟发生的疾病</txt>
+      <txt c="X" s="2" y="175" x="610">癌症</txt>
+      <txt c="X" s="2" y="260" x="610">大脑坏死</txt>
+      <txt c="X" s="2" y="375" x="610">心脏病</txt>
+      <txt c="X" s="2" y="475" x="610">哮喘／过敏</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>接触化学品引起的伤害症状，列举如下：</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>接触化学品可能引起的延迟发生的疾病</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Воздействие химических веществ – симптомы и болезни</title>
+    <pics>
+      <pic preload="X" noFade="X" y="160" x="281">PS0411a.swf</pic>
+      <pic>
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="350" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="450" x="110">PS0411b.swf</pic>
+      <pic preload="X" noFade="X">
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="350" x="590">PS0411b.swf</pic>
+      <pic preload="X" noFade="X" y="450" x="590">PS0411b.swf</pic>
+    </pics>
+    <sounds>
+      <snd>RU.185.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>RU.185b.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" y="65" x="245">Некоторые симптомы воздействия химических веществ изложены ниже</txt>
+      <txt c="X" s="1" y="100" x="130">Симптомы</txt>
+      <txt c="X" s="2" y="175" x="130">Усталость</txt>
+      <txt c="X" s="2" y="275" x="130">Потеря памяти</txt>
+      <txt c="X" s="2" y="375" x="130">Агрессивность</txt>
+      <txt c="X" s="2" y="475" x="130">Головокружение</txt>
+      <txt c="X" s="1" y="100" x="580">Последующие болезни:</txt>
+      <txt c="X" s="2" y="174" x="638">Рак</txt>
+      <txt c="X" s="2" w="100" y="256" x="618">Некроз (омертвление) мозга</txt>
+      <txt c="X" s="2" y="367" x="624">Болезни сердцаk</txt>
+      <txt c="X" s="2" y="475" x="610">Астма/аллергия</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Некоторые симптомы воздействия химических веществ изложены ниже</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Воздействие химических веществ может привести к болезням, которые проявятся позднее</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

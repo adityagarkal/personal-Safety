@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>National and international laws and regulations</title>
+    <pics>
+      <pic noFade="X" y="103" x="54">PS0107a.swf</pic>
+      <pic noFade="X" y="160" x="309">PS0107b.swf</pic>
+      <pic noFade="X" y="116" x="537">PS0107c.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>19.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="500" x="50">You will be given information about national and international laws and regulations and where to find more information.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>You will be given information about national and international laws and regulations and where to find more information.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>National and international laws and regulations</title>
+    <pics>
+      <pic noFade="X" y="103" x="54">PS0107a.swf</pic>
+      <pic noFade="X" y="160" x="309">PS0107b.swf</pic>
+      <pic noFade="X" y="116" x="537">PS0107c.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>CH.19.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="500" x="50">获得相关国家和国际的法律法规以及得到更多信息的渠道。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>获得相关国家和国际的法律法规以及得到更多信息的渠道。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Национальные и международные правила</title>
+    <pics>
+      <pic noFade="X" y="103" x="54">PS0107a.swf</pic>
+      <pic noFade="X" y="160" x="309">PS0107b.swf</pic>
+      <pic noFade="X" y="116" x="537">PS0107c.swf</pic>
+      <pic preload="X">
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>RU.19.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="500" x="50">Вы получите информацию о национальных и международных законах и правилах, а также где найти дополнительную информацию.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Вы получите информацию о национальных и международных законах и правилах, а также где найти дополнительную информацию.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Main type of injuries</title>
+    <pics>
+      <pic preload="X" noFade="X" y="51" x="-4">PS0302.swf</pic>
+    </pics>
+    <sounds>
+      <snd>74.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="500" y="118" x="180">(The three most common, the most frequently injured part first)</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Which part of the body do you think is most frequently injured?</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Main type of injuries</title>
+    <pics>
+      <pic preload="X" noFade="X" y="51" x="-4">PS0302.swf</pic>
+    </pics>
+    <sounds>
+      <snd>CH.74.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="500" y="118" x="180">（首先是三种最常见，最频繁发生伤害的部分）</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>你认为身体的哪个部位受的伤害最频繁？ </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Основные травмы</title>
+    <pics>
+      <pic preload="X" noFade="X" y="51" x="-4">PS0302.swf</pic>
+    </pics>
+    <sounds>
+      <snd>RU.74.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="500" y="118" x="318">Три наиболее частые травмы</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Как вы думаете, какие части тела чаще всего страдают?</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

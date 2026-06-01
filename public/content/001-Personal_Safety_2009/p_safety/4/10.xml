@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Chemical health hazards - exposure</title>
+    <pics>
+      <pic preload="X" noFade="X" y="109" x="212">PS0410a.swf</pic>
+      <pic preload="X" noFade="X" y="298" x="136">PS0410b.swf</pic>
+      <pic preload="X" noFade="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic y="303" x="417">PS0410c.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>184.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" y="380" x="183">Cargo:</txt>
+      <txt c="X" s="2" y="405" x="183">-Benzene</txt>
+      <txt c="X" s="2" y="430" x="183">-Different chemicals</txt>
+      <txt c="X" s="2" y="415" x="183">
+      </txt>
+      <txt c="X" s="2" y="445" x="183">
+      </txt>
+      <txt c="X" s="1" y="360" x="500">Daily use:</txt>
+      <txt c="X" s="2" y="380" x="500">-Solvents</txt>
+      <txt c="X" s="2" y="400" x="500">-Degreasants</txt>
+      <txt c="X" s="2">-Detergents and clean-up materials</txt>
+      <txt c="X" s="2">-Boiler substances</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>The risk of exposure to dangerous chemicals is not only from cargo but also from chemicals that are in daily use.</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Chemical health hazards - exposure</title>
+    <pics>
+      <pic preload="X" noFade="X" y="109" x="212">PS0410a.swf</pic>
+      <pic preload="X" noFade="X" y="298" x="136">PS0410b.swf</pic>
+      <pic preload="X" noFade="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic y="303" x="417">PS0410c.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>CH.184.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" y="380" x="183">货物:</txt>
+      <txt c="X" s="2" y="405" x="183">-苯</txt>
+      <txt c="X" s="2" y="430" x="183">-不同的化学品</txt>
+      <txt c="X" s="2" y="415" x="183">
+      </txt>
+      <txt c="X" s="2" y="445" x="183">
+      </txt>
+      <txt c="X" s="1" y="360" x="500">日常使用:</txt>
+      <txt c="X" s="2" y="380" x="500">-溶剂</txt>
+      <txt c="X" s="2" y="400" x="500">-脱脂剂</txt>
+      <txt c="X" s="2">-清洁剂和清洁材料</txt>
+      <txt c="X" s="2">-锅炉物质</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>接触危险化学品的危险不仅来源于货物，还来源于日常使用的化学品 </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Опасность использования химических веществ -   Вредное воздействие</title>
+    <pics>
+      <pic preload="X" noFade="X" y="109" x="212">PS0410a.swf</pic>
+      <pic preload="X" noFade="X" y="298" x="136">PS0410b.swf</pic>
+      <pic preload="X" noFade="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic y="303" x="417">PS0410c.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>RU.184.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" y="384" x="177">Груз</txt>
+      <txt c="X" s="2" y="408" x="177">-Бензен</txt>
+      <txt c="X" s="2" w="140" y="428" x="178">-Прочие химические вещества</txt>
+      <txt c="X" s="2" x="183">
+      </txt>
+      <txt c="X" s="2" x="183">
+      </txt>
+      <txt c="X" s="1" w="150" y="351" x="509">Ежедневное использование</txt>
+      <txt s="2">
+      </txt>
+      <txt c="X" s="2" y="385" x="511">-Растворители</txt>
+      <txt c="X" s="2" y="402" x="511">-Порошки и мыльно - пузырные материалы</txt>
+      <txt c="X" s="2" y="437" x="511">-Удалители смазки</txt>
+      <txt c="X" s="2" w="140" y="458" x="512">-Химия для очистки котлов</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Риск существует не только от воздействия химического груза, находящегося на борту судна, но и от других веществ, используемых каждодневно.</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

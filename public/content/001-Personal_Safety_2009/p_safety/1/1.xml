@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Learning objectives</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic noFade="X" y="230" x="100">bullet.swf</pic>
+    </pics>
+    <sounds>
+      <snd>1.mp3</snd>
+      <snd>2.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="200" x="100">This section should give a short introduction to:</txt>
+      <txt c="X" s="2" w="570" x="130">The vessel’s safety procedures, lifesaving and fire fighting equipment and safe working practices.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>This section should give a short introduction to:</sndTxt>
+      <sndTxt>The vessel’s safety procedures, lifesaving and fire fighting equipment and safe working practices.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Learning objectives</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic noFade="X" y="239" x="100">bullet.swf</pic>
+    </pics>
+    <sounds>
+      <snd>CH.1.mp3</snd>
+      <snd>CH.2.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="200" x="100">本部分应对以下内容作出简短介绍：</txt>
+      <txt c="X" s="2" w="570" x="130">船上的安全程序、救生和消防设备安全工作实践。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>本部分应对以下内容作出简短介绍：</sndTxt>
+      <sndTxt>船上的安全程序、救生和消防设备安全工作实践。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Цели и задачи</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic noFade="X" y="230" x="100">bullet.swf</pic>
+    </pics>
+    <sounds>
+      <snd>RU.1.mp3</snd>
+      <snd>RU.2.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="200" x="100">Эта часть озакомит вас:</txt>
+      <txt c="X" s="2" w="570" x="130">Расписанием по тревогам, спасательным и противопожарным имуществом и методами безопасного производства работ</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Эта часть озакомит вас:</sndTxt>
+      <sndTxt>Расписанием по тревогам, спасательным и противопожарным имуществом и методами безопасного производства работ</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

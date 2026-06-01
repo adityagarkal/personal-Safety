@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Fire fighting equipment</title>
+    <pics>
+      <pic noFade="X" y="112" x="126">PS0105.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>17.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="250" y="200" x="450">The type of fire fighting equipment onboard will vary depending on the type of vessel, cargo etc.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>The type of fire fighting equipment onboard will vary depending on the type of vessel, cargo etc.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Fire fighting equipment</title>
+    <pics>
+      <pic noFade="X" y="112" x="126">PS0105.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.17.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="250" y="200" x="450">根据不同种类的船舶和货物等，配备不同的消防设备。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>根据不同种类的船舶和货物等，配备不同的消防设备。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Противопожарное оборудование</title>
+    <pics>
+      <pic noFade="X" y="112" x="126">PS0105.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.17.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="250" y="200" x="450">Тип противопожарного оборудования может варьировать в зависимости от типа судна, его грузов и т.д.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Тип противопожарного оборудования может варьировать в зависимости от типа судна, его грузов и т.д.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

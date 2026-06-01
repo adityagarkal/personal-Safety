@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Flag state requirements</title>
+    <pics>
+      <pic preload="X" noFade="X" y="0" x="0">Background1.jpg</pic>
+      <pic noFade="X" y="159" x="205">PS0204.swf</pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>31.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Rules and regulations of the flag state include provisions requiring that all employees shall undergo certain health control procedures prior to serving onboard a vessel. The extent of the control and the specific requirements depend on the position in which the person shall serve. You should make yourselves familiar with the rules and regulation your vessel's flag state require.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Flag state requirements</title>
+    <pics>
+      <pic preload="X" noFade="X" y="0" x="0">Background1.jpg</pic>
+      <pic noFade="X" y="159" x="205">PS0204.swf</pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.31.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>船旗国的规章条例包括条款中要求所有的雇员在登船前应经过健康控制程序。控制的程度及特殊的要求将根据该人员在船上的职务而定。你应该熟悉船旗国的规章条例的要求。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Требования Администрации Флага судна.</title>
+    <pics>
+      <pic preload="X" noFade="X" y="0" x="0">Background1.jpg</pic>
+      <pic noFade="X" y="159" x="205">PS0204.swf</pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.31.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>По правилам Администрации Флага судна все моряки перед началом работы на судне должны пройти медкомиссию. Требования к здоровью определены в соответствии с занимаемой должностью. Вы должны ознакомиться с  правилами флага вашего судна. </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

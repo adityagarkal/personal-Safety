@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Safety meetings</title>
+    <pics>
+      <pic noFade="X" y="205" x="409">PS0109.swf</pic>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>21.mp3</snd>
+      <snd>22.mp3</snd>
+      <snd>23.mp3</snd>
+      <snd>24.mp3</snd>
+      <snd>25.mp3</snd>
+      <snd>26.mp3</snd>
+      <snd>27.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="700" y="100" x="50">In most companies, the safety officer is in charge of the Safety meeting. The purpose of this meeting is to focus on safety related matters, such as: </txt>
+      <txt c="X" s="2" y="150" x="80">- How to avoid accidents</txt>
+      <txt c="X" s="2" y="180">- Working and safety procedures</txt>
+      <txt c="X" s="2" y="210">- Accident reports</txt>
+      <txt c="X" s="2" y="240">- Suggestion for new safety training and drills</txt>
+      <txt c="X" s="2" y="270">- Working environment</txt>
+      <txt c="X" s="1" y="500" x="50">In this meeting, crewmembers should not only be informed about safety matters, they should also be encouraged to participate in discussions and make their own suggestions for improvement.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>In most companies, the safety officer is in charge of the Safety meeting. The purpose of this meeting is to focus on safety related matters, such as: </sndTxt>
+      <sndTxt>How to avoid accidents</sndTxt>
+      <sndTxt>Working and safety procedures</sndTxt>
+      <sndTxt>Accident reports</sndTxt>
+      <sndTxt>Suggestion for new safety training and drills</sndTxt>
+      <sndTxt>Working environment</sndTxt>
+      <sndTxt>In this meeting, crewmembers should not only be informed about safety matters, they should also be encouraged to participate in discussions and make their own suggestions for improvement.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Safety meetings</title>
+    <pics>
+      <pic noFade="X" y="205" x="409">PS0109.swf</pic>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.21.mp3</snd>
+      <snd>CH.22.mp3</snd>
+      <snd>CH.23.mp3</snd>
+      <snd>CH.24.mp3</snd>
+      <snd>CH.25.mp3</snd>
+      <snd>CH.26.mp3</snd>
+      <snd>CH.27.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="700" y="100" x="50">在大多数公司里安全员负责召开安全会议，目的是讨论和安全相关的事务，譬如：</txt>
+      <txt c="X" s="2" y="150" x="80">- 怎样避免事故</txt>
+      <txt c="X" s="2" y="180">- 工作和安全程序</txt>
+      <txt c="X" s="2" y="210">- 事故报告</txt>
+      <txt c="X" s="2" y="240">- 新的安全培训和演习的建议</txt>
+      <txt c="X" s="2" y="270">- 工作环境</txt>
+      <txt c="X" s="1" y="500" x="50">在此会议中，不仅仅是告知船员有关安全问题，而且应该鼓励船员参与讨论，让他们自己提出改良建议。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>在大多数公司里安全员负责召开安全会议，目的是讨论和安全相关的事务，譬如：</sndTxt>
+      <sndTxt>怎样避免事故</sndTxt>
+      <sndTxt>工作和安全程序</sndTxt>
+      <sndTxt>事故报告</sndTxt>
+      <sndTxt>新的安全培训和演习的建议</sndTxt>
+      <sndTxt>工作环境</sndTxt>
+      <sndTxt>在此会议中，不仅仅是告知船员有关安全问题，而且应该鼓励船员参与讨论，让他们自己提出改良建议。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Совещания по технике безопасности</title>
+    <pics>
+      <pic noFade="X" y="205" x="409">PS0109.swf</pic>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.21.mp3</snd>
+      <snd>RU.22.mp3</snd>
+      <snd>RU.23.mp3</snd>
+      <snd>RU.24.mp3</snd>
+      <snd>RU.25.mp3</snd>
+      <snd>RU.26.mp3</snd>
+      <snd>RU.27.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="700" y="100" x="50">В большинстве компаний «Сэйфти» офицер организует совещания по технике безопасности. Цель таких совещаний обратить внимание на вопросы связанные с техникой безопасности, а именно:</txt>
+      <txt c="X" s="2" y="150" x="80">- Как предотвратить несчастные случаи</txt>
+      <txt c="X" s="2" y="180">- Правила техники безопсаности при выполнении работ.</txt>
+      <txt c="X" s="2" y="210">- Информация о несчастных случаях</txt>
+      <txt c="X" s="2" y="240">- Предложения по проведению учений и тревог</txt>
+      <txt c="X" s="2" y="270">- Условия работы</txt>
+      <txt c="X" s="1" y="500" x="50">На совещаниях, морякам должна не только предоставляться информация, а также поощряться их участие в дискуссиях и идеях по улучшению безопасности труда</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>В большинстве компаний «Сэйфти» офицер организует совещания по технике безопасности труда. Цель таких совещаний обратить внимание на вопросы связанные с техникой безопасности, а именно:</sndTxt>
+      <sndTxt>Как предотвратить несчастные случаи</sndTxt>
+      <sndTxt>Правила техники безопсаности при выполнении работ.</sndTxt>
+      <sndTxt>Информация о несчастных случаях</sndTxt>
+      <sndTxt>Предложения по проведению учений и тревог</sndTxt>
+      <sndTxt>Условия работы</sndTxt>
+      <sndTxt>На совещаниях, морякам должна не только предоставляться информация, а также поощряться их участие в дискуссиях и идеях по улучшению безопасности труда</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

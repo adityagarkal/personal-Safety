@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">How can you best protect yourself against the most common injuries: sprains or cuts in hands, arms or fingers?</txt>
+      <txt crct="4" c="X">By avoiding operations and jobs that can cause such accidents</txt>
+      <txt crct="38" c="X">By using gloves when practical, and being observant of the risk</txt>
+      <txt crct="26" c="X">By never touching anything with your hands and always using some kind of tool</txt>
+      <txt crct="15" c="X">It depends on the work requirement.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">针对扭伤或手、臂、手指的割伤这些最常见的伤害，你如何最好的保护自己？</txt>
+      <txt crct="94" c="X">避免会引起事故的操作和工作。</txt>
+      <txt crct="62" c="X">在实际操作时使用手套，密切注意危险情况。</txt>
+      <txt crct="40" c="X">永远不要用手触摸任何东西，要使用适当的工具。</txt>
+      <txt crct="47" c="X">这要由工作要求决定。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Как избежать наиболее частых травм, таких как растяжения, порезы кистей рук и пальцев  </txt>
+      <txt crct="16" c="X">Не производить работу,приводящую к таким травмам</txt>
+      <txt crct="34" c="X">Быть осторожным и использовать по возможности рукавицы.</txt>
+      <txt crct="70" c="X">Не трогать ничего руками и использовать инструменты</txt>
+      <txt crct="85" c="X">Всё зависит от типа работы</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Which accidents or injuries are the most common connected to maintenance work?</txt>
+      <txt crct="46" c="X">wet shoes</txt>
+      <txt crct="40" c="X">foreign bodies in eyes</txt>
+      <txt crct="32" c="X">using the needle gun on a foot</txt>
+      <txt crct="52" c="X">injuries from abrasive blasting</txt>
+      <txt crct="53" c="X">injuries from using chemicals</txt>
+      <txt crct="67" c="X">swallowing dust</txt>
+      <txt crct="95" c="X">injuries from falling</txt>
+      <txt crct="103" c="X">falling overboard</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1"> 什么是与维护保养工作有关的最常见的事故或伤害？</txt>
+      <txt crct="68" c="X">湿滑的鞋</txt>
+      <txt crct="48" c="X">眼中进入了杂质</txt>
+      <txt crct="38" c="X">敲锈枪针打到脚面造成的伤害</txt>
+      <txt crct="6" c="X">由喷砂造成的伤害</txt>
+      <txt crct="75" c="X">使用化学品时造成的伤害</txt>
+      <txt crct="11" c="X">吸入粉尘</txt>
+      <txt crct="51" c="X">摔伤</txt>
+      <txt crct="31" c="X">人员落水</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Какие травмы чаще всего бываю при работах по поддержанию технического состояния судна?</txt>
+      <txt crct="44" c="X">Мокрая обувь</txt>
+      <txt crct="66" c="X">Попадание инородных предметов в глаза</txt>
+      <txt crct="70" c="X">Использование гвоздевого пистолета стоя</txt>
+      <txt crct="4" c="X">Травмы при работы с абразивными материалами</txt>
+      <txt crct="39" c="X">Травмы от использования химических препаратов</txt>
+      <txt crct="77" c="X">глатание пыли</txt>
+      <txt crct="25" c="X">травмы от падения</txt>
+      <txt crct="11" c="X">падение за борт</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

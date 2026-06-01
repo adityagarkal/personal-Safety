@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Life saving appliances</title>
+    <pics>
+      <pic noFade="X" y="98" x="63">PS0104a.swf</pic>
+      <pic noFade="X" y="340" x="63">PS0104b.swf</pic>
+      <pic noFade="X" y="286" x="678">PS0104c.swf</pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>6.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" x="275">-Mustering and emergency instructions-Protection against fire, gases and cold-Lifejackets-Survival in survival craft-Life rafts-Lifeboats-Immersion suits-Illumination and protection in launching area-Rescue boat-Radio equipment-Pyrotechnic equipment-Life buoy, lights and smoke signals-Retrieval equipment</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Onboard you will find an instruction manual for life saving and fire extinguishing appliances. The specific content of each section will vary from vessel to vessel depending on the different equipment onboard.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Life saving appliances</title>
+    <pics>
+      <pic noFade="X" y="98" x="63">PS0104a.swf</pic>
+      <pic noFade="X" y="340" x="63">PS0104b.swf</pic>
+      <pic noFade="X" y="286" x="678">PS0104c.swf</pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>CH.6.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" x="275">- 应急清单及紧急情况说明 - 防火、防毒气和御寒的保护措施 - 救生衣 - 逃生用的救生艇- 救生筏 - 救生船 - 救生服- 照明和防护发射区域 - 援救船 - 无线电通讯设备 - 烟火设备- 救生圈、光烟信号- 救生设备</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>在船上你将会看到救生及消防设备的使用说明书。由于船上配备的设备不同，说明书各部分的特定内容会有所差异。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Спасательные средства</title>
+    <pics>
+      <pic noFade="X" y="98" x="63">PS0104a.swf</pic>
+      <pic noFade="X" y="340" x="63">PS0104b.swf</pic>
+      <pic noFade="X" y="286" x="678">PS0104c.swf</pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>RU.6.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" x="275">- Сбор и действия во время тревог - Противопожарная защита, защита от газов и холода- Спасательные жилеты- Способы спасения и спасательные средства- Плоты- Спасательные шлюпки- Гидрокостюмы- Защита и освещение места спуска- Поисково - Спасательная шлюпка- Радиооборудование- Пиротехника- Спасательный Круг, световые и дымовые сигналы- Поисковое оборудование</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>На борту судна имеется инструкция по использованию противопожарного и спасательного оборудования.  Содержимое каждой части такого оборудования  может отличаться на разных судах, и зависит от типа оборудования</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

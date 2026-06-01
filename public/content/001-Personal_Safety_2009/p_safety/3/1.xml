@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Learning objectives</title>
+    <pics>
+      <pic preload="X" y="133" x="209">PS0301.swf</pic>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>72.mp3</snd>
+      <snd>73.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="450" x="70">This section will focus on the most common injuries and accidents related to different working operations on board.</txt>
+      <txt c="X" s="2" w="670" y="500" x="70">We will also focus on the importance of reporting not only accidents but also near-accidents.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>This section will focus on the most common injuries and accidents related to different working operations on board.</sndTxt>
+      <sndTxt>In this section we will also focus on the importance of reporting not only accidents but also near-accidents.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Learning objectives</title>
+    <pics>
+      <pic preload="X" y="133" x="209">PS0301.swf</pic>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.72.mp3</snd>
+      <snd>CH.73.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="450" x="70">本节的重点集中在涉及船上不同工序的最常见的伤害和事故。</txt>
+      <txt c="X" s="2" w="670" y="500" x="70">我们的重点集中在不仅报告意外事故还要报告未遂事件的重要性上。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>本节的重点集中在涉及船上不同工序的最常见的伤害和事故。</sndTxt>
+      <sndTxt>我们的重点集中在不仅报告意外事故还要报告未遂事件的重要性上。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Цели обучения</title>
+    <pics>
+      <pic preload="X" y="133" x="209">PS0301.swf</pic>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.72.mp3</snd>
+      <snd>RU.73.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="670" y="450" x="70">В этой главе мы рассмотрим наиболее частые травмы и несчастные случаи при различных работах на борту судна.</txt>
+      <txt c="X" s="2" w="670" y="500" x="70">Мы также обратим ваше внимание на необходимость сообщать не только о несчастных случаях, но и о потенциальных инцидентах.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>В этой главе мы рассмотрим наиболее частые травмы и несчастные случаи при различных работах на борту судна.</sndTxt>
+      <sndTxt>В этой части мы обратим также ваше внимание о необходимости сообщать не только о несчастных случаяхно но и о потенциальных инцидентах.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

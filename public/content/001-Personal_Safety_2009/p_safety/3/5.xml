@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Reporting of accidents and near-accidents</title>
+    <pics>
+      <pic preload="X" noFade="X" y="259" x="91">PS0305.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>125.mp3</snd>
+      <snd>126.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="100" x="100">It is of the utmost importance that not only accidents, but also near-accidents are reported.</txt>
+      <txt c="X" s="2" y="150" x="100">The reason is obvious...</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>It is of the utmost importance that not only accidents, but also near-accidents are reported.</sndTxt>
+      <sndTxt>The reason is obvious</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Reporting of accidents and near-accidents</title>
+    <pics>
+      <pic preload="X" noFade="X" y="259" x="91">PS0305.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>CH.125.mp3</snd>
+      <snd>CH.126.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="100" x="100">报告事故和未遂事故是及其重要的。</txt>
+      <txt c="X" s="2" y="150" x="100">理由很明显…</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>报告事故和未遂事故是及其重要的。</sndTxt>
+      <sndTxt>理由很明显…</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Оповещение о произошедших и потенциальных несчастных случаях</title>
+    <pics>
+      <pic preload="X" noFade="X" y="259" x="91">PS0305.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>RU.125.mp3</snd>
+      <snd>RU.126.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="600" y="100" x="100">Особенно важно сообщать как о произошедших несчастных случаях, так и о тех, которые удалось избежать.  </txt>
+      <txt c="X" s="2" y="150" x="100">Причина очевидна.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Особенно важно сообщать как о произошедших несчастных случаях, так и о тех, которые удалось избежать.  </sndTxt>
+      <sndTxt>Причина очевидна.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

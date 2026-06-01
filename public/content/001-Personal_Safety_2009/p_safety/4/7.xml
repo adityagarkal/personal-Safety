@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Lighting, illumination</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic preload="X" noFade="X" y="91" x="552">PS0407a.swf</pic>
+      <pic y="285" x="443">PS0407b.swf</pic>
+    </pics>
+    <sounds>
+      <snd>173.mp3</snd>
+      <snd>174.mp3</snd>
+      <snd>175.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="350" y="100" x="50">It is important to have enough light when working. This applies also to your leisure time, for example when you are reading.</txt>
+      <txt c="X" s="1" w="350" y="250" x="50">Seafarers working on the bridge at night are especially in need of good night vision and that the illumination is correct.</txt>
+      <txt c="X" s="1" w="350" y="400" x="50">When exposed to sudden bright light, it will take several minutes to adjust, so that night vision is restored. This is dependent on the person's age because older seafarers take longer to adjust.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>It is important to have enough light when working. This applies also to your leisure time, for example when you are reading.</sndTxt>
+      <sndTxt>Seafarers working on the bridge at night are especially in need of good night vision to ensure that the illumination is correct.</sndTxt>
+      <sndTxt>When exposed to sudden bright light, it will take several minutes to adjust, so that night vision is restored. This is dependent on the person's age because older seafarers take longer to adjust.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Lighting, illumination</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic preload="X" noFade="X" y="91" x="552">PS0407a.swf</pic>
+      <pic y="285" x="443">PS0407b.swf</pic>
+    </pics>
+    <sounds>
+      <snd>CH.173.mp3</snd>
+      <snd>CH.174.mp3</snd>
+      <snd>CH.175.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="350" y="100" x="50">工作时有充足的光线很重要。这也适用于你的闲暇时间，比如读书的时候。</txt>
+      <txt c="X" s="1" w="350" y="250" x="50">夜间船员在驾驶台工作时，尤为需要良好的夜间视觉和适当的照明。</txt>
+      <txt c="X" s="1" w="350" y="400" x="50">突然遭受强光后，人的视觉需要适应几分钟才能恢复。当然这取决于个人的年龄，因为年龄大的船员需要更长的时间适应。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>工作时有充足的光线很重要。这也适用于你的闲暇时间，比如读书的时候。</sndTxt>
+      <sndTxt>夜间船员在驾驶台工作时，尤为需要良好的夜间视觉和适当的照明。</sndTxt>
+      <sndTxt>突然遭受强光后，人的视觉需要适应几分钟才能恢复。当然这取决于个人的年龄，因为年龄大的船员需要更长的时间适应。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Освещение</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic preload="X" noFade="X" y="91" x="552">PS0407a.swf</pic>
+      <pic y="285" x="443">PS0407b.swf</pic>
+    </pics>
+    <sounds>
+      <snd>RU.173.mp3</snd>
+      <snd>RU.174.mp3</snd>
+      <snd>RU.175.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="350" y="100" x="50">Для работ необходимо чтобы освещение было достаточным. Это также важно и во время досуга – например при чтении книг.</txt>
+      <txt c="X" s="1" w="350" y="250" x="50">Моряки, несущие вахту на мостике ночью должны иметь хорошее ночное видение и поэтому здесь важно наличие правильного освещения</txt>
+      <txt c="X" s="1" w="350" y="400" x="50">Когда происходит внезапное ослепление ярким светом, то для восстановления ночного видения потребуется несколько минут. Оно зависит от возраста человека, и чем старше моряк, тем больше времени ему потребуется для адоптации. </txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Для работ необходимо чтобы освещение было достаточным. Это также важно и во время досуга – например при чтении книг.</sndTxt>
+      <sndTxt>Моряки, несущие вахту на мостике ночью должны иметь хорошее ночное видение и поэтому здесь важно наличие правильного освещения</sndTxt>
+      <sndTxt>Когда происходит внезапное ослепление ярким светом, то для восстановления ночного видения потребуется несколько минут. Оно зависит от возраста человека, и чем старше моряк, тем больше времени ему потребуется для адоптации.</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

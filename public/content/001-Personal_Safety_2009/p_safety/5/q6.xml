@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Which are the most common injuries in general on board?</txt>
+      <txt crct="32" c="X">Toxic injuries</txt>
+      <txt crct="74" c="X">Sprain, cuts or twisting of arms, hands or fingers</txt>
+      <txt crct="88" c="X">Head injuries from falling objects</txt>
+      <txt crct="54" c="X">Foreign body in eyes from welding, dust etc.</txt>
+      <txt crct="60" c="X">Damage to ears caused by loud noises</txt>
+      <txt crct="41" c="X">Burns from steam, hot oil or chemicals</txt>
+      <txt crct="68" c="X">Injuries of back or shoulders caused by poor working posture or wrong lifting techniques.</txt>
+      <txt crct="58" c="X">Sprain or cuts in legs, feet or toes.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">船上通常最常见的伤害是什么？</txt>
+      <txt crct="28" c="X">中毒</txt>
+      <txt crct="38" c="X">扭伤、割伤或扭到胳膊、手或手指。</txt>
+      <txt crct="66" c="X">由落下的物体造成的头部伤害。</txt>
+      <txt crct="16" c="X">焊接时的杂质或灰尘等进入眼中。</txt>
+      <txt crct="74" c="X">由高噪音造成的听力受损。</txt>
+      <txt crct="43" c="X">蒸汽、热油或化学品造成的灼伤。</txt>
+      <txt crct="14" c="X">由工作姿势不正确或提升方法错误造成的背伤或肩伤。</txt>
+      <txt crct="26" c="X">扭伤、大腿、脚或脚趾的割伤。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Какие травмы являются наиболее распространенными на борту судна?</txt>
+      <txt crct="84" c="X">Отравления</txt>
+      <txt crct="14" c="X">Растяжения, порезы и вывихи рук или пальцев</txt>
+      <txt crct="26" c="X">Травмы головы от падающих предметов</txt>
+      <txt crct="58" c="X">Попадание инородных тел, пыли в глаза при сварке и т.п.</txt>
+      <txt crct="66" c="X">Повреждение слуха</txt>
+      <txt crct="91" c="X">Ожоги паром, горячими маслами или химией</txt>
+      <txt crct="74" c="X">Травмы поясницы и плеч от неправильного поднятия тяжестей</txt>
+      <txt crct="76" c="X">Растяжения или порезы ступней, ног и палцев ног</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>General</title>
+    <pics>
+      <pic noFade="X" y="128" x="53">PS030703a.swf</pic>
+      <pic preload="X" y="495" x="66">Chpt4.2.jpg</pic>
+    </pics>
+    <sounds>
+      <snd>134.mp3</snd>
+      <snd>135.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="300" y="150" x="500">It was stated in the previous section that many of these accidents could have been avoided if the near accidents had been reported.</txt>
+      <txt c="X" s="1" w="640" y="500" x="80">A lot of these accidents can also be avoided if the correct protection equipment, safety clothing and safety procedures are used!</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>It was stated in the previous section that many of these accidents could have been avoided if the near accidents had been reported.</sndTxt>
+      <sndTxt>A lot of these accidents can also be avoided if the correct protection equipment, safety clothing and safety procedures are used</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>General</title>
+    <pics>
+      <pic noFade="X" y="128" x="53">PS030703a.swf</pic>
+      <pic preload="X" y="495" x="66">Chpt4.2.jpg</pic>
+    </pics>
+    <sounds>
+      <snd>CH.134.mp3</snd>
+      <snd>CH.135.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="270" y="150" x="500">在前面的章节里已经提到，如果能将未遂事故报告，很多事故都是可以避免的。</txt>
+      <txt c="X" s="1" w="640" y="500" x="80">如果使用正确的保护设备，穿着安全服，按安全程序操作，很多事故也是可以避免的。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>在前面的章节里已经提到，如果能将未遂事故报告，很多事故都是可以避免的。</sndTxt>
+      <sndTxt>如果使用正确的保护设备，穿着安全服，按安全程序操作，很多事故也是可以避免的。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Общая часть</title>
+    <pics>
+      <pic noFade="X" y="128" x="53">PS030703a.swf</pic>
+      <pic preload="X" y="495" x="66">Chpt4.2.jpg</pic>
+    </pics>
+    <sounds>
+      <snd>RU.134.mp3</snd>
+      <snd>RU.135.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" w="300" y="150" x="489">Как уже было отмечено в предыдущей части большинство инцидентов можно было бы избежать, если бы было сообщено о тех, которые чуть было не произошли.</txt>
+      <txt c="X" s="1" w="640" y="500" x="80">Большинство инцидентов также можно было бы избежать, если бы использовалось соответствующее спец. одежда, оборудование и соблюдались инструкции! </txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Как уже было отмечено в предыдущей части большинство инцидентов можно было бы избежать, если бы было сообщено о тех, которые которые чуть было не произошли.</sndTxt>
+      <sndTxt>Большинство инцидентов также можно было бы избежать, если бы использовалось соответствующее спец. одежда, оборудование и соблюдались инструкции!</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

@@ -1,0 +1,1096 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Ergonomics</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="170" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="190" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="210" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="230" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="270" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="290" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="310" x="80">bullet.swf</pic>
+      <pic preload="X" hotid="13" hot="S" noFade="X" y="125" x="520">PS0405.swf</pic>
+      <pic preload="X" hotid="1" hot="S" noFade="X" y="401" x="141">PS0405a.jpg</pic>
+      <pic preload="X" hotid="2" hot="S" noFade="X" y="450" x="141">PS0405a.jpg</pic>
+      <pic preload="X" hotid="3" hot="S" noFade="X" y="400" x="435">PS0405a.jpg</pic>
+      <pic preload="X" hotid="4" hot="S" noFade="X" y="452" x="435">PS0405a.jpg</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>165.mp3</snd>
+      <snd>165a.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>166.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" y="100" x="80">Load factors </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" y="150" x="100">Weight</txt>
+      <txt c="X" s="2" y="170" x="100">Frequency</txt>
+      <txt c="X" s="2" y="190" x="100">Time allocation between work and breaks </txt>
+      <txt c="X" s="2" y="210" x="100">Total time </txt>
+      <txt c="X" s="2" y="230" x="100">Path of movement </txt>
+      <txt c="X" s="2" y="250" x="100">Work demands: easy, medium or complex </txt>
+      <txt c="X" s="2" y="270" x="100">Working posture </txt>
+      <txt c="X" s="2" y="290" x="100">Variations</txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" y="310" x="100">Information</txt>
+      <txt c="X" s="2" y="405" x="160">Correct Lifting Technique </txt>
+      <txt c="X" s="2" y="455" x="160">Incorrect Lifting Technique </txt>
+      <txt c="X" s="2" y="405" x="460">Carry with Both Hands </txt>
+      <txt c="X" s="2" y="456" x="460">Principles for Carrying </txt>
+      <txt c="X" s="2" y="510" x="250">Click the buttons to learn more about the subjects </txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>There are different load factors that may influence you in how you do your work. </sndTxt>
+      <sndTxt>Typical load factors are listed below. </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Click the buttons to learn more about the subjects </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Ergonomics</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="170" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="190" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="210" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="230" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="270" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="290" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="310" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="125" x="520">PS0405.swf</pic>
+      <pic preload="X" hotid="5" hot="S" noFade="X" y="401" x="141">PS0405a.jpg</pic>
+      <pic preload="X" hotid="6" hot="S" noFade="X" y="450" x="141">PS0405a.jpg</pic>
+      <pic preload="X" hotid="7" hot="S" noFade="X" y="400" x="435">PS0405a.jpg</pic>
+      <pic preload="X" hotid="8" hot="S" noFade="X" y="452" x="435">PS0405a.jpg</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>CH.165.mp3</snd>
+      <snd>CH.165a.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>CH.166.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" y="100" x="80">负荷因素</txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" y="150" x="100">重量</txt>
+      <txt c="X" s="2" y="170" x="100">频率</txt>
+      <txt c="X" s="2" y="190" x="100">工作和休息的时间分配</txt>
+      <txt c="X" s="2" y="210" x="100">耗时</txt>
+      <txt c="X" s="2" y="230" x="100">移动路线</txt>
+      <txt c="X" s="2" y="250" x="100">工作需求：简单的、一般的、复杂的</txt>
+      <txt c="X" s="2" y="270" x="100">工作姿势</txt>
+      <txt c="X" s="2" y="290" x="100">变更</txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" y="310" x="100">信息</txt>
+      <txt c="X" s="2" y="405" x="160">正确的提升技术</txt>
+      <txt c="X" s="2" y="455" x="160">错误的提升技术</txt>
+      <txt c="X" s="2" y="405" x="460">双手手工搬运</txt>
+      <txt c="X" s="2" y="456" x="460">运输原则</txt>
+      <txt c="X" s="2" y="510" x="250">点击文本框了解更多的内容。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>不同的负荷因素会对你如何进行工作产生影响。</sndTxt>
+      <sndTxt>典型的负荷因素列举如下：</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>点击文本框了解更多的内容。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Эргономика</title>
+    <pics>
+      <pic preload="X">
+      </pic>
+      <pic>
+      </pic>
+      <pic preload="X" noFade="X" y="150" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="170" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="190" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="210" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="230" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="250" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="270" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="290" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="310" x="80">bullet.swf</pic>
+      <pic preload="X" noFade="X" y="125" x="520">
+      </pic>
+      <pic noFade="X">
+      </pic>
+      <pic noFade="X">
+      </pic>
+      <pic noFade="X">
+      </pic>
+      <pic noFade="X">
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>RU.165.mp3</snd>
+      <snd>RU.165a.mp3</snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>RU.166.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="1" y="100" x="80">Нагрузка</txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" y="150" x="100">Груз (вес)</txt>
+      <txt c="X" s="2" y="170" x="100"> Частота</txt>
+      <txt c="X" s="2" y="190" x="100">Время на работу и время на перерыв</txt>
+      <txt c="X" s="2" y="210" x="100">Общее время</txt>
+      <txt c="X" s="2" y="230" x="100">Пути - дорожки перемещения и движения</txt>
+      <txt c="X" s="2" y="250" x="100">Требования к работе: лёгкая, средняя или сложная </txt>
+      <txt c="X" s="2" y="270" x="100">Поза или положение при которой осуществляется работа</txt>
+      <txt c="X" s="2" y="290" x="100">Вариации</txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" y="310" x="100">Информация</txt>
+      <txt c="X" hotid="9" hot="S" s="2" y="400" x="150">Правильная техника поднятия грузов</txt>
+      <txt c="X" hotid="10" hot="S" s="2" y="450" x="150">Неправильная техника поднятия грузов</txt>
+      <txt c="X" hotid="11" hot="S" s="2" y="400" x="470">Несите обеими руками</txt>
+      <txt c="X" hotid="12" hot="S" s="2" y="450" x="470">Принципы переноски</txt>
+      <txt c="X" s="2" y="510" x="250">Щёлкните по кнопкам для дополнительной информации</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>Существуют различные факторы нагрузки, которые влияют как на вас, так и на то, как вы выполняете работу</sndTxt>
+      <sndTxt>Типичные факторы это:</sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Щёлкните по кнопкам для дополнительной информации</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages>
+    <page id="1">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="373" x="474">PS040501a.swf</pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="403" x="569">PS040501c.swf</pic>
+        <pic preload="X" noFade="X" y="371" x="665">PS040501d.swf</pic>
+      </pics>
+      <sounds>
+        <snd>212.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="750" y="75" x="20">It is important to use correct lifting techniques to avoid injuries to back and shoulders. If the object is very heavy and/or warm, two persons have to carry the object between them. </txt>
+        <txt c="X" s="2">Preparations:  </txt>
+        <txt c="X" s="2" x="40">Stand as close as possible in front of what you are going to lift. </txt>
+        <txt c="X" s="2">Stand on a steady base. </txt>
+        <txt c="X" s="2">Stand with the legs a little apart, or one leg slightly in front of the other. </txt>
+        <txt c="X" s="2">Stand in the same direction as you are going to lift. </txt>
+        <txt c="X" s="2">Evaluate how heavy the lift will be. </txt>
+        <txt c="X" s="2">Bend your knees, bend your upper body forward. Hold your back straight. </txt>
+        <txt c="X" s="2">Take a good and steady grip on what to lift </txt>
+        <txt c="X" s="1" y="400" x="20">The lift: </txt>
+        <txt c="X" s="2" x="40">Straighten your ankles, knees and hips. </txt>
+        <txt c="X" s="2">Hold the back straight. </txt>
+        <txt c="X" s="2">Hold the object close to you body.  </txt>
+        <txt c="X" s="2">
+        </txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>It is important to use correct lifting techniques to avoid injuries to back and shoulders. If the object is very heavy and/or warm, two persons have to carry the object between them. </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="2">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X" noFade="X" y="218" x="115">PS040502a.swf</pic>
+        <pic preload="X" noFade="X" y="240" x="466">PS040502b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>213.mp3</snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" w="700" y="140" x="155">The consequence of incorrect lifting techniques can be as illustrated here. </txt>
+        <txt c="X" s="1" y="425" x="525">Correct</txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>The consequence of incorrect lifting techniques can be as illustrated here. </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="3">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="321" x="378">PS040503a.swf</pic>
+        <pic preload="X" noFade="X" y="323" x="547">PS040503b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>214.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="700" y="100" x="20">Tips for carrying objects with both hands are as follows: </txt>
+        <txt c="X" s="2" x="40">Carry the object in front of the body. </txt>
+        <txt c="X" s="2">Bend the elbows. </txt>
+        <txt c="X" s="2">Carry as closed to your body as possible. </txt>
+        <txt c="X" s="2">Hold your back a little sway-backed. </txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Tips for carrying objects with both hands are as follows: </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="4">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="224" x="478">PS040504a.swf</pic>
+        <pic preload="X" noFade="X" y="224" x="602">PS040504b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>215.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="700" y="100" x="20">Some general principles for carrying are as listed: </txt>
+        <txt c="X" s="2" x="40">Always carry in an upright position. </txt>
+        <txt c="X" s="2">Hold the object as close to your body as possible. </txt>
+        <txt c="X" s="2">The object shall be as close to your centre of gravity as possible. </txt>
+        <txt c="X" s="2">Your body has to be in balance. </txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Some general principles for carrying are as listed: </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="5">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="373" x="474">PS040501a.swf</pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="403" x="569">PS040501c.swf</pic>
+        <pic preload="X" noFade="X" y="371" x="665">PS040501d.swf</pic>
+      </pics>
+      <sounds>
+        <snd>CH.212.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="750" y="75" x="20">使用正确的提升技术对于避免背伤和肩伤很重要。如果物品很重或很热，应由两个人来完成运送工作。</txt>
+        <txt c="X" s="2">准备工作:</txt>
+        <txt c="X" s="2" x="40">站在尽可能接近你即将进行提升操作物体的前方。</txt>
+        <txt c="X" s="2">站在一个稳定的地方。</txt>
+        <txt c="X" s="2">两脚微微分开站立，或是一脚稍微在前站立。</txt>
+        <txt c="X" s="2">站立的方向与你进行提升的方向一致。</txt>
+        <txt c="X" s="2">预估提升的重量。</txt>
+        <txt c="X" s="2">屈膝，上身向前弯曲，保持背部挺直。</txt>
+        <txt c="X" s="2">牢牢地稳定地抓住提升的物品。</txt>
+        <txt c="X" s="2" y="138" x="460">提升:</txt>
+        <txt c="X" s="2">踝关节、膝、臀要伸直。</txt>
+        <txt c="X" s="2">保持背部挺直。</txt>
+        <txt c="X" s="2">抱住物体贴近你的身体。</txt>
+        <txt c="X" s="2">
+        </txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>使用正确的提升技术对于避免背伤和肩伤很重要。如果物品很重或很热，应由两个人来完成运送工作。</sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="6">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X" noFade="X" y="218" x="115">PS040502a.swf</pic>
+        <pic preload="X" noFade="X" y="240" x="466">PS040502b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>CH.213.mp3</snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" w="700" y="140" x="155">错误的提升方法造成的后果，如图所示：</txt>
+        <txt c="X" s="1" y="425" x="525">正确</txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>错误的提升方法造成的后果，如图所示：</sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="7">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="321" x="378">PS040503a.swf</pic>
+        <pic preload="X" noFade="X" y="323" x="547">PS040503b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>CH.214.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="700" y="100" x="20">关于用双手搬运物品的提示如下：</txt>
+        <txt c="X" s="2" x="40">将物品报在胸前。</txt>
+        <txt c="X" s="2">屈肘。</txt>
+        <txt c="X" s="2">搬运时让物品尽量靠着你的身体。</txt>
+        <txt c="X" s="2">背部微弯。</txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>关于用双手搬运物品的提示如下：</sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="8">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="224" x="478">PS040504a.swf</pic>
+        <pic preload="X" noFade="X" y="224" x="602">PS040504b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>CH.215.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="700" y="100" x="20">关于搬运的一些基本原则列举如下：</txt>
+        <txt c="X" s="2" x="40">搬运时始终保持垂直状态。</txt>
+        <txt c="X" s="2">搬运时让物品尽量靠着你的身体。</txt>
+        <txt c="X" s="2">物品应尽可能靠近你的重心。</txt>
+        <txt c="X" s="2">保持身体的平衡。</txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>关于搬运的一些基本原则列举如下：</sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="9">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="373" x="474">PS040501a.swf</pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="403" x="569">PS040501c.swf</pic>
+        <pic preload="X" noFade="X" y="371" x="665">PS040501d.swf</pic>
+      </pics>
+      <sounds>
+        <snd>RU.212.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="750" y="75" x="20">Во время работ важно использовать правильную технику подъёма грузов, что поможет избежать травм спины и плеч. Если предмет очень тяжелый или горячий, то его надо переносить вдвоём.</txt>
+        <txt c="X" s="2">Приготовления:</txt>
+        <txt c="X" s="2" x="40">Подойдите как можно ближе к предмету, который вы хотите поднять</txt>
+        <txt c="X" s="2">Стойте на устойчивой почве</txt>
+        <txt c="X" s="2">Ноги слегка врозь и одна нога слегка впереди другой</txt>
+        <txt c="X" s="2">Стойте в том же направлении, куда вы собираетесь поднимать</txt>
+        <txt c="X" s="2">Оцените насколько тяжела ноша</txt>
+        <txt c="X" s="2">Согните колени и наклонитесь вперёд. Держите спину прямо.</txt>
+        <txt c="X" s="2">Хорошо захватите предмет</txt>
+        <txt c="X" s="1" y="400" x="20">Подъём</txt>
+        <txt c="X" s="2" x="40">Выпрямите лодыжки, колени и бедра</txt>
+        <txt c="X" s="2">Держите спину прямо</txt>
+        <txt c="X" s="2">Держите объект близко к телу</txt>
+        <txt c="X" s="2">
+        </txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Во время работ важно использовать правильную технику подъёма грузов, что поможет избежать травм спины и плеч. Если предмет очень тяжелый или горячий, то его надо переносить вдвоём.</sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="10">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X" noFade="X" y="218" x="115">PS040502a.swf</pic>
+        <pic preload="X" noFade="X" y="240" x="466">PS040502b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>RU.213.mp3</snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="2" w="700" y="140" x="155">При неправильном поднятии тяжести последствия могут быть такими как показано здесь </txt>
+        <txt c="X" s="1" y="425" x="525">Правильно</txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>При неправильном поднятии тяжести последствия могут быть такими как показано здесь </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="11">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="321" x="378">PS040503a.swf</pic>
+        <pic preload="X" noFade="X" y="323" x="547">PS040503b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>RU.214.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="700" y="100" x="20">переносить предметы обеими руками надо следующим образом:</txt>
+        <txt c="X" s="2" x="40">Несите предмет спереди</txt>
+        <txt c="X" s="2">Согните локти</txt>
+        <txt c="X" s="2">Прижмите к себе как можно ближе</txt>
+        <txt c="X" s="2">Нагните спину немного назад</txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>переносить предметы обеими руками надо следующим образом:</sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="12">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic preload="X">
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic>
+        </pic>
+        <pic preload="X" noFade="X" y="224" x="478">PS040504a.swf</pic>
+        <pic preload="X" noFade="X" y="224" x="602">PS040504b.swf</pic>
+      </pics>
+      <sounds>
+        <snd>RU.215.mp3</snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="X" s="1" w="700" y="100" x="20">Вот некоторые основные принципы переноски груза:</txt>
+        <txt c="X" s="2" x="40">Несите всегда в прямом положении</txt>
+        <txt c="X" s="2">Прижимайте предмет к телу как можно ближе</txt>
+        <txt c="X" s="2">Предмет должен располагаться как можно ближе к центру тяжести вашего тела.</txt>
+        <txt c="X" s="2">Ваше тело должно быть уравновешено</txt>
+        <txt c="X" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>Вот некоторые основные принципы переноски груза:</sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+    <page id="13">
+      <template alignTxt="left">tmp01.swf</template>
+      <title>
+      </title>
+      <pics>
+        <pic>
+        </pic>
+      </pics>
+      <sounds>
+        <snd>
+        </snd>
+      </sounds>
+      <texts>
+        <txt c="" s="2">
+        </txt>
+      </texts>
+      <soundTexts>
+        <sndTxt>
+        </sndTxt>
+      </soundTexts>
+    </page>
+  </subpages>
+</pages>

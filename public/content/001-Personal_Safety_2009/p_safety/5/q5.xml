@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Which types of work require permits or check list?(Check all correct answers)</txt>
+      <txt crct="48" c="X">Painting on deck</txt>
+      <txt crct="43" c="X">Chipping on the bridge deck</txt>
+      <txt crct="13" c="X">Painting the mast with help of a bosun's chair</txt>
+      <txt crct="63" c="X">Lowering the anchor</txt>
+      <txt crct="99" c="X">Chipping down in the ballast tank</txt>
+      <txt crct="102" c="X">Welding on the poop deck</txt>
+      <txt crct="26" c="X">Welding in the engine work shop</txt>
+      <txt crct="36" c="X">Dismantling a pump</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template>q1.swf</template>
+    <title>Question 3 of 3</title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">什么类型的工作需要许可证和检查清单？（选择所有正确的答案）</txt>
+      <txt crct="16" c="X">油漆甲板</txt>
+      <txt crct="87" c="X">在驾驶台甲板敲锈</txt>
+      <txt crct="43" c="X">使用单人座板油漆桅杆</txt>
+      <txt crct="87" c="X">抛锚</txt>
+      <txt crct="57" c="X">在压载舱敲锈</txt>
+      <txt crct="20" c="X">在尾甲板焊接</txt>
+      <txt crct="74" c="X">在机舱工作间焊接</txt>
+      <txt crct="92" c="X">拆解泵</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template>q1.swf</template>
+    <title>
+    </title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Какие типы работ требуют разрешения или заполнения чек листа (Отметьте все правильные ответы)</txt>
+      <txt crct="92" c="X">Покраска палубы</txt>
+      <txt crct="33" c="X">Обивка палубы мостика</txt>
+      <txt crct="87" c="X">Покраска мачты с использованием «беседки»</txt>
+      <txt crct="17" c="X">Отдача якоря</txt>
+      <txt crct="21" c="X">Обивка окалины в балластном танке</txt>
+      <txt crct="44" c="X">Сварка на кормовой палубе</txt>
+      <txt crct="60" c="X">Сварка в токарке машинного отделения</txt>
+      <txt crct="74" c="X">Разборка насоса</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

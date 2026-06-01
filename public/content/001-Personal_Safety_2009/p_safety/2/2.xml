@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Company requirements</title>
+    <pics>
+      <pic noFade="X" y="75" x="71">PS0202a.swf</pic>
+      <pic preload="X" noFade="X" y="207" x="417">PS0202b.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>29.mp3</snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" w="250" y="440" x="440">The owners of this vessel will cooperate fully with the public authorities in the criminal prosecution of anyone  possessing illegal drugs or drug associated paraphernalia aboard this vessel.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>Some companies practice a very strict drug abuse policy. Any employee may risk unannounced testing. Refusal to participate in such testing will be considered as a positive test result. The company drug abuse policy is described in the company quality manual - vessel procedures.</sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Company requirements</title>
+    <pics>
+      <pic noFade="X" y="75" x="71">PS0202a.swf</pic>
+      <pic preload="X" noFade="X" y="207" x="417">PS0202b.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.29.mp3</snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" w="250" y="440" x="440">船东全力配合政府机构对任何人在船上非法持有毒品或用具进行的刑事诉讼。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>一些公司执行非常严格的禁止滥用毒品方针。任何雇员都会面临随时被抽查的可能性，拒绝被抽查的将会视测试结果呈阳性。公司的禁止滥用毒品方针在公司的质量控制手册中的船舶程序中有所描述。</sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>Требования компании</title>
+    <pics>
+      <pic noFade="X" y="75" x="71">PS0202a.swf</pic>
+      <pic preload="X" noFade="X" y="207" x="417">PS0202b.swf</pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.29.mp3</snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="2" w="250" y="440" x="440">Владельцы судна окажут всяческую помощь общественности и властями в целях уголовного преследования за незаконное хранение на борту наркотиков и аксесуаров для их применения.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>В некотрых компаниях существует запрет на употребления наркотиков. Любой работник может подвергнуться неожиданной проверке. Отказ от участия в такой проверке рассматривается, как факт присутствия наркотиков в организме. Политика Компании по употреблению и использованию наркотиков описана в судовых инструкциях «Руковоства Качеством» - Куолити Манюал.</sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

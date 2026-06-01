@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>First time on board</title>
+    <pics>
+      <pic noFade="X" y="118" x="75">PS0102.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>3.mp3</snd>
+      <snd>4.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="350" y="200" x="450">When coming on board for the first time it is important that you become familiar with the vessel's safety procedures, especially the alarm instructions, lifesaving and fire-fighting equipment, hazardous areas etc., as soon as possible.</txt>
+      <txt c="X" s="1" w="700" y="400" x="75">It is also important that you become familiar with the vessel, its equipment and your own duties connected to your position on board. </txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>When coming on board for the first time it is important that you become familiar with the vessel's safety procedures, especially the alarm instructions, lifesaving and fire-fighting equipment, hazardous areas etc. as soon as possible.</sndTxt>
+      <sndTxt>It is also important that you become familiar with the vessel, its equipment and your own duties connected to your position on board.</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>First time on board</title>
+    <pics>
+      <pic noFade="X" y="118" x="75">PS0102.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>CH.3.mp3</snd>
+      <snd>CH.4.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="300" y="200" x="450">当你首次上船时， 尽快熟悉船上安全程序, 特别是预警指令、救生和消防设备、危险区域等是很重要的。</txt>
+      <txt c="X" s="1" w="700" y="400" x="75">熟悉船舶、设备和你在船上的岗位职责也是很重要的。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>当你首次上船时， 尽快熟悉船上安全程序, 特别是预警指令、救生和消防设备、危险区域等是很重要的。</sndTxt>
+      <sndTxt>熟悉船舶、设备和你在船上的岗位职责也是很重要的。</sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template alignTxt="left">tmp01.swf</template>
+    <title>В первый раз на судне</title>
+    <pics>
+      <pic noFade="X" y="118" x="75">PS0102.swf</pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>RU.3.mp3</snd>
+      <snd>RU.4.mp3</snd>
+    </sounds>
+    <texts>
+      <txt c="X" s="2">
+      </txt>
+      <txt c="X" s="1" w="300" y="200" x="450">По прибытии на судно в первый раз крайне важно как можно быстрее ознакомиться с расписанием по тревогам, с сигналами  тревог, спасательными средствами и противопожарным оборудованием,  опасными зонами и так далее.</txt>
+      <txt c="X" s="1" w="700" y="400" x="75">Немаловажно ознакомиться с судном, его оборудованием, а также вашими обязанностями на борту этого судна</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>По прибытии на судно в первый раз крайне важно, как можно быстрее, ознакомиться с расписанием по тревогам, с сигналами  тревог, спасательными средствами и противопожарным оборудованием,  опасными зонами и так далее.</sndTxt>
+      <sndTxt>Необходимо ознакомиться с судном, его оборудованием, а также вашими обязанностями на борту этого судна</sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages sgxmlv="1.2">
+  <page level="EN">
+    <template>q1.swf</template>
+    <title>Question 2 of 3</title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Are you allowed to smoke marijuana when outside U.S waters? </txt>
+      <txt crct="76" c="X">Yes, you are allowed to smoke marijuana outside U.S. waters </txt>
+      <txt crct="31" c="X">Yes, you are allowed to smoke marijuana if there are at least 4 hours until you go on duty, and you have permission from the master. </txt>
+      <txt crct="95" c="X">No, any use of drugs onboard is strictly prohibited. </txt>
+      <txt crct="27" c="X">Yes, only for medicinal purpose.</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="CH">
+    <template>q1.swf</template>
+    <title>Question 2 of 3</title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">在美国之外的水域能允许你吸食大麻吗？</txt>
+      <txt crct="54" c="X">是，你可以在美国之外的水域吸食大麻。</txt>
+      <txt crct="9" c="X">是，在值班至少4小时之前，并得到船长批准的情况下，你可以吸食大麻。</txt>
+      <txt crct="87" c="X">不，在船上严格禁止使用任何毒品。 </txt>
+      <txt crct="77" c="X">是，仅作为医疗用途。</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <page level="RU">
+    <template>q1.swf</template>
+    <title>Вопрос 2 из 3-х</title>
+    <pics>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+      <pic>
+      </pic>
+    </pics>
+    <sounds>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+      <snd>
+      </snd>
+    </sounds>
+    <texts>
+      <txt a="X" c="X" e="-3" pt="1">Можно ли вам курить марихуану за пределами вод США?</txt>
+      <txt crct="80" c="X">Да вы можете курить марихуану вне вод США</txt>
+      <txt crct="25" c="X">Да. Вы можете курить марихуану, если до работы более 4 часов и Капитан дал вам «Добро».</txt>
+      <txt crct="97" c="X">Нет, использование любых наркотиков на борту строго запрещено,</txt>
+      <txt crct="27" c="X">Да, но только в медицинских целях</txt>
+    </texts>
+    <soundTexts>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+      <sndTxt>
+      </sndTxt>
+    </soundTexts>
+  </page>
+  <subpages />
+</pages>
