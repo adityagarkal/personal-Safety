@@ -57,9 +57,18 @@ function Dashboard() {
           )}
         </div>
 
-        <Link to="/" className="px-4 py-2 rounded bg-gray-200">
-          Change Candidate
-        </Link>
+        <div className="flex gap-3">
+          <Link
+            to="/admin-records"
+            className="px-4 py-2 rounded bg-green-600 text-white"
+          >
+            View Records
+          </Link>
+
+          <Link to="/" className="px-4 py-2 rounded bg-gray-200">
+            Change Candidate
+          </Link>
+        </div>
       </div>
 
       <section className="mb-10">
@@ -140,7 +149,8 @@ function Dashboard() {
 
               <p>Questions: {assessmentChapter["@_nrQuest"]}</p>
               <p className="mt-2 text-sm">
-                Complete all training chapters before starting the final assessment.
+                Complete all training chapters before starting the final
+                assessment.
               </p>
             </div>
           )}

@@ -17,6 +17,8 @@ import {
 
 import { answerKey } from "../../data/answerKey";
 
+import { markChapterCompletedInDatabase } from "../../services/databaseService";
+
 const CONTENT_BASE_PATH = "/content/001-Personal_Safety_2009/p_safety";
 const PASS_PERCENTAGE = 70;
 
@@ -50,7 +52,7 @@ function saveAssessmentAnswer(questionId, isCorrect) {
   localStorage.setItem("gemini_assessment_answers", JSON.stringify(answers));
 }
 
-function markChapterCompleted(chapterId) {
+async function markChapterCompleted(chapterId) {
   const raw = localStorage.getItem("gemini_completed_chapters");
   const completed = raw ? JSON.parse(raw) : [];
 
@@ -59,6 +61,19 @@ function markChapterCompleted(chapterId) {
   }
 
   localStorage.setItem("gemini_completed_chapters", JSON.stringify(completed));
+
+  try {
+    const candidateId = localStorage.getItem("gemini_candidate_id");
+
+    if (candidateId) {
+      await markChapterCompletedInDatabase({
+        candidateId,
+        chapterId,
+      });
+    }
+  } catch (error) {
+    console.error("Chapter Progress Save Error:", error);
+  }
 }
 
 function calculateAssessmentResult() {
@@ -142,8 +157,10 @@ function CourseViewer() {
     : courseStructure[actualChapterId] || [];
 
   const currentIndex = currentSequence.indexOf(pageNumber);
+
   const previousPage =
     currentIndex > 0 ? currentSequence[currentIndex - 1] : null;
+
   const nextPage =
     currentIndex < currentSequence.length - 1
       ? currentSequence[currentIndex + 1]
@@ -220,7 +237,7 @@ function CourseViewer() {
     }
   }
 
-  function handleNext() {
+  async function handleNext() {
     if (isAssessment && !nextPage) {
       calculateAssessmentResult();
       navigate("/assessment-result");
@@ -228,7 +245,7 @@ function CourseViewer() {
     }
 
     if (!isAssessment && !nextPage) {
-      markChapterCompleted(actualChapterId);
+      await markChapterCompleted(actualChapterId);
       navigate("/dashboard");
       return;
     }

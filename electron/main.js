@@ -4,9 +4,13 @@ import { fileURLToPath } from "url";
 
 import {
   saveCandidate,
+  findCandidateByPassport,
+  getCompletedChapters,
+  markChapterCompleted,
   saveAssessmentResult,
   saveCertificate,
   getAllCandidates,
+  getAssessmentRecords,
 } from "./database.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,7 +23,7 @@ function createWindow() {
     minWidth: 1000,
     minHeight: 700,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
       nodeIntegration: false,
     },
@@ -36,6 +40,18 @@ ipcMain.handle("db:saveCandidate", (_event, candidate) => {
   return saveCandidate(candidate);
 });
 
+ipcMain.handle("db:findCandidateByPassport", (_event, passportNumber) => {
+  return findCandidateByPassport(passportNumber);
+});
+
+ipcMain.handle("db:getCompletedChapters", (_event, candidateId) => {
+  return getCompletedChapters(candidateId);
+});
+
+ipcMain.handle("db:markChapterCompleted", (_event, data) => {
+  return markChapterCompleted(data);
+});
+
 ipcMain.handle("db:saveAssessmentResult", (_event, result) => {
   return saveAssessmentResult(result);
 });
@@ -48,18 +64,18 @@ ipcMain.handle("db:getAllCandidates", () => {
   return getAllCandidates();
 });
 
+ipcMain.handle("db:getAssessmentRecords", () => {
+  return getAssessmentRecords();
+});
+
 app.whenReady().then(() => {
   createWindow();
 
   app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  if (process.platform !== "darwin") app.quit();
 });
