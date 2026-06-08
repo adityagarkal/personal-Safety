@@ -1,22 +1,47 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { loadCourse } from "../../services/courseLoader";
+import { getModuleProgressFromDatabase } from "../../services/databaseService";
 
-function getCompletedChapters() {
-  const raw = localStorage.getItem("gemini_completed_chapters");
-  return raw ? JSON.parse(raw) : [];
+function getLoginUser() {
+  const raw = localStorage.getItem("gemini_login_user");
+  return raw ? JSON.parse(raw) : null;
+}
+
+function getSelectedCourse() {
+  const raw = localStorage.getItem("selected_course");
+  return raw ? JSON.parse(raw) : null;
 }
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   const [course, setCourse] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [completedChapters, setCompletedChapters] = useState([]);
 
   useEffect(() => {
     async function fetchCourse() {
+      const loginUser = getLoginUser();
+      const selected = getSelectedCourse();
       const data = await loadCourse();
+
+      setSelectedCourse(selected);
       setCourse(data);
-      setCompletedChapters(getCompletedChapters());
+
+      if (loginUser?.id && selected?.name) {
+        const progress = await getModuleProgressFromDatabase({
+          userId: loginUser.id,
+          moduleName: selected.name,
+        });
+
+        const completed = Array.isArray(progress)
+          ? progress.map((item) => String(item.chapter_id))
+          : [];
+
+        setCompletedChapters(completed);
+      }
     }
 
     fetchCourse();
@@ -34,41 +59,38 @@ function Dashboard() {
     (chapter) => chapter["@_ass"] === "X"
   );
 
-  const candidateRaw = localStorage.getItem("gemini_candidate_details");
-  const candidate = candidateRaw ? JSON.parse(candidateRaw) : null;
-
   const allChaptersCompleted = trainingChapters.every((_, index) =>
     completedChapters.includes(String(index + 1))
   );
+
+  const displayName = selectedCourse?.name || course.name;
 
   return (
     <div className="max-w-6xl mx-auto p-8">
       <div className="flex justify-between items-start gap-4 mb-8">
         <div>
-          <h1 className="text-4xl font-bold">{course.name}</h1>
+          <h1 className="text-4xl font-bold">{displayName}</h1>
 
-          {candidate && (
+          {selectedCourse?.category && (
             <p className="mt-3 text-gray-700">
-              Candidate: <strong>{candidate.candidateName}</strong>
-              {candidate.passportNumber ? (
-                <> | Passport: <strong>{candidate.passportNumber}</strong></>
+              Category: <strong>{selectedCourse.category}</strong>
+              {selectedCourse?.estimatedDuration ? (
+                <>
+                  {" "}
+                  | Duration:{" "}
+                  <strong>{selectedCourse.estimatedDuration}</strong>
+                </>
               ) : null}
             </p>
           )}
         </div>
 
-        <div className="flex gap-3">
-          <Link
-            to="/admin-records"
-            className="px-4 py-2 rounded bg-green-600 text-white"
-          >
-            View Records
-          </Link>
-
-          <Link to="/" className="px-4 py-2 rounded bg-gray-200">
-            Change Candidate
-          </Link>
-        </div>
+        <button
+          onClick={() => navigate("/course-selection")}
+          className="px-5 py-2 rounded bg-gray-200 hover:bg-gray-300"
+        >
+          Back to CBT Center
+        </button>
       </div>
 
       <section className="mb-10">

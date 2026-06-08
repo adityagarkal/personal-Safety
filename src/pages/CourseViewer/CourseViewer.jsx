@@ -17,9 +17,12 @@ import {
 
 import { answerKey } from "../../data/answerKey";
 
-import { markChapterCompletedInDatabase } from "../../services/databaseService";
+import {
+  saveModuleProgressToDatabase,
+  saveCBTCompletionToDatabase,
+} from "../../services/databaseService";
 
-const CONTENT_BASE_PATH = "/content/001-Personal_Safety_2009/p_safety";
+const CONTENT_BASE_PATH = "content/001-Personal_Safety_2009/p_safety";
 const PASS_PERCENTAGE = 70;
 
 function normalizeText(value) {
@@ -36,8 +39,18 @@ function getPicFileName(pic) {
   return fileName.replace(".swf", ".jpg");
 }
 
+function getLoginUser() {
+  const raw = localStorage.getItem("gemini_login_user");
+  return raw ? JSON.parse(raw) : null;
+}
+
+function getSelectedCourse() {
+  const raw = localStorage.getItem("selected_course");
+  return raw ? JSON.parse(raw) : null;
+}
+
 function getStoredAssessmentAnswers() {
-  const raw = localStorage.getItem("gemini_assessment_answers");
+  const raw = sessionStorage.getItem("gemini_assessment_answers_session");
   return raw ? JSON.parse(raw) : {};
 }
 
@@ -49,37 +62,36 @@ function saveAssessmentAnswer(questionId, isCorrect) {
     submittedAt: new Date().toISOString(),
   };
 
-  localStorage.setItem("gemini_assessment_answers", JSON.stringify(answers));
+  sessionStorage.setItem(
+    "gemini_assessment_answers_session",
+    JSON.stringify(answers)
+  );
 }
 
 async function markChapterCompleted(chapterId) {
-  const raw = localStorage.getItem("gemini_completed_chapters");
-  const completed = raw ? JSON.parse(raw) : [];
+  const loginUser = getLoginUser();
+  const selectedCourse = getSelectedCourse();
 
-  if (!completed.includes(String(chapterId))) {
-    completed.push(String(chapterId));
-  }
-
-  localStorage.setItem("gemini_completed_chapters", JSON.stringify(completed));
+  if (!loginUser?.id || !selectedCourse?.name) return;
 
   try {
-    const candidateId = localStorage.getItem("gemini_candidate_id");
-
-    if (candidateId) {
-      await markChapterCompletedInDatabase({
-        candidateId,
-        chapterId,
-      });
-    }
+    await saveModuleProgressToDatabase({
+      userId: loginUser.id,
+      moduleName: selectedCourse.name,
+      chapterId,
+    });
   } catch (error) {
-    console.error("Chapter Progress Save Error:", error);
+    console.error("Module Progress Save Error:", error);
   }
 }
 
-function calculateAssessmentResult() {
+async function calculateAndSaveAssessmentResult() {
   const answers = getStoredAssessmentAnswers();
+  const loginUser = getLoginUser();
+  const selectedCourse = getSelectedCourse();
 
   const total = assessmentStructure.length;
+
   const correct = assessmentStructure.filter((questionId) => {
     const key = `5/${questionId}`;
     return answers[key]?.isCorrect === true;
@@ -98,6 +110,22 @@ function calculateAssessmentResult() {
   };
 
   localStorage.setItem("gemini_assessment_result", JSON.stringify(result));
+
+  if (loginUser?.id) {
+    try {
+      await saveCBTCompletionToDatabase({
+        userId: loginUser.id,
+        moduleName: selectedCourse?.name || "Personal Safety",
+        moduleVersion: "1.0",
+        score: percentage,
+        status: passed ? "PASS" : "FAIL",
+        certificateNumber: "",
+      });
+    } catch (error) {
+      console.error("CBT Completion Save Error:", error);
+    }
+  }
+
   return result;
 }
 
@@ -145,7 +173,9 @@ function CourseViewer() {
     );
   }
 
-  if (!pageData) return <div className="p-10">Loading...</div>;
+  if (!pageData) {
+    return <div className="p-10">Loading...</div>;
+  }
 
   const englishPage = getEnglishPage(pageData);
   const texts = getPageTexts(englishPage);
@@ -205,7 +235,9 @@ function CourseViewer() {
   function checkAnswer() {
     if (!currentAnswerKey) return false;
 
-    if (selectedAnswerTexts.length !== correctAnswerTexts.length) return false;
+    if (selectedAnswerTexts.length !== correctAnswerTexts.length) {
+      return false;
+    }
 
     return correctAnswerTexts.every((answer) =>
       selectedAnswerTexts.includes(answer)
@@ -239,7 +271,7 @@ function CourseViewer() {
 
   async function handleNext() {
     if (isAssessment && !nextPage) {
-      calculateAssessmentResult();
+      await calculateAndSaveAssessmentResult();
       navigate("/assessment-result");
       return;
     }
@@ -274,10 +306,7 @@ function CourseViewer() {
             Previous
           </Link>
         ) : (
-          <button
-            disabled
-            className="px-4 py-2 rounded bg-gray-200 opacity-50"
-          >
+          <button disabled className="px-4 py-2 rounded bg-gray-200 opacity-50">
             Previous
           </button>
         )}
@@ -378,8 +407,8 @@ function CourseViewer() {
                 src={`${CONTENT_BASE_PATH}/pic/${jpgFile}`}
                 alt=""
                 className="w-full rounded-lg shadow mb-6"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
                 }}
               />
             );

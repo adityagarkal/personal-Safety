@@ -3,6 +3,45 @@ const { contextBridge, ipcRenderer } = require("electron");
 contextBridge.exposeInMainWorld("electronAPI", {
   appName: "Gemini CBT",
 
+  readCourseFile: (relativePath) =>
+    ipcRenderer.invoke("file:readCourseFile", relativePath),
+
+  validateLogin: (data) =>
+    ipcRenderer.invoke("auth:validateLogin", data),
+
+  createUser: (data) =>
+    ipcRenderer.invoke("db:createUser", data),
+
+  getAllUsers: () =>
+    ipcRenderer.invoke("db:getAllUsers"),
+
+  assignTraining: (data) =>
+    ipcRenderer.invoke("db:assignTraining", data),
+
+  getUserAssignments: (userId) =>
+    ipcRenderer.invoke("db:getUserAssignments", userId),
+
+  saveModuleProgress: (data) =>
+    ipcRenderer.invoke("db:saveModuleProgress", data),
+
+  getModuleProgress: (data) =>
+    ipcRenderer.invoke("db:getModuleProgress", data),
+
+  saveCBTCompletion: (data) =>
+    ipcRenderer.invoke("db:saveCBTCompletion", data),
+
+  getUserCBTCompletions: (userId) =>
+    ipcRenderer.invoke("db:getUserCBTCompletions", userId),
+
+  getAuditLogs: () =>
+    ipcRenderer.invoke("db:getAuditLogs"),
+
+  getCBTModules: () =>
+    ipcRenderer.invoke("db:getCBTModules"),
+
+  generateMonthlyReport: (data) =>
+    ipcRenderer.invoke("report:generateMonthlyReport", data),
+
   saveCandidate: (candidate) =>
     ipcRenderer.invoke("db:saveCandidate", candidate),
 

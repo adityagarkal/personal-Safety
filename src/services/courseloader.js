@@ -1,7 +1,23 @@
 import { loadXML } from "./xmlParser";
 
-export const COURSE_BASE_PATH =
-  "/content/001-Personal_Safety_2009/p_safety";
+export function getSelectedCourse() {
+  const raw = localStorage.getItem("selected_course");
+
+  if (!raw) {
+    return {
+      id: "001",
+      name: "Personal Safety",
+      path: "content/001-Personal_Safety_2009/p_safety",
+    };
+  }
+
+  return JSON.parse(raw);
+}
+
+export function getCourseBasePath() {
+  const selectedCourse = getSelectedCourse();
+  return selectedCourse.path || "content/001-Personal_Safety_2009/p_safety";
+}
 
 function normalizeArray(value) {
   if (!value) return [];
@@ -9,28 +25,25 @@ function normalizeArray(value) {
 }
 
 export async function loadCourse() {
-  const data = await loadXML(`${COURSE_BASE_PATH}/cbt.xml`);
+  const courseBasePath = getCourseBasePath();
+  const data = await loadXML(`${courseBasePath}/cbt.xml`);
 
   const module = data.module;
 
   return {
-    name: module["@_name"] || "Untitled Course",
+    name: module["@_name"] || getSelectedCourse().name || "Untitled Course",
     shortName: module["@_shortName"] || "",
-
     objectives: normalizeArray(module.objectives?.obj),
-
     chapters: normalizeArray(module.chapters?.chap),
-
     levels: normalizeArray(module.levels?.level),
   };
 }
 
 export async function loadCoursePage(chapterId, pageNumber) {
   const actualChapterId = chapterId || "5";
+  const courseBasePath = getCourseBasePath();
 
-  return loadXML(
-    `${COURSE_BASE_PATH}/${actualChapterId}/${pageNumber}.xml`
-  );
+  return loadXML(`${courseBasePath}/${actualChapterId}/${pageNumber}.xml`);
 }
 
 export function getEnglishPage(pageData) {

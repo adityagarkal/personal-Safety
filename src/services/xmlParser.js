@@ -3,21 +3,24 @@ import { XMLParser } from "fast-xml-parser";
 const parser = new XMLParser({
   ignoreAttributes: false,
   attributeNamePrefix: "@_",
+  textNodeName: "#text",
+  trimValues: true,
 });
 
-export async function loadXML(xmlPath) {
-  try {
-    const response = await fetch(xmlPath);
+export async function loadXML(filePath) {
+  let xmlText = "";
+
+  if (window.electronAPI?.readCourseFile) {
+    xmlText = await window.electronAPI.readCourseFile(filePath);
+  } else {
+    const response = await fetch(filePath);
 
     if (!response.ok) {
-      throw new Error(`Failed to load XML: ${xmlPath}`);
+      throw new Error(`XML file not found: ${filePath}`);
     }
 
-    const xmlText = await response.text();
-
-    return parser.parse(xmlText);
-  } catch (error) {
-    console.error("XML Loading Error:", error);
-    throw error;
+    xmlText = await response.text();
   }
+
+  return parser.parse(xmlText);
 }
