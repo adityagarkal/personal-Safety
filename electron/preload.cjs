@@ -65,4 +65,13 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
   getAssessmentRecords: () =>
     ipcRenderer.invoke("db:getAssessmentRecords"),
+
+  getUserWiseReports: () =>
+  ipcRenderer.invoke("db:getUserWiseReports"),
+
+  getMonthlyReportStats: (month) =>
+  ipcRenderer.invoke("db:getMonthlyReportStats", month),
+
+  getAdminDashboardStats: () =>
+  ipcRenderer.invoke("db:getAdminDashboardStats"),
 });

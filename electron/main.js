@@ -8,6 +8,9 @@ import {
   validateLogin,
   createUser,
   getAllUsers,
+  getUserWiseReports,
+  getMonthlyReportStats,
+  getAdminDashboardStats,
   assignTraining,
   getUserAssignments,
   saveModuleProgress,
@@ -174,44 +177,68 @@ ipcMain.handle("file:readCourseFile", (_event, relativePath) => {
 ipcMain.handle("auth:validateLogin", (_event, data) => validateLogin(data));
 ipcMain.handle("db:createUser", (_event, data) => createUser(data));
 ipcMain.handle("db:getAllUsers", () => getAllUsers());
+ipcMain.handle("db:getUserWiseReports", () => getUserWiseReports());
+
+ipcMain.handle("db:getMonthlyReportStats", (_event, month) =>
+  getMonthlyReportStats(month)
+);
+
+ipcMain.handle("db:getAdminDashboardStats", () =>
+  getAdminDashboardStats()
+);
+
 ipcMain.handle("db:assignTraining", (_event, data) => assignTraining(data));
+
 ipcMain.handle("db:getUserAssignments", (_event, userId) =>
   getUserAssignments(userId)
 );
+
 ipcMain.handle("db:saveModuleProgress", (_event, data) =>
   saveModuleProgress(data)
 );
+
 ipcMain.handle("db:getModuleProgress", (_event, data) =>
   getModuleProgress(data.userId, data.moduleName)
 );
+
 ipcMain.handle("db:saveCBTCompletion", (_event, data) =>
   saveCBTCompletion(data)
 );
+
 ipcMain.handle("db:getUserCBTCompletions", (_event, userId) =>
   getUserCBTCompletions(userId)
 );
+
 ipcMain.handle("db:getAuditLogs", () => getAuditLogs());
 ipcMain.handle("db:getCBTModules", () => getCBTModules());
+
 ipcMain.handle("db:saveCandidate", (_event, candidate) =>
   saveCandidate(candidate)
 );
+
 ipcMain.handle("db:findCandidateByPassport", (_event, passportNumber) =>
   findCandidateByPassport(passportNumber)
 );
+
 ipcMain.handle("db:getCompletedChapters", (_event, candidateId) =>
   getCompletedChapters(candidateId)
 );
+
 ipcMain.handle("db:markChapterCompleted", (_event, data) =>
   markChapterCompleted(data)
 );
+
 ipcMain.handle("db:saveAssessmentResult", (_event, result) =>
   saveAssessmentResult(result)
 );
+
 ipcMain.handle("db:saveCertificate", (_event, certificate) =>
   saveCertificate(certificate)
 );
+
 ipcMain.handle("db:getAllCandidates", () => getAllCandidates());
 ipcMain.handle("db:getAssessmentRecords", () => getAssessmentRecords());
+
 ipcMain.handle("report:generateMonthlyReport", (_event, data) =>
   generateMonthlyReport(data)
 );

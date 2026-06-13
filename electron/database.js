@@ -664,6 +664,116 @@ export function getAllUsers() {
   `).all();
 }
 
+export function getUserWiseReports() {
+  return db.prepare(`
+    SELECT
+      u.id,
+      u.crew_id,
+      u.first_name,
+      u.last_name,
+      u.full_name,
+      u.rank,
+      u.status,
+
+      COALESCE(ta.total_assigned, 0) AS mandatory_total,
+      COALESCE(cc.total_completed, 0) AS mandatory_completed,
+
+      0 AS recommended_total,
+      0 AS recommended_completed,
+
+      COALESCE(cc.total_completed, 0) AS total_cbts
+
+    FROM users u
+
+    LEFT JOIN (
+      SELECT user_id, COUNT(*) AS total_assigned
+      FROM training_assignments
+      GROUP BY user_id
+    ) ta ON ta.user_id = u.id
+
+    LEFT JOIN (
+      SELECT user_id, COUNT(*) AS total_completed
+      FROM cbt_completions
+      GROUP BY user_id
+    ) cc ON cc.user_id = u.id
+
+    WHERE u.role != 'admin'
+    ORDER BY u.id DESC
+  `).all();
+}
+
+export function getMonthlyReportStats(month) {
+  return db.prepare(`
+    SELECT
+      COUNT(*) AS totalCompletions,
+      COUNT(DISTINCT user_id) AS crewTrained,
+      AVG(score) AS averageScore
+    FROM cbt_completions
+    WHERE substr(completion_date, 1, 7) = ?
+  `).get(month);
+}
+
+export function getAdminDashboardStats() {
+  const totalUsers = db.prepare(`
+    SELECT COUNT(*) AS total
+    FROM users
+    WHERE role != 'admin'
+  `).get();
+
+  const activeUsers = db.prepare(`
+    SELECT COUNT(*) AS total
+    FROM users
+    WHERE role != 'admin'
+      AND status = 'Active'
+  `).get();
+
+  const archivedUsers = db.prepare(`
+    SELECT COUNT(*) AS total
+    FROM users
+    WHERE role != 'admin'
+      AND status = 'Archived'
+  `).get();
+
+  const completedThisMonth = db.prepare(`
+    SELECT COUNT(*) AS total
+    FROM cbt_completions
+    WHERE substr(completion_date, 1, 7) = substr(date('now'), 1, 7)
+  `).get();
+
+  const todayCompletions = db.prepare(`
+    SELECT COUNT(*) AS total
+    FROM cbt_completions
+    WHERE substr(completion_date, 1, 10) = date('now')
+  `).get();
+
+  const recentCompletions = db.prepare(`
+    SELECT
+      cc.id,
+      cc.module_name,
+      cc.completion_date,
+      cc.status,
+      cc.score,
+      u.crew_id,
+      u.first_name,
+      u.last_name,
+      u.full_name,
+      u.rank
+    FROM cbt_completions cc
+    JOIN users u ON u.id = cc.user_id
+    ORDER BY cc.completion_date DESC
+    LIMIT 8
+  `).all();
+
+  return {
+    totalUsers: totalUsers.total || 0,
+    activeUsers: activeUsers.total || 0,
+    archivedUsers: archivedUsers.total || 0,
+    completedThisMonth: completedThisMonth.total || 0,
+    todayCompletions: todayCompletions.total || 0,
+    recentCompletions,
+  };
+}
+
 export function getCBTModules() {
   return db.prepare(`
     SELECT *
@@ -875,4 +985,5 @@ export function getAssessmentRecords() {
       ON c.id = cert.candidate_id
     ORDER BY c.id DESC
   `).all();
+
 }

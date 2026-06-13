@@ -10,6 +10,7 @@ import AssessmentResult from "../pages/AssessmentResult/AssessmentResult";
 import AdminLogin from "../pages/AdminLogin/AdminLogin";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import AdminUsers from "../pages/AdminUsers/AdminUsers";
+import AdminAddUser from "../pages/AdminAddUser/AdminAddUser";
 import AdminRecords from "../pages/AdminRecords/AdminRecords";
 import AdminAuditLogs from "../pages/AdminAuditLogs/AdminAuditLogs";
 import MonthlyReport from "../pages/MonthlyReport/MonthlyReport";
@@ -25,25 +26,19 @@ function AppRoutes() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
-
         <Route path="/admin" element={<AdminDashboard />} />
+
         <Route path="/admin/users" element={<AdminUsers />} />
-        <Route path="/admin/users/new" element={<AdminUsers />} />
-        <Route path="/admin/users/:id/edit" element={<AdminUsers />} />
+        <Route path="/admin/users/new" element={<AdminAddUser />} />
+        <Route path="/admin/users/:id/edit" element={<AdminAddUser />} />
 
         <Route path="/admin/reports/users" element={<AdminRecords />} />
         <Route path="/admin/reports/users/:id" element={<AdminRecords />} />
         <Route path="/admin/reports/monthly" element={<MonthlyReport />} />
-
         <Route path="/admin/audit-logs" element={<AdminAuditLogs />} />
 
-        <Route
-          path="/course/:chapterId/:pageNumber"
-          element={<CourseViewer />}
-        />
-
+        <Route path="/course/:chapterId/:pageNumber" element={<CourseViewer />} />
         <Route path="/assessment/:pageNumber" element={<CourseViewer />} />
-
         <Route path="/assessment-result" element={<AssessmentResult />} />
       </Routes>
     </HashRouter>

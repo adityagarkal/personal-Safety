@@ -157,3 +157,27 @@ export async function generateMonthlyReportInDatabase(data) {
 
   return window.electronAPI.generateMonthlyReport(data);
 }
+
+export async function getUserWiseReportsFromDatabase() {
+  if (!window.electronAPI?.getUserWiseReports) {
+    throw new Error("Electron report API not available");
+  }
+
+  return window.electronAPI.getUserWiseReports();
+}
+
+export async function getMonthlyReportStatsFromDatabase(month) {
+  if (!window.electronAPI?.getMonthlyReportStats) {
+    throw new Error("Electron monthly report API not available");
+  }
+
+  return window.electronAPI.getMonthlyReportStats(month);
+}
+
+export async function getAdminDashboardStatsFromDatabase() {
+  if (!window.electronAPI?.getAdminDashboardStats) {
+    throw new Error("Electron dashboard API not available");
+  }
+
+  return window.electronAPI.getAdminDashboardStats();
+}

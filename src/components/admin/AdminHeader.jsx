@@ -10,7 +10,7 @@ function AdminHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-30 h-16 bg-[#173f9f] flex items-center justify-between px-6 shadow">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 ml-14">
         <div className="w-9 h-9 rounded bg-white/15 flex items-center justify-center text-white font-bold">
           G
         </div>
