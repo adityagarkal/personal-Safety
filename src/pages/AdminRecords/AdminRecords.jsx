@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import AdminLayout from "../../layouts/AdminLayout";
 import { getAssessmentRecordsFromDatabase } from "../../services/databaseService";
 
 function AdminRecords() {
@@ -11,7 +11,7 @@ function AdminRecords() {
       try {
         setError("");
         const assessmentRecords = await getAssessmentRecordsFromDatabase();
-        setRecords(assessmentRecords);
+        setRecords(Array.isArray(assessmentRecords) ? assessmentRecords : []);
       } catch (err) {
         console.error("Admin Records Error:", err);
         setError("Unable to load completion records from SQLite.");
@@ -22,18 +22,14 @@ function AdminRecords() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto p-8">
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-4xl font-bold">CBT Completion Records</h1>
-          <p className="mt-2 text-gray-600">
-            Completion records are read-only and must not be modified by admin.
-          </p>
-        </div>
-
-        <Link to="/admin-dashboard" className="px-4 py-2 rounded bg-gray-200">
-          Back to Admin Dashboard
-        </Link>
+    <AdminLayout>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-900">
+          User Wise Reports
+        </h1>
+        <p className="text-gray-500 mt-1">
+          Read-only CBT completion records, scores, certificates, and audit-safe history.
+        </p>
       </div>
 
       {error && (
@@ -57,10 +53,10 @@ function AdminRecords() {
         </ul>
       </div>
 
-      <div className="overflow-auto bg-white rounded-xl shadow">
+      <div className="overflow-auto bg-white rounded-xl border shadow-sm">
         <table className="w-full border">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-gray-100">
               <th className="border p-3">User / Candidate</th>
               <th className="border p-3">Module</th>
               <th className="border p-3">Version</th>
@@ -112,7 +108,7 @@ function AdminRecords() {
           </tbody>
         </table>
       </div>
-    </div>
+    </AdminLayout>
   );
 }
 

@@ -52,7 +52,7 @@ function AdminLogin() {
         })
       );
 
-      navigate("/admin-dashboard");
+      navigate("/admin");
     } catch (err) {
       console.error("Admin Login Error:", err);
       setError("Admin login failed. Please check database connection.");

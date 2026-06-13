@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import AdminLayout from "../../layouts/AdminLayout";
 import {
   createUserInDatabase,
   getAllUsersFromDatabase,
@@ -7,7 +7,7 @@ import {
 } from "../../services/databaseService";
 
 function AdminUsers() {
-  const navigate = useNavigate();
+  const isAddPage = window.location.hash.includes("/admin/users/new");
 
   const [users, setUsers] = useState([]);
   const [modules, setModules] = useState([]);
@@ -20,17 +20,14 @@ function AdminUsers() {
     rank: "",
     department: "",
     nationality: "",
-
     vessel: "",
     joiningDate: "",
     contractEndDate: "",
-
     username: "",
     password: "",
     forcePasswordChange: "No",
     status: "Active",
     role: "user",
-
     trainingAssignments: "Personal Safety",
   });
 
@@ -48,7 +45,6 @@ function AdminUsers() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-
     setForm((prev) => ({
       ...prev,
       [name]: name === "username" ? value.toLowerCase() : value,
@@ -57,19 +53,12 @@ function AdminUsers() {
 
   function toggleModule(moduleName) {
     const current = form.trainingAssignments
-      ? form.trainingAssignments
-          .split("\n")
-          .map((item) => item.trim())
-          .filter(Boolean)
+      ? form.trainingAssignments.split("\n").map((item) => item.trim()).filter(Boolean)
       : [];
 
-    let updated;
-
-    if (current.includes(moduleName)) {
-      updated = current.filter((item) => item !== moduleName);
-    } else {
-      updated = [...current, moduleName];
-    }
+    const updated = current.includes(moduleName)
+      ? current.filter((item) => item !== moduleName)
+      : [...current, moduleName];
 
     setForm((prev) => ({
       ...prev,
@@ -92,17 +81,14 @@ function AdminUsers() {
         rank: "",
         department: "",
         nationality: "",
-
         vessel: "",
         joiningDate: "",
         contractEndDate: "",
-
         username: "",
         password: "",
         forcePasswordChange: "No",
         status: "Active",
         role: "user",
-
         trainingAssignments: "Personal Safety",
       });
 
@@ -119,28 +105,20 @@ function AdminUsers() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between mb-8">
-          <div>
-            <h1 className="text-4xl font-bold">Crew & Login Management</h1>
-            <p className="text-gray-600 mt-2">
-              Create admin-controlled crew accounts and assign CBT training.
-            </p>
-          </div>
+    <AdminLayout>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-900">
+          {isAddPage ? "Add New Crew Member" : "User List"}
+        </h1>
+        <p className="text-gray-500 mt-1">
+          {isAddPage
+            ? "Register crew profile, login details, vessel information, and CBT assignments."
+            : "Browse and manage all registered crew members."}
+        </p>
+      </div>
 
-          <button
-            onClick={() => navigate("/admin-dashboard")}
-            className="px-5 py-3 rounded bg-gray-300"
-          >
-            Back
-          </button>
-        </div>
-
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow p-6 mb-8"
-        >
+      {isAddPage && (
+        <form onSubmit={handleSubmit} className="bg-white rounded-xl border shadow-sm p-6 mb-8">
           <h2 className="text-2xl font-bold mb-5">Create Crew Login</h2>
 
           {message && (
@@ -150,146 +128,46 @@ function AdminUsers() {
           )}
 
           <section className="mb-8">
-            <h3 className="text-xl font-bold mb-4">
-              Section A – Personal Details
-            </h3>
+            <h3 className="text-xl font-bold mb-4">Section A – Personal Details</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <input
-                name="crewId"
-                value={form.crewId}
-                onChange={handleChange}
-                placeholder="Crew ID"
-                className="border rounded-lg p-3"
-              />
-
-              <input
-                name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
-                placeholder="First Name"
-                required
-                className="border rounded-lg p-3"
-              />
-
-              <input
-                name="lastName"
-                value={form.lastName}
-                onChange={handleChange}
-                placeholder="Last Name"
-                required
-                className="border rounded-lg p-3"
-              />
-
-              <input
-                name="rank"
-                value={form.rank}
-                onChange={handleChange}
-                placeholder="Rank"
-                className="border rounded-lg p-3"
-              />
-
-              <input
-                name="department"
-                value={form.department}
-                onChange={handleChange}
-                placeholder="Department"
-                className="border rounded-lg p-3"
-              />
-
-              <input
-                name="nationality"
-                value={form.nationality}
-                onChange={handleChange}
-                placeholder="Nationality"
-                className="border rounded-lg p-3"
-              />
+              <input name="crewId" value={form.crewId} onChange={handleChange} placeholder="Crew ID" className="border rounded-lg p-3" />
+              <input name="firstName" value={form.firstName} onChange={handleChange} placeholder="First Name" required className="border rounded-lg p-3" />
+              <input name="lastName" value={form.lastName} onChange={handleChange} placeholder="Last Name" required className="border rounded-lg p-3" />
+              <input name="rank" value={form.rank} onChange={handleChange} placeholder="Rank" className="border rounded-lg p-3" />
+              <input name="department" value={form.department} onChange={handleChange} placeholder="Department" className="border rounded-lg p-3" />
+              <input name="nationality" value={form.nationality} onChange={handleChange} placeholder="Nationality" className="border rounded-lg p-3" />
             </div>
           </section>
 
           <section className="mb-8">
-            <h3 className="text-xl font-bold mb-4">
-              Section B – Vessel Details
-            </h3>
+            <h3 className="text-xl font-bold mb-4">Section B – Vessel Details</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <input
-                name="vessel"
-                value={form.vessel}
-                onChange={handleChange}
-                placeholder="Vessel"
-                className="border rounded-lg p-3"
-              />
-
-              <input
-                type="date"
-                name="joiningDate"
-                value={form.joiningDate}
-                onChange={handleChange}
-                className="border rounded-lg p-3"
-              />
-
-              <input
-                type="date"
-                name="contractEndDate"
-                value={form.contractEndDate}
-                onChange={handleChange}
-                className="border rounded-lg p-3"
-              />
+              <input name="vessel" value={form.vessel} onChange={handleChange} placeholder="Vessel" className="border rounded-lg p-3" />
+              <input type="date" name="joiningDate" value={form.joiningDate} onChange={handleChange} className="border rounded-lg p-3" />
+              <input type="date" name="contractEndDate" value={form.contractEndDate} onChange={handleChange} className="border rounded-lg p-3" />
             </div>
           </section>
 
           <section className="mb-8">
-            <h3 className="text-xl font-bold mb-4">
-              Section C – Login Details
-            </h3>
+            <h3 className="text-xl font-bold mb-4">Section C – Login Details</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <input
-                name="username"
-                value={form.username}
-                onChange={handleChange}
-                placeholder="Username"
-                required
-                autoComplete="off"
-                className="border rounded-lg p-3"
-              />
+              <input name="username" value={form.username} onChange={handleChange} placeholder="Username" required autoComplete="off" className="border rounded-lg p-3" />
+              <input name="password" value={form.password} onChange={handleChange} placeholder="Password" required className="border rounded-lg p-3" />
 
-              <input
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="Password"
-                required
-                className="border rounded-lg p-3"
-              />
-
-              <select
-                name="forcePasswordChange"
-                value={form.forcePasswordChange}
-                onChange={handleChange}
-                className="border rounded-lg p-3"
-              >
+              <select name="forcePasswordChange" value={form.forcePasswordChange} onChange={handleChange} className="border rounded-lg p-3">
                 <option value="No">Force Password Change: No</option>
                 <option value="Yes">Force Password Change: Yes</option>
               </select>
 
-              <select
-                name="status"
-                value={form.status}
-                onChange={handleChange}
-                className="border rounded-lg p-3"
-              >
+              <select name="status" value={form.status} onChange={handleChange} className="border rounded-lg p-3">
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
               </select>
 
-              <select
-                name="role"
-                value={form.role}
-                onChange={handleChange}
-                className="border rounded-lg p-3"
-              >
+              <select name="role" value={form.role} onChange={handleChange} className="border rounded-lg p-3">
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
               </select>
@@ -297,9 +175,7 @@ function AdminUsers() {
           </section>
 
           <section className="mb-8">
-            <h3 className="text-xl font-bold mb-4">
-              Section D – Training Assignment
-            </h3>
+            <h3 className="text-xl font-bold mb-4">Section D – Training Assignment</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {modules.length === 0 ? (
@@ -314,9 +190,7 @@ function AdminUsers() {
                     <label
                       key={module.id}
                       className={`flex items-center gap-3 border rounded-lg p-3 cursor-pointer ${
-                        selected
-                          ? "border-blue-500 bg-blue-50"
-                          : "border-gray-300 bg-white"
+                        selected ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-white"
                       }`}
                     >
                       <input
@@ -326,13 +200,9 @@ function AdminUsers() {
                       />
 
                       <div>
-                        <div className="font-semibold">
-                          {module.module_name}
-                        </div>
-
+                        <div className="font-semibold">{module.module_name}</div>
                         <div className="text-sm text-gray-500">
-                          Version {module.module_version} |{" "}
-                          {module.status || "Active"}
+                          Version {module.module_version} | {module.status || "Active"}
                         </div>
                       </div>
                     </label>
@@ -340,67 +210,60 @@ function AdminUsers() {
                 })
               )}
             </div>
-
-            <p className="text-sm text-gray-600 mt-4">
-              Assigned CBT modules are stored in the Training Assignment table.
-              Completion records remain immutable after completion.
-            </p>
           </section>
 
-          <button className="px-6 py-3 rounded bg-blue-600 text-white">
+          <button className="px-6 py-3 rounded bg-[#173f9f] text-white">
             Create Crew Login
           </button>
         </form>
+      )}
 
-        <div className="bg-white rounded-xl shadow overflow-auto">
-          <table className="w-full border">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border p-3">Crew ID</th>
-                <th className="border p-3">Name</th>
-                <th className="border p-3">Rank</th>
-                <th className="border p-3">Department</th>
-                <th className="border p-3">Nationality</th>
-                <th className="border p-3">Vessel</th>
-                <th className="border p-3">Username</th>
-                <th className="border p-3">Role</th>
-                <th className="border p-3">Status</th>
+      <div className="bg-white rounded-xl border shadow-sm overflow-auto">
+        <table className="w-full border">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border p-3">Crew ID</th>
+              <th className="border p-3">Name</th>
+              <th className="border p-3">Rank</th>
+              <th className="border p-3">Department</th>
+              <th className="border p-3">Nationality</th>
+              <th className="border p-3">Vessel</th>
+              <th className="border p-3">Username</th>
+              <th className="border p-3">Role</th>
+              <th className="border p-3">Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {users.length === 0 ? (
+              <tr>
+                <td colSpan="9" className="border p-4 text-center">
+                  No users found.
+                </td>
               </tr>
-            </thead>
-
-            <tbody>
-              {users.length === 0 ? (
-                <tr>
-                  <td colSpan="9" className="border p-4 text-center">
-                    No users found.
+            ) : (
+              users.map((user) => (
+                <tr key={user.id}>
+                  <td className="border p-3">{user.crew_id || "-"}</td>
+                  <td className="border p-3">
+                    {user.first_name || user.last_name
+                      ? `${user.first_name || ""} ${user.last_name || ""}`
+                      : user.full_name || "-"}
                   </td>
+                  <td className="border p-3">{user.rank || "-"}</td>
+                  <td className="border p-3">{user.department || "-"}</td>
+                  <td className="border p-3">{user.nationality || "-"}</td>
+                  <td className="border p-3">{user.vessel || "-"}</td>
+                  <td className="border p-3">{user.username}</td>
+                  <td className="border p-3">{user.role}</td>
+                  <td className="border p-3">{user.status || "Active"}</td>
                 </tr>
-              ) : (
-                users.map((user) => (
-                  <tr key={user.id}>
-                    <td className="border p-3">{user.crew_id || "-"}</td>
-
-                    <td className="border p-3">
-                      {user.first_name || user.last_name
-                        ? `${user.first_name || ""} ${user.last_name || ""}`
-                        : user.full_name || "-"}
-                    </td>
-
-                    <td className="border p-3">{user.rank || "-"}</td>
-                    <td className="border p-3">{user.department || "-"}</td>
-                    <td className="border p-3">{user.nationality || "-"}</td>
-                    <td className="border p-3">{user.vessel || "-"}</td>
-                    <td className="border p-3">{user.username}</td>
-                    <td className="border p-3">{user.role}</td>
-                    <td className="border p-3">{user.status || "Active"}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
-    </div>
+    </AdminLayout>
   );
 }
 

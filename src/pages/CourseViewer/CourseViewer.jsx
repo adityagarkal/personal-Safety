@@ -380,14 +380,24 @@ function CourseViewer() {
               </button>
             ) : (
               <div
-                className={`p-4 rounded font-semibold ${
-                  currentAnswerCorrect
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-700"
-                }`}
-              >
-                {currentAnswerCorrect ? "Correct Answer" : "Incorrect Answer"}
-              </div>
+  className={`p-4 rounded font-semibold ${
+    currentAnswerCorrect
+      ? "bg-green-100 text-green-700"
+      : "bg-red-100 text-red-700"
+  }`}
+>
+  <p>{currentAnswerCorrect ? "Correct Answer" : "Incorrect Answer"}</p>
+
+  {!currentAnswerCorrect && correctAnswerTexts.length > 0 && (
+    <div className="mt-3 rounded bg-white p-3 text-gray-800 border">
+      <p className="font-bold mb-2">Correct Answer:</p>
+
+      {currentAnswerKey.correctAnswers.map((answer, index) => (
+        <p key={index}>• {answer}</p>
+      ))}
+    </div>
+  )}
+</div>
             )}
           </div>
         </div>
