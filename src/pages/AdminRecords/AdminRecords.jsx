@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import AdminLayout from "../../layouts/AdminLayout";
 import { getUserWiseReportsFromDatabase } from "../../services/databaseService";
+import { useNavigate } from "react-router-dom";
 
 function ProgressBar({ value, total }) {
   const percentage = total ? Math.round((Number(value) / Number(total)) * 100) : 0;
@@ -31,6 +32,7 @@ function getName(user) {
 }
 
 function AdminRecords() {
+  const navigate = useNavigate();
   const [reports, setReports] = useState([]);
   const [search, setSearch] = useState("");
   const [rankFilter, setRankFilter] = useState("");
@@ -87,12 +89,24 @@ function AdminRecords() {
 
       <div className="bg-white rounded-xl border shadow-sm p-5 mb-6 flex items-center justify-between gap-4">
         <div className="flex gap-4">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by name, ID, or rank..."
-            className="w-80 border rounded-lg px-4 py-3"
-          />
+          <div className="relative w-80">
+  <input
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="Search by name, ID, or rank..."
+    className="w-full border rounded-lg px-4 py-3 pr-10"
+  />
+
+  {search && (
+    <button
+      type="button"
+      onClick={() => setSearch("")}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+    >
+      ✕
+    </button>
+  )}
+</div>
 
           <select
             value={rankFilter}
@@ -203,8 +217,15 @@ function AdminRecords() {
                     <td className="px-5 py-5 border-b font-bold">{total}</td>
 
                     <td className="px-5 py-5 border-b text-right">
-                      <button className="px-5 py-3 rounded-lg bg-[#2554C7] text-white font-semibold">
-                        View Details
+                      <button
+                          type="button"
+                          onClick={() => {
+                            console.log("VIEW DETAILS CLICKED", user.user_id || user.id);
+                            navigate(`/admin/users/${user.user_id || user.id}/profile`);
+                          }}
+                          className="px-5 py-3 rounded-lg bg-[#2554C7] text-white font-semibold cursor-pointer"
+                        >
+                          View Details
                       </button>
                     </td>
                   </tr>

@@ -31,6 +31,52 @@ db.exec(`
     created_at TEXT
   );
 
+  CREATE TABLE IF NOT EXISTS courses (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  course_code TEXT UNIQUE,
+  course_name TEXT NOT NULL,
+  category TEXT,
+  folder_path TEXT NOT NULL,
+  available_languages TEXT,
+  total_chapters INTEGER DEFAULT 0,
+  total_pages INTEGER DEFAULT 0,
+  is_active INTEGER DEFAULT 1,
+  imported_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS rank_course_matrix (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  rank_name TEXT NOT NULL,
+  course_id INTEGER NOT NULL,
+  assignment_type TEXT DEFAULT 'recommended',
+  FOREIGN KEY(course_id) REFERENCES courses(id)
+);
+
+CREATE TABLE IF NOT EXISTS user_course_progress (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  course_id INTEGER NOT NULL,
+  status TEXT DEFAULT 'not_started',
+  progress_percentage INTEGER DEFAULT 0,
+  current_chapter TEXT,
+  current_page TEXT,
+  started_at TEXT,
+  completed_at TEXT,
+  last_accessed_at TEXT,
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(course_id) REFERENCES courses(id)
+);
+
+CREATE TABLE IF NOT EXISTS course_completions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  course_id INTEGER NOT NULL,
+  completion_date TEXT NOT NULL,
+  certificate_generated INTEGER DEFAULT 0,
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(course_id) REFERENCES courses(id)
+);
+
   CREATE TABLE IF NOT EXISTS training_assignments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -332,8 +378,116 @@ function seedDefaultCBTModules() {
   }
 }
 
+function migrateCBTModulesToCourses() {
+  const existingCourses = db.prepare(`
+    SELECT COUNT(*) AS total FROM courses
+  `).get();
+
+  if (existingCourses.total > 0) return;
+
+  const modules = db.prepare(`
+    SELECT * FROM cbt_modules
+    ORDER BY module_id ASC
+  `).all();
+
+  const insertCourse = db.prepare(`
+    INSERT INTO courses
+    (
+      course_code,
+      course_name,
+      category,
+      folder_path,
+      available_languages,
+      total_chapters,
+      total_pages,
+      is_active,
+      imported_at
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const module of modules) {
+    insertCourse.run(
+      module.module_id,
+      module.module_name,
+      module.module_id === "001" ? "mandatory" : "recommended",
+      `/content/${module.module_id}`,
+      JSON.stringify(["EN"]),
+      0,
+      0,
+      module.status === "Active" ? 1 : 0,
+      new Date().toISOString()
+    );
+  }
+
+  writeAuditLog({
+    action: "CBT_MODULES_MIGRATED_TO_COURSES",
+    newValue: JSON.stringify(modules),
+    performedBy: "system",
+  });
+}
+
+function seedRankCourseMatrix() {
+  db.prepare(`DELETE FROM rank_course_matrix`).run();
+
+  const personalSafety = db.prepare(`
+    SELECT id, course_name
+    FROM courses
+    WHERE course_code = ?
+  `).get("001");
+
+  if (!personalSafety) return;
+
+  const ranks = [
+    "MASTER",
+    "CH OFF",
+    "2ND OFF",
+    "3RD OFF",
+    "DECK CADET",
+    "BOSUN",
+    "AB",
+    "AB 1",
+    "AB 2",
+    "AB 3",
+    "OS",
+    "CH ENG",
+    "2ND ENG",
+    "3RD ENG",
+    "4TH ENG",
+    "TME",
+    "ETO",
+    "GAS ENGINEER",
+    "FITTER",
+    "OILER",
+    "WIPER",
+    "CH COOK",
+    "GENERAL STEWARD",
+  ];
+
+  const insert = db.prepare(`
+    INSERT INTO rank_course_matrix
+    (rank_name, course_id, assignment_type)
+    VALUES (?, ?, ?)
+  `);
+
+  for (const rank of ranks) {
+    insert.run(rank, personalSafety.id, "mandatory");
+  }
+
+  writeAuditLog({
+    action: "RANK_COURSE_MATRIX_RESET",
+    newValue: JSON.stringify({
+      course: personalSafety.course_name,
+      ranks,
+    }),
+    performedBy: "system",
+  });
+}
+
 ensureDefaultAdmin();
 seedDefaultCBTModules();
+migrateCBTModulesToCourses();
+seedRankCourseMatrix();
 
 export function validateLogin(data) {
   const username = String(data.username || "").trim().toLowerCase();
@@ -398,6 +552,60 @@ export function validateLogin(data) {
   };
 }
 
+function createUserCourseProgressFromRank(userId, rankName) {
+  const courses = db.prepare(`
+    SELECT
+      rcm.course_id,
+      rcm.assignment_type
+    FROM rank_course_matrix rcm
+    JOIN courses c ON c.id = rcm.course_id
+    WHERE rcm.rank_name = ?
+      AND c.is_active = 1
+  `).all(rankName);
+
+  if (courses.length === 0) return;
+
+  const insertProgress = db.prepare(`
+    INSERT OR IGNORE INTO user_course_progress
+    (
+      user_id,
+      course_id,
+      status,
+      progress_percentage,
+      current_chapter,
+      current_page,
+      started_at,
+      completed_at,
+      last_accessed_at
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const course of courses) {
+    insertProgress.run(
+      Number(userId),
+      Number(course.course_id),
+      "not_started",
+      0,
+      "",
+      "",
+      "",
+      "",
+      new Date().toISOString()
+    );
+  }
+
+  writeAuditLog({
+    userId: Number(userId),
+    action: "RANK_BASED_COURSES_ASSIGNED",
+    newValue: JSON.stringify({
+      rank: rankName,
+      coursesAssigned: courses.length,
+    }),
+    performedBy: "system",
+  });
+}
+
 export function createUser(data) {
   const username = String(data.username || "").trim().toLowerCase();
   const password = String(data.password || "").trim();
@@ -456,6 +664,7 @@ export function createUser(data) {
   const userId = Number(result.lastInsertRowid);
 
   syncTrainingAssignments(userId, data.trainingAssignments || "", "admin");
+  createUserCourseProgressFromRank(userId, data.rank || "");
 
   writeAuditLog({
     userId,
@@ -599,7 +808,9 @@ export function saveCBTCompletion(data) {
     };
   }
 
-  const result = db.prepare(`
+  const completionDate = new Date().toISOString();
+
+  db.prepare(`
     INSERT INTO cbt_completions
     (
       user_id,
@@ -616,12 +827,51 @@ export function saveCBTCompletion(data) {
     userId,
     moduleName,
     moduleVersion,
-    new Date().toISOString(),
+    completionDate,
     score,
     status,
     certificateNumber,
-    new Date().toISOString()
+    completionDate
   );
+
+  const course = db.prepare(`
+    SELECT id
+    FROM courses
+    WHERE course_name = ?
+  `).get(moduleName);
+
+  if (course) {
+
+    db.prepare(`
+      INSERT OR IGNORE INTO course_completions
+      (
+        user_id,
+        course_id,
+        completion_date,
+        certificate_generated
+      )
+      VALUES (?, ?, ?, ?)
+    `).run(
+      userId,
+      course.id,
+      completionDate,
+      certificateNumber ? 1 : 0
+    );
+
+    db.prepare(`
+      UPDATE user_course_progress
+      SET
+        status = 'completed',
+        progress_percentage = 100,
+        completed_at = ?
+      WHERE user_id = ?
+        AND course_id = ?
+    `).run(
+      completionDate,
+      userId,
+      course.id
+    );
+  }
 
   writeAuditLog({
     userId,
@@ -639,7 +889,6 @@ export function saveCBTCompletion(data) {
   return {
     success: true,
     message: "CBT completion saved and locked.",
-    result,
   };
 }
 
@@ -664,9 +913,233 @@ export function getAllUsers() {
   `).all();
 }
 
+export function getUserById(userId) {
+  return db.prepare(`
+    SELECT
+      id,
+      crew_id,
+      first_name,
+      last_name,
+      full_name,
+      rank,
+      department,
+      nationality,
+      vessel,
+      joining_date,
+      contract_end_date,
+      username,
+      force_password_change,
+      status,
+      role,
+      passport_number,
+      cdc_number,
+      training_assignments,
+      created_at
+    FROM users
+    WHERE id = ?
+  `).get(Number(userId));
+}
+
+export function getUserTrainingProfile(userId) {
+  const id = Number(userId);
+
+  const user = getUserById(id);
+
+  if (!user) {
+    return null;
+  }
+
+  const courses = db.prepare(`
+    SELECT
+      ucp.id,
+      c.course_code,
+      c.course_name,
+      c.category,
+      ucp.status,
+      ucp.progress_percentage,
+      ucp.current_chapter,
+      ucp.current_page,
+      ucp.started_at,
+      ucp.completed_at,
+      ucp.last_accessed_at
+    FROM user_course_progress ucp
+    JOIN courses c ON c.id = ucp.course_id
+    WHERE ucp.user_id = ?
+    ORDER BY c.course_code ASC
+  `).all(id);
+
+  const completions = db.prepare(`
+    SELECT
+      cc.id,
+      c.course_code,
+      c.course_name,
+      c.category,
+      cc.completion_date,
+      cc.certificate_generated
+    FROM course_completions cc
+    JOIN courses c ON c.id = cc.course_id
+    WHERE cc.user_id = ?
+    ORDER BY cc.completion_date DESC
+  `).all(id);
+
+  return {
+    user,
+    courses,
+    completions,
+    summary: {
+      assignedCourses: courses.length,
+      completedCourses: completions.length,
+      completionPercentage:
+        courses.length > 0
+          ? Math.round((completions.length / courses.length) * 100)
+          : 0,
+    },
+  };
+}
+
+export function updateUser(data) {
+  const id = Number(data.id);
+
+  if (!id) {
+    return {
+      success: false,
+      message: "User ID is required.",
+    };
+  }
+
+  const existing = db.prepare(`
+    SELECT *
+    FROM users
+    WHERE id = ?
+  `).get(id);
+
+  if (!existing) {
+    return {
+      success: false,
+      message: "User not found.",
+    };
+  }
+
+  const username = String(data.username || "").trim().toLowerCase();
+
+  const duplicate = db.prepare(`
+    SELECT id
+    FROM users
+    WHERE username = ?
+      AND id != ?
+  `).get(username, id);
+
+  if (duplicate) {
+    return {
+      success: false,
+      message: "Username already exists.",
+    };
+  }
+
+  const firstName = data.firstName || data.first_name || "";
+  const lastName = data.lastName || data.last_name || "";
+  const fullName = `${firstName} ${lastName}`.trim();
+
+  db.prepare(`
+    UPDATE users
+    SET
+      crew_id = ?,
+      first_name = ?,
+      last_name = ?,
+      full_name = ?,
+      rank = ?,
+      department = ?,
+      nationality = ?,
+      vessel = ?,
+      joining_date = ?,
+      contract_end_date = ?,
+      username = ?,
+      status = ?,
+      role = ?,
+      passport_number = ?,
+      cdc_number = ?
+    WHERE id = ?
+  `).run(
+    data.crewId || data.crew_id || "",
+    firstName,
+    lastName,
+    fullName,
+    data.rank || "",
+    data.department || "",
+    data.nationality || "",
+    data.vessel || "",
+    data.joiningDate || data.joining_date || "",
+    data.contractEndDate || data.contract_end_date || "",
+    username,
+    data.status || "Active",
+    data.role || "user",
+    data.passportNumber || data.passport_number || "",
+    data.cdcNumber || data.cdc_number || "",
+    id
+  );
+
+  writeAuditLog({
+    userId: id,
+    action: "USER_UPDATED",
+    previousValue: JSON.stringify({
+      username: existing.username,
+      rank: existing.rank,
+      status: existing.status,
+    }),
+    newValue: JSON.stringify({
+      username,
+      rank: data.rank || "",
+      status: data.status || "Active",
+    }),
+    performedBy: "admin",
+  });
+
+  return {
+    success: true,
+    message: "Crew member updated successfully.",
+  };
+}
+
+export function archiveUser(userId) {
+  const id = Number(userId);
+
+  const user = db.prepare(`
+    SELECT id, username, status
+    FROM users
+    WHERE id = ?
+  `).get(id);
+
+  if (!user) {
+    return {
+      success: false,
+      message: "User not found.",
+    };
+  }
+
+  db.prepare(`
+    UPDATE users
+    SET status = ?
+    WHERE id = ?
+  `).run("Archived", id);
+
+  writeAuditLog({
+    userId: id,
+    action: "USER_ARCHIVED",
+    previousValue: user.status || "",
+    newValue: "Archived",
+    performedBy: "admin",
+  });
+
+  return {
+    success: true,
+    message: "User archived successfully.",
+  };
+}
+
 export function getUserWiseReports() {
   return db.prepare(`
     SELECT
+      u.id AS user_id,
       u.id,
       u.crew_id,
       u.first_name,
@@ -675,29 +1148,35 @@ export function getUserWiseReports() {
       u.rank,
       u.status,
 
-      COALESCE(ta.total_assigned, 0) AS mandatory_total,
-      COALESCE(cc.total_completed, 0) AS mandatory_completed,
+      COALESCE(up.total_assigned, 0) AS mandatory_total,
+
+      COALESCE(cp.total_completed, 0) AS mandatory_completed,
 
       0 AS recommended_total,
       0 AS recommended_completed,
 
-      COALESCE(cc.total_completed, 0) AS total_cbts
+      COALESCE(cp.total_completed, 0) AS total_cbts
 
     FROM users u
 
     LEFT JOIN (
-      SELECT user_id, COUNT(*) AS total_assigned
-      FROM training_assignments
+      SELECT
+        user_id,
+        COUNT(*) AS total_assigned
+      FROM user_course_progress
       GROUP BY user_id
-    ) ta ON ta.user_id = u.id
+    ) up ON up.user_id = u.id
 
     LEFT JOIN (
-      SELECT user_id, COUNT(*) AS total_completed
-      FROM cbt_completions
+      SELECT
+        user_id,
+        COUNT(*) AS total_completed
+      FROM course_completions
       GROUP BY user_id
-    ) cc ON cc.user_id = u.id
+    ) cp ON cp.user_id = u.id
 
     WHERE u.role != 'admin'
+
     ORDER BY u.id DESC
   `).all();
 }
@@ -706,9 +1185,8 @@ export function getMonthlyReportStats(month) {
   return db.prepare(`
     SELECT
       COUNT(*) AS totalCompletions,
-      COUNT(DISTINCT user_id) AS crewTrained,
-      AVG(score) AS averageScore
-    FROM cbt_completions
+      COUNT(DISTINCT user_id) AS crewTrained
+    FROM course_completions
     WHERE substr(completion_date, 1, 7) = ?
   `).get(month);
 }
@@ -736,31 +1214,38 @@ export function getAdminDashboardStats() {
 
   const completedThisMonth = db.prepare(`
     SELECT COUNT(*) AS total
-    FROM cbt_completions
+    FROM course_completions
     WHERE substr(completion_date, 1, 7) = substr(date('now'), 1, 7)
   `).get();
 
   const todayCompletions = db.prepare(`
     SELECT COUNT(*) AS total
-    FROM cbt_completions
+    FROM course_completions
     WHERE substr(completion_date, 1, 10) = date('now')
   `).get();
 
   const recentCompletions = db.prepare(`
     SELECT
       cc.id,
-      cc.module_name,
       cc.completion_date,
-      cc.status,
-      cc.score,
+      c.course_name AS module_name,
+
       u.crew_id,
       u.first_name,
       u.last_name,
       u.full_name,
       u.rank
-    FROM cbt_completions cc
-    JOIN users u ON u.id = cc.user_id
+
+    FROM course_completions cc
+
+    JOIN users u
+      ON u.id = cc.user_id
+
+    JOIN courses c
+      ON c.id = cc.course_id
+
     ORDER BY cc.completion_date DESC
+
     LIMIT 8
   `).all();
 

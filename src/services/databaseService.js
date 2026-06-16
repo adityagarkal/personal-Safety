@@ -181,3 +181,35 @@ export async function getAdminDashboardStatsFromDatabase() {
 
   return window.electronAPI.getAdminDashboardStats();
 }
+
+export async function archiveUserInDatabase(userId) {
+  if (!window.electronAPI?.archiveUser) {
+    throw new Error("Electron archive user API not available");
+  }
+
+  return window.electronAPI.archiveUser(userId);
+}
+
+export async function getUserByIdFromDatabase(userId) {
+  if (!window.electronAPI?.getUserById) {
+    throw new Error("Electron get user API not available");
+  }
+
+  return window.electronAPI.getUserById(userId);
+}
+
+export async function updateUserInDatabase(data) {
+  if (!window.electronAPI?.updateUser) {
+    throw new Error("Electron update user API not available");
+  }
+
+  return window.electronAPI.updateUser(data);
+}
+
+export async function getUserTrainingProfileFromDatabase(userId) {
+  if (!window.electronAPI?.getUserTrainingProfile) {
+    throw new Error("Electron user training profile API not available");
+  }
+
+  return window.electronAPI.getUserTrainingProfile(userId);
+}

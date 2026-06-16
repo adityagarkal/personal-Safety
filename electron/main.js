@@ -27,6 +27,10 @@ import {
   saveCertificate,
   getAllCandidates,
   getAssessmentRecords,
+  archiveUser,
+  getUserById,
+updateUser,
+getUserTrainingProfile,
 } from "./database.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -241,6 +245,22 @@ ipcMain.handle("db:getAssessmentRecords", () => getAssessmentRecords());
 
 ipcMain.handle("report:generateMonthlyReport", (_event, data) =>
   generateMonthlyReport(data)
+);
+
+ipcMain.handle("db:archiveUser", (_event, userId) =>
+  archiveUser(userId)
+);
+
+ipcMain.handle("db:getUserById", (_event, userId) =>
+  getUserById(userId)
+);
+
+ipcMain.handle("db:updateUser", (_event, data) =>
+  updateUser(data)
+);
+
+ipcMain.handle("db:getUserTrainingProfile", (_event, userId) =>
+  getUserTrainingProfile(userId)
 );
 
 app.whenReady().then(() => {

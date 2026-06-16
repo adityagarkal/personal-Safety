@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
-import { getAllUsersFromDatabase } from "../../services/databaseService";
+import {
+  getAllUsersFromDatabase,
+  archiveUserInDatabase,
+} from "../../services/databaseService";
 
 function getFullName(user) {
   if (user.first_name || user.last_name) {
@@ -42,6 +45,23 @@ function AdminUsers() {
     loadUsers();
   }, []);
 
+  async function handleArchive(userId) {
+  const confirmed = window.confirm(
+    "Archive this crew member?"
+  );
+
+  if (!confirmed) return;
+
+  const response = await archiveUserInDatabase(userId);
+
+  if (response.success) {
+    const usersData = await getAllUsersFromDatabase();
+    setUsers(Array.isArray(usersData) ? usersData : []);
+  } else {
+    alert(response.message);
+  }
+}
+
   const ranks = useMemo(() => {
     return [...new Set(users.map((user) => user.rank).filter(Boolean))];
   }, [users]);
@@ -58,6 +78,8 @@ function AdminUsers() {
     return matchesSearch && matchesRank && matchesStatus;
   });
 
+
+
   return (
     <AdminLayout>
       <div className="mb-6">
@@ -70,12 +92,24 @@ function AdminUsers() {
       <div className="bg-white rounded-xl border shadow-sm p-4 mb-5">
         <div className="flex flex-col xl:flex-row gap-4 xl:items-center xl:justify-between">
           <div className="flex flex-col md:flex-row gap-3">
-            <input
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search by name, ID, or rank..."
-              className="w-full md:w-72 border rounded-lg px-4 py-3 text-sm"
-            />
+            <div className="relative w-full md:w-72">
+  <input
+    value={search}
+    onChange={(event) => setSearch(event.target.value)}
+    placeholder="Search by name, ID, or rank..."
+    className="w-full border rounded-lg px-4 py-3 pr-10 text-sm"
+  />
+
+  {search && (
+    <button
+      type="button"
+      onClick={() => setSearch("")}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+    >
+      ✕
+    </button>
+  )}
+</div>
 
             <select
               value={rankFilter}
@@ -197,9 +231,12 @@ function AdminUsers() {
                         ✎ Edit
                       </button>
 
-                      <button className="px-4 py-2 rounded-lg border border-red-300 text-red-600 text-sm font-semibold">
-                        ▣ Archive
-                      </button>
+                      <button
+  onClick={() => handleArchive(user.id)}
+  className="px-4 py-2 rounded-lg border border-red-300 text-red-600 text-sm font-semibold"
+>
+  ▣ Archive
+</button> 
                     </td>
                   </tr>
                 );
