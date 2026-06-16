@@ -1,183 +1,47 @@
-export async function validateLoginFromDatabase(data) {
-  if (!window.electronAPI?.validateLogin) {
-    throw new Error("Electron database API not available");
+function ensureElectronApi(methodName) {
+  if (!window.electronAPI?.[methodName]) {
+    throw new Error(`Electron API method not available: ${methodName}`);
   }
 
-  return window.electronAPI.validateLogin(data);
+  return window.electronAPI[methodName];
+}
+
+export async function validateLoginFromDatabase(data) {
+  return ensureElectronApi("validateLogin")(data);
 }
 
 export async function createUserInDatabase(data) {
-  if (!window.electronAPI?.createUser) {
-    throw new Error("Electron database API not available");
-  }
+  return ensureElectronApi("createUser")(data);
+}
 
-  return window.electronAPI.createUser(data);
+export async function updateUserInDatabase(id, data) {
+  return ensureElectronApi("updateUser")(id, data);
+}
+
+export async function archiveUserInDatabase(id) {
+  return ensureElectronApi("archiveUser")(id);
+}
+
+export async function getUserByIdFromDatabase(id) {
+  return ensureElectronApi("getUserById")(id);
 }
 
 export async function getAllUsersFromDatabase() {
-  if (!window.electronAPI?.getAllUsers) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getAllUsers();
+  return ensureElectronApi("getAllUsers")();
 }
 
-export async function assignTrainingInDatabase(data) {
-  if (!window.electronAPI?.assignTraining) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.assignTraining(data);
-}
-
-export async function getUserAssignmentsFromDatabase(userId) {
-  if (!window.electronAPI?.getUserAssignments) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getUserAssignments(userId);
-}
-
-export async function saveModuleProgressToDatabase(data) {
-  if (!window.electronAPI?.saveModuleProgress) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.saveModuleProgress(data);
-}
-
-export async function getModuleProgressFromDatabase(data) {
-  if (!window.electronAPI?.getModuleProgress) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getModuleProgress(data);
-}
-
-export async function saveCBTCompletionToDatabase(data) {
-  if (!window.electronAPI?.saveCBTCompletion) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.saveCBTCompletion(data);
-}
-
-export async function getUserCBTCompletionsFromDatabase(userId) {
-  if (!window.electronAPI?.getUserCBTCompletions) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getUserCBTCompletions(userId);
-}
-
-export async function saveCandidateToDatabase(candidate) {
-  if (!window.electronAPI?.saveCandidate) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.saveCandidate(candidate);
-}
-
-export async function findCandidateByPassportFromDatabase(passportNumber) {
-  if (!window.electronAPI?.findCandidateByPassport) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.findCandidateByPassport(passportNumber);
-}
-
-export async function getCompletedChaptersFromDatabase(candidateId) {
-  if (!window.electronAPI?.getCompletedChapters) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getCompletedChapters(candidateId);
-}
-
-export async function markChapterCompletedInDatabase(data) {
-  if (!window.electronAPI?.markChapterCompleted) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.markChapterCompleted(data);
-}
-
-export async function saveAssessmentResultToDatabase(result) {
-  if (!window.electronAPI?.saveAssessmentResult) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.saveAssessmentResult(result);
-}
-
-export async function saveCertificateToDatabase(certificate) {
-  if (!window.electronAPI?.saveCertificate) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.saveCertificate(certificate);
-}
-
-export async function getAllCandidatesFromDatabase() {
-  if (!window.electronAPI?.getAllCandidates) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getAllCandidates();
-}
-
-export async function getAssessmentRecordsFromDatabase() {
-  if (!window.electronAPI?.getAssessmentRecords) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getAssessmentRecords();
-}
-
-export async function getAuditLogsFromDatabase() {
-  if (!window.electronAPI?.getAuditLogs) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getAuditLogs();
-}
-
-export async function getCBTModulesFromDatabase() {
-  if (!window.electronAPI?.getCBTModules) {
-    throw new Error("Electron database API not available");
-  }
-
-  return window.electronAPI.getCBTModules();
-}
-
-export async function generateMonthlyReportInDatabase(data) {
-  if (!window.electronAPI?.generateMonthlyReport) {
-    throw new Error("Electron report API not available");
-  }
-
-  return window.electronAPI.generateMonthlyReport(data);
+export async function getCoursesFromDatabase() {
+  return ensureElectronApi("getCourses")();
 }
 
 export async function getUserWiseReportsFromDatabase() {
-  if (!window.electronAPI?.getUserWiseReports) {
-    throw new Error("Electron report API not available");
-  }
-
-  return window.electronAPI.getUserWiseReports();
+  return ensureElectronApi("getUserWiseReports")();
 }
 
 export async function getMonthlyReportStatsFromDatabase(month) {
-  if (!window.electronAPI?.getMonthlyReportStats) {
-    throw new Error("Electron monthly report API not available");
-  }
-
-  return window.electronAPI.getMonthlyReportStats(month);
+  return ensureElectronApi("getMonthlyReportStats")(month);
 }
 
 export async function getAdminDashboardStatsFromDatabase() {
-  if (!window.electronAPI?.getAdminDashboardStats) {
-    throw new Error("Electron dashboard API not available");
-  }
-
-  return window.electronAPI.getAdminDashboardStats();
+  return ensureElectronApi("getAdminDashboardStats")();
 }

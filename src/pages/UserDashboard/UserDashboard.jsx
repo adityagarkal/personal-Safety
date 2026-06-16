@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  getUserAssignmentsFromDatabase,
-  getModuleProgressFromDatabase,
-  getUserCBTCompletionsFromDatabase,
+  // getUserAssignmentsFromDatabase,
+  // getModuleProgressFromDatabase,
+  // getUserCBTCompletionsFromDatabase,
 } from "../../services/databaseService";
 
 const allCBTs = [
@@ -81,56 +81,56 @@ function UserDashboard() {
   const [assignmentError, setAssignmentError] = useState("");
 
   useEffect(() => {
-    async function loadDashboardData() {
-      try {
-        setLoading(true);
-        setAssignmentError("");
+    // async function loadDashboardData() {
+    //   try {
+    //     setLoading(true);
+    //     setAssignmentError("");
 
-        if (!loginUser?.id) {
-          setAssignments([]);
-          setProgressMap({});
-          setCompletionMap({});
-          return;
-        }
+    //     if (!loginUser?.id) {
+    //       setAssignments([]);
+    //       setProgressMap({});
+    //       setCompletionMap({});
+    //       return;
+    //     }
 
-        const assignmentData = await getUserAssignmentsFromDatabase(loginUser.id);
-        const safeAssignments = Array.isArray(assignmentData) ? assignmentData : [];
+    //     const assignmentData = await getUserAssignmentsFromDatabase(loginUser.id);
+    //     const safeAssignments = Array.isArray(assignmentData) ? assignmentData : [];
 
-        const completionsData = await getUserCBTCompletionsFromDatabase(loginUser.id);
-        const safeCompletions = Array.isArray(completionsData) ? completionsData : [];
+    //     const completionsData = await getUserCBTCompletionsFromDatabase(loginUser.id);
+    //     const safeCompletions = Array.isArray(completionsData) ? completionsData : [];
 
-        const nextCompletionMap = {};
-        safeCompletions.forEach((item) => {
-          nextCompletionMap[item.module_name] = item;
-        });
+    //     const nextCompletionMap = {};
+    //     safeCompletions.forEach((item) => {
+    //       nextCompletionMap[item.module_name] = item;
+    //     });
 
-        const nextProgressMap = {};
+    //     const nextProgressMap = {};
 
-        for (const assignment of safeAssignments) {
-          const moduleName = assignment.module_name;
+    //     for (const assignment of safeAssignments) {
+    //       const moduleName = assignment.module_name;
 
-          const progressData = await getModuleProgressFromDatabase({
-            userId: loginUser.id,
-            moduleName,
-          });
+    //       const progressData = await getModuleProgressFromDatabase({
+    //         userId: loginUser.id,
+    //         moduleName,
+    //       });
 
-          nextProgressMap[moduleName] = Array.isArray(progressData)
-            ? progressData
-            : [];
-        }
+    //       nextProgressMap[moduleName] = Array.isArray(progressData)
+    //         ? progressData
+    //         : [];
+    //     }
 
-        setAssignments(safeAssignments);
-        setCompletionMap(nextCompletionMap);
-        setProgressMap(nextProgressMap);
-      } catch (err) {
-        console.error("Dashboard Load Error:", err);
-        setAssignmentError("Unable to load CBT progress from SQLite.");
-      } finally {
-        setLoading(false);
-      }
-    }
+    //     setAssignments(safeAssignments);
+    //     setCompletionMap(nextCompletionMap);
+    //     setProgressMap(nextProgressMap);
+    //   } catch (err) {
+    //     console.error("Dashboard Load Error:", err);
+    //     setAssignmentError("Unable to load CBT progress from SQLite.");
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
 
-    loadDashboardData();
+    // loadDashboardData();
   }, [loginUser?.id]);
 
   const assignedCBTs = useMemo(() => {

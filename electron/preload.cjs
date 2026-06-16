@@ -12,66 +12,27 @@ contextBridge.exposeInMainWorld("electronAPI", {
   createUser: (data) =>
     ipcRenderer.invoke("db:createUser", data),
 
+  updateUser: (id, data) =>
+    ipcRenderer.invoke("db:updateUser", id, data),
+
+  archiveUser: (id) =>
+    ipcRenderer.invoke("db:archiveUser", id),
+
+  getUserById: (id) =>
+    ipcRenderer.invoke("db:getUserById", id),
+
   getAllUsers: () =>
     ipcRenderer.invoke("db:getAllUsers"),
 
-  assignTraining: (data) =>
-    ipcRenderer.invoke("db:assignTraining", data),
-
-  getUserAssignments: (userId) =>
-    ipcRenderer.invoke("db:getUserAssignments", userId),
-
-  saveModuleProgress: (data) =>
-    ipcRenderer.invoke("db:saveModuleProgress", data),
-
-  getModuleProgress: (data) =>
-    ipcRenderer.invoke("db:getModuleProgress", data),
-
-  saveCBTCompletion: (data) =>
-    ipcRenderer.invoke("db:saveCBTCompletion", data),
-
-  getUserCBTCompletions: (userId) =>
-    ipcRenderer.invoke("db:getUserCBTCompletions", userId),
-
-  getAuditLogs: () =>
-    ipcRenderer.invoke("db:getAuditLogs"),
-
-  getCBTModules: () =>
-    ipcRenderer.invoke("db:getCBTModules"),
-
-  generateMonthlyReport: (data) =>
-    ipcRenderer.invoke("report:generateMonthlyReport", data),
-
-  saveCandidate: (candidate) =>
-    ipcRenderer.invoke("db:saveCandidate", candidate),
-
-  findCandidateByPassport: (passportNumber) =>
-    ipcRenderer.invoke("db:findCandidateByPassport", passportNumber),
-
-  getCompletedChapters: (candidateId) =>
-    ipcRenderer.invoke("db:getCompletedChapters", candidateId),
-
-  markChapterCompleted: (data) =>
-    ipcRenderer.invoke("db:markChapterCompleted", data),
-
-  saveAssessmentResult: (result) =>
-    ipcRenderer.invoke("db:saveAssessmentResult", result),
-
-  saveCertificate: (certificate) =>
-    ipcRenderer.invoke("db:saveCertificate", certificate),
-
-  getAllCandidates: () =>
-    ipcRenderer.invoke("db:getAllCandidates"),
-
-  getAssessmentRecords: () =>
-    ipcRenderer.invoke("db:getAssessmentRecords"),
+  getCourses: () =>
+    ipcRenderer.invoke("db:getCourses"),
 
   getUserWiseReports: () =>
-  ipcRenderer.invoke("db:getUserWiseReports"),
+    ipcRenderer.invoke("db:getUserWiseReports"),
 
   getMonthlyReportStats: (month) =>
-  ipcRenderer.invoke("db:getMonthlyReportStats", month),
+    ipcRenderer.invoke("db:getMonthlyReportStats", month),
 
   getAdminDashboardStats: () =>
-  ipcRenderer.invoke("db:getAdminDashboardStats"),
+    ipcRenderer.invoke("db:getAdminDashboardStats"),
 });

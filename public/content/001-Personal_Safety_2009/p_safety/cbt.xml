@@ -1,25 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<module b="253" v="2.2" back="Mainbackground.jpg" OBLnr="1" shortName="p_safety" name="Personal Safety">
-  <chapters>
-    <chap pt="0" oblg="0" col="000000" ass="" back="Background.jpg" name="Familiarisation" nrSelQuest="2" nrPages="10" nrQuest="2" />
-    <chap pt="0" oblg="0" col="000000" ass="" back="Background.jpg" name="Health  and safety" nrSelQuest="3" nrPages="7" nrQuest="3" />
-    <chap pt="0" oblg="0" col="000000" ass="" back="Background.jpg" name="Injuries and accidents" nrSelQuest="3" nrPages="6" nrQuest="3" />
-    <chap pt="0" oblg="0" col="000000" ass="" back="Background.jpg" name="Preventing injuries and accidents" nrSelQuest="3" nrPages="11" nrQuest="3" />
-    <chap pt="8" oblg="0" col="000000" ass="X" back="Background2.jpg" name="Assessment" nrSelQuest="11" nrPages="0" nrQuest="11" />
-  </chapters>
-  <objectives>
-    <obj>After you have completed this CBT module you should:</obj>
-    <obj>-	Know the importance of being familiar with safety procedures and your own duties      connected to your position on board. </obj>
-    <obj>-	Be aware of the most common hazards linked to the different working operations       on board and know how to reduce the number of accidents.</obj>
-    <obj>-	Be familiar with Protection and Environmental work and know where to find more      information about this.</obj>
-  </objectives>
-  <credits>SCRIPTVibeke Nordahl, Seagull ASRandi Svanes, Seagull ASPål Viken, Seagull ASTECHNICAL ADVISORSMagne Fjeldstad, Th. KlavenesTor Hergot Bergesen d/yEinar Hardus, Seagull ASMULTIMEDIA DESIGNERSKrzysztof Krakowski, PolarisTerje Knutsen, Seagull ASARTWORKIvar Ravlo, Seagull ASKrzysztof Krakowski, PolarisRECORDING STUDIONSI Lydprodukjson ASENGLISH VOICEMark Brown, NSI Lydprodukjson ASRUSSIAN VOICEIrina Dorfmann, NSI Lydprodukjson ASCHINESE VOICESeafarer ServicesCHINESE TRANSLATIONJuan Luo, Seafarer ServicesAcknowledgement, inputs given by:Th. Klaveness Shipping Company, NorwayBergesen d/y Shipping Company, Norway</credits>
-  <disclaimer>This program is supplied as a training tool only and is to be used in support of other applicable material.  Guidelines provided by competent authorities, shipping companies or equipment manufacturers are to be followed.
-Certain material in this program is drawn from controlled documents. These documents may have been updated since the production of this program and caution must be exercised accordingly.
-</disclaimer>
-  <levels>
-    <level id="EN" embed="true">English</level>
-    <level id="CH" embed="false">Mandarin</level>
-    <level id="RU" fontsize="13" fontfamily="Arial" embed="false">Russian</level>
-  </levels>
-</module>
