@@ -45,3 +45,15 @@ export async function getMonthlyReportStatsFromDatabase(month) {
 export async function getAdminDashboardStatsFromDatabase() {
   return ensureElectronApi("getAdminDashboardStats")();
 }
+
+export async function selectCourseFolderFromSystem() {
+  return ensureElectronApi("selectCourseFolder")();
+}
+
+export async function importSelectedCourseToSystem(courseData) {
+  return ensureElectronApi("importSelectedCourse")(courseData);
+}
+
+export async function deleteCourseFromSystem(courseId) {
+  return ensureElectronApi("deleteCourse")(courseId);
+}

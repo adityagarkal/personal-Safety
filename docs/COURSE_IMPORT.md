@@ -34,3 +34,29 @@ Copy Course
 Create DB Record
       ↓
 Success
+
+----------------------17-June-2026
+Delete Course button
+↓
+Deletes physical course folder from AppData
+↓
+Marks course as inactive in DB
+↓
+Course disappears from user catalog
+↓
+Completion/report history remains safe
+
+------
+Import updated 001
+↓
+System detects course_code = 001 already exists
+↓
+Deletes old physical folder
+↓
+Copies new folder
+↓
+Updates same courses row
+↓
+Keeps old completion history
+↓
+Course becomes active again
