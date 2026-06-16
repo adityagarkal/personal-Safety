@@ -9,6 +9,7 @@ import AdminUsers from "../pages/AdminUsers/AdminUsers";
 import AdminAddUser from "../pages/AdminAddUser/AdminAddUser";
 import AdminRecords from "../pages/AdminRecords/AdminRecords";
 import MonthlyReport from "../pages/MonthlyReport/MonthlyReport";
+import SystemCourseImport from "../pages/SystemCourseImport/SystemCourseImport";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,8 @@ function AppRoutes() {
         <Route path="/admin/reports/users" element={<AdminRecords />} />
         <Route path="/admin/reports/users/:id" element={<AdminRecords />} />
         <Route path="/admin/reports/monthly" element={<MonthlyReport />} />
+
+        <Route path="/system/import-course" element={<SystemCourseImport />} />
       </Routes>
     </HashRouter>
   );

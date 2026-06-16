@@ -35,4 +35,13 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
   getAdminDashboardStats: () =>
     ipcRenderer.invoke("db:getAdminDashboardStats"),
+
+  selectCourseFolder: () =>
+    ipcRenderer.invoke("course:selectFolder"),
+
+  importSelectedCourse: (courseData) =>
+    ipcRenderer.invoke("course:importSelected", courseData),
+
+  deleteCourse: (courseId) =>
+    ipcRenderer.invoke("course:delete", courseId),
 });
