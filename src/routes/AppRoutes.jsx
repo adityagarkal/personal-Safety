@@ -10,6 +10,7 @@ import AdminAddUser from "../pages/AdminAddUser/AdminAddUser";
 import AdminRecords from "../pages/AdminRecords/AdminRecords";
 import MonthlyReport from "../pages/MonthlyReport/MonthlyReport";
 
+
 function AppRoutes() {
   return (
     <HashRouter>

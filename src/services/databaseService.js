@@ -45,3 +45,4 @@ export async function getMonthlyReportStatsFromDatabase(month) {
 export async function getAdminDashboardStatsFromDatabase() {
   return ensureElectronApi("getAdminDashboardStats")();
 }
+
