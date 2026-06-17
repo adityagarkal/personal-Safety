@@ -145,7 +145,7 @@ function AdminAddUser() {
     let response;
 
     if (isEditMode) {
-      response = await updateUserInDatabase(form);
+      response = await updateUserInDatabase(id, form);
     } else {
       if (form.password !== confirmPassword) {
         setMessage("Password and Confirm Password do not match.");
