@@ -17,7 +17,13 @@ const months = [
   ["12", "December"],
 ];
 
-const years = ["2026", "2027", "2028"];
+
+const currentYear = new Date().getFullYear();
+
+const years = Array.from(
+  { length: 10 },
+  (_, index) => String(currentYear - 2 + index)
+);
 
 function StatCard({ label, value, color, icon }) {
   return (
