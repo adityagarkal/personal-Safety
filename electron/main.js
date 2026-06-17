@@ -14,6 +14,7 @@ import {
   getUserWiseReports,
   getMonthlyReportStats,
   getAdminDashboardStats,
+  getUserTrainingProfile,
 } from "./database.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -78,6 +79,10 @@ ipcMain.handle("db:getMonthlyReportStats", (_event, month) =>
 );
 
 ipcMain.handle("db:getAdminDashboardStats", () => getAdminDashboardStats());
+
+ipcMain.handle("db:getUserTrainingProfile", (_event, userId) =>
+  getUserTrainingProfile(userId)
+);
 
 app.whenReady().then(() => {
   createWindow();

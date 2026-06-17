@@ -46,3 +46,10 @@ export async function getAdminDashboardStatsFromDatabase() {
   return ensureElectronApi("getAdminDashboardStats")();
 }
 
+export async function getUserTrainingProfileFromDatabase(userId) {
+  if (!window.electronAPI?.getUserTrainingProfile) {
+    throw new Error("Electron user training profile API not available");
+  }
+
+  return window.electronAPI.getUserTrainingProfile(userId);
+}

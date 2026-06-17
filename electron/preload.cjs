@@ -35,4 +35,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
   getAdminDashboardStats: () =>
     ipcRenderer.invoke("db:getAdminDashboardStats"),
+
+  getUserTrainingProfile: (userId) =>
+  ipcRenderer.invoke("db:getUserTrainingProfile", userId),
 });
