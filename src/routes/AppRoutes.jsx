@@ -10,6 +10,8 @@ import AdminUsers from "../pages/AdminUsers/AdminUsers";
 import AdminAddUser from "../pages/AdminAddUser/AdminAddUser";
 import AdminRecords from "../pages/AdminRecords/AdminRecords";
 import MonthlyReport from "../pages/MonthlyReport/MonthlyReport";
+import UserProfile from "../pages/UserProfile/UserProfile";
+
 import SystemCourseImport from "../pages/SystemCourseImport/SystemCourseImport";
 
 function AppRoutes() {
@@ -23,6 +25,7 @@ function AppRoutes() {
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/users/new" element={<AdminAddUser />} />
         <Route path="/admin/users/:id/edit" element={<AdminAddUser />} />
+        <Route path="/admin/users/:id/profile" element={<UserProfile />} />
 
         <Route path="/admin/reports/users" element={<AdminRecords />} />
         <Route path="/admin/reports/users/:id" element={<AdminRecords />} />

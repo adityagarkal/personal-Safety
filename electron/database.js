@@ -408,6 +408,63 @@ export function getUserById(id) {
     .get(Number(id));
 }
 
+export function getUserTrainingProfile(userId) {
+  const id = Number(userId);
+
+  const user = getUserById(id);
+
+  if (!user) {
+    return null;
+  }
+
+  const courses = db.prepare(`
+    SELECT
+      ucp.id,
+      c.course_code,
+      c.course_name,
+      c.category,
+      ucp.status,
+      ucp.progress_percentage,
+      ucp.current_chapter,
+      ucp.current_page,
+      ucp.started_at,
+      ucp.completed_at,
+      ucp.last_accessed_at
+    FROM user_course_progress ucp
+    JOIN courses c ON c.id = ucp.course_id
+    WHERE ucp.user_id = ?
+    ORDER BY c.course_code ASC
+  `).all(id);
+
+  const completions = db.prepare(`
+    SELECT
+      cc.id,
+      c.course_code,
+      c.course_name,
+      c.category,
+      cc.completion_date,
+      cc.certificate_generated
+    FROM course_completions cc
+    JOIN courses c ON c.id = cc.course_id
+    WHERE cc.user_id = ?
+    ORDER BY cc.completion_date DESC
+  `).all(id);
+
+  return {
+    user,
+    courses,
+    completions,
+    summary: {
+      assignedCourses: courses.length,
+      completedCourses: completions.length,
+      completionPercentage:
+        courses.length > 0
+          ? Math.round((completions.length / courses.length) * 100)
+          : 0,
+    },
+  };
+}
+
 export function getAllUsers() {
   return db
     .prepare(`

@@ -18,6 +18,7 @@ import {
   getUserWiseReports,
   getMonthlyReportStats,
   getAdminDashboardStats,
+  getUserTrainingProfile,
 } from "./database.js";
 
 import {
@@ -88,6 +89,9 @@ ipcMain.handle("db:getMonthlyReportStats", (_event, month) =>
 
 ipcMain.handle("db:getAdminDashboardStats", () => getAdminDashboardStats());
 
+ipcMain.handle("db:getUserTrainingProfile", (_event, userId) =>
+  getUserTrainingProfile(userId)
+);
 ipcMain.handle("course:selectFolder", async () => {
   return selectCourseFolder();
 });
