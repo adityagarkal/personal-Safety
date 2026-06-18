@@ -1,10 +1,80 @@
-import { FileText, ImageIcon, Volume2 } from "lucide-react";
+import { FileText, ImageIcon, Volume2 } from "lucide-react";function AssessmentSlide({ assessment, selectedAnswer, onSelectAnswer }) {
+  const question = assessment?.question || "";
+  const options = assessment?.options || [];
+
+  return (
+    <div className="mx-auto max-w-4xl">
+      <div className="mb-6 rounded-2xl border border-[#DDE3EA] bg-[#F5F7FA] p-6">
+        <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-[#2554C7]">
+          Assessment Question
+        </p>
+
+        <h3 className="text-xl font-bold leading-8 text-[#163B6D]">
+          {question || "Question text not found."}
+        </h3>
+      </div>
+
+      {options.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-[#DDE3EA] bg-white p-8 text-center text-gray-600">
+          No answer options found for this question.
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {options.map((option, index) => {
+            const isSelected = selectedAnswer === option.id;
+
+            return (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => onSelectAnswer?.(option.id)}
+                className={`flex w-full items-start gap-4 rounded-xl border p-5 text-left transition ${
+                  isSelected
+                    ? "border-[#2554C7] bg-blue-50 shadow-sm"
+                    : "border-[#DDE3EA] bg-white hover:border-[#2554C7] hover:bg-[#F5F7FA]"
+                }`}
+              >
+                <span
+                  className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-sm font-bold ${
+                    isSelected
+                      ? "border-[#2554C7] bg-[#2554C7] text-white"
+                      : "border-[#DDE3EA] bg-white text-gray-600"
+                  }`}
+                >
+                  {String.fromCharCode(65 + index)}
+                </span>
+
+                <span className="flex-1 text-base leading-7 text-gray-800">
+                  {option.label}
+                </span>
+
+                <span
+                  className={`mt-1 h-5 w-5 shrink-0 rounded-full border ${
+                    isSelected
+                      ? "border-[#2554C7] bg-[#2554C7]"
+                      : "border-gray-300 bg-white"
+                  }`}
+                />
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      <p className="mt-5 rounded-xl bg-[#FFFBEB] px-4 py-3 text-sm text-gray-700">
+        Select one answer, then click <b>Next</b> to continue.
+      </p>
+    </div>
+  );
+}
 
 function CoursePageRenderer({
   pageContent,
   pageLoading,
   pageError,
   selectedPage,
+  selectedAssessmentAnswer,
+  onSelectAssessmentAnswer,
 }) {
   if (pageLoading) {
     return (
@@ -57,37 +127,43 @@ function CoursePageRenderer({
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-8 py-6">
-          {textBlocks.length === 0 && supportedImages.length === 0 ? (
-            <EmptyContent />
-          ) : (
-            <div
-              className={`grid gap-8 ${
-                supportedImages.length > 0
-                  ? "grid-cols-[minmax(0,1fr)_360px]"
-                  : "grid-cols-1"
-              }`}
-            >
-              <div className="min-w-0 space-y-4">
-                {textBlocks.length === 0 ? (
-                  <div className="rounded-xl border border-dashed border-[#DDE3EA] bg-[#F5F7FA] p-6 text-center text-sm text-gray-600">
-                    No visible text found on this page.
-                  </div>
+            {pageContent.isAssessment ? (
+                <AssessmentSlide
+                    assessment={pageContent.assessment}
+                    selectedAnswer={selectedAssessmentAnswer}
+                    onSelectAnswer={onSelectAssessmentAnswer}
+                />
+                ) : textBlocks.length === 0 && supportedImages.length === 0 ? (
+                <EmptyContent />
                 ) : (
-                  textBlocks.map((block, index) => (
-                    <TextBlock key={block.id} block={block} index={index} />
-                  ))
-                )}
-              </div>
+                <div
+                    className={`grid gap-8 ${
+                    supportedImages.length > 0
+                        ? "grid-cols-[minmax(0,1fr)_360px]"
+                        : "grid-cols-1"
+                    }`}
+                >
+                    <div className="min-w-0 space-y-4">
+                    {textBlocks.length === 0 ? (
+                        <div className="rounded-xl border border-dashed border-[#DDE3EA] bg-[#F5F7FA] p-6 text-center text-sm text-gray-600">
+                        No visible text found on this page.
+                        </div>
+                    ) : (
+                        textBlocks.map((block, index) => (
+                        <TextBlock key={block.id} block={block} index={index} />
+                        ))
+                    )}
+                    </div>
 
-              {supportedImages.length > 0 && (
-                <div className="space-y-4">
-                  {supportedImages.map((image, index) => (
-                    <ImageBlock key={image.id} image={image} index={index} />
-                  ))}
+                    {supportedImages.length > 0 && (
+                    <div className="space-y-4">
+                        {supportedImages.map((image, index) => (
+                        <ImageBlock key={image.id} image={image} index={index} />
+                        ))}
+                    </div>
+                    )}
                 </div>
-              )}
-            </div>
-          )}
+            )}
         </div>
       </div>
 

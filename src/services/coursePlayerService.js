@@ -152,6 +152,38 @@ function parseTextBlocks(page) {
     .filter(Boolean);
 }
 
+function parseAssessmentQuestion(page) {
+  const rawTexts = normalizeArray(page?.texts?.txt).filter((item) =>
+    getTextValue(item)
+  );
+
+  if (rawTexts.length === 0) {
+    return {
+      question: "",
+      options: [],
+    };
+  }
+
+  const questionItem =
+    rawTexts.find(
+      (item) => String(item?.["@_a"] || "").toUpperCase() === "X"
+    ) || rawTexts[0];
+
+  const options = rawTexts
+    .filter((item) => item !== questionItem)
+    .map((item, index) => ({
+      id: `option-${index + 1}`,
+      label: getTextValue(item),
+      correctCode: item?.["@_crct"] || "",
+    }))
+    .filter((item) => item.label);
+
+  return {
+    question: getTextValue(questionItem),
+    options,
+  };
+}
+
 async function parsePictures(page, coursePath) {
   const rawPictures = normalizeArray(page?.pics?.pic);
 
@@ -309,7 +341,13 @@ export async function loadCoursePageContent(pageFile, selectedLanguage = "EN") {
   const title = getTextValue(selectedPage?.title) || pageFile.displayLabel;
   const template = getTextValue(selectedPage?.template);
 
-  const textBlocks = parseTextBlocks(selectedPage);
+  const isAssessment = Boolean(pageFile.isAssessment);
+
+  const assessment = isAssessment
+    ? parseAssessmentQuestion(selectedPage)
+    : null;
+
+  const textBlocks = isAssessment ? [] : parseTextBlocks(selectedPage);
   const images = await parsePictures(selectedPage, pageFile.coursePath);
   const audios = await parseSounds(selectedPage, pageFile.coursePath);
 
@@ -317,6 +355,8 @@ export async function loadCoursePageContent(pageFile, selectedLanguage = "EN") {
     title,
     template,
     language: getPageLanguage(selectedPage),
+    isAssessment,
+    assessment,
     textBlocks,
     images,
     audios,

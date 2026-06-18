@@ -118,6 +118,7 @@ function CoursePlayer() {
   const [pageContent, setPageContent] = useState(null);
   const [pageLoading, setPageLoading] = useState(false);
   const [pageError, setPageError] = useState("");
+  const [assessmentAnswers, setAssessmentAnswers] = useState({});
 
   const selectedLanguage = selectedCourse?.language || "EN";
 
@@ -228,7 +229,9 @@ function CoursePlayer() {
 
   const currentPages = selectedChapter?.pages || [];
   const selectedPage = currentPages[selectedPageIndex] || currentPages[0] || null;
-
+  const selectedAssessmentAnswer = selectedPage
+    ? assessmentAnswers[selectedPage.id] || ""
+    : "";
   const currentChapterIndex = selectedChapter
     ? chapters.findIndex((chapter) => chapter.id === selectedChapter.id)
     : -1;
@@ -307,6 +310,15 @@ function CoursePlayer() {
 
       await saveProgress(previousChapter.id, newPageIndex);
     }
+  }
+
+  function handleSelectAssessmentAnswer(optionId) {
+    if (!selectedPage) return;
+
+    setAssessmentAnswers((prev) => ({
+      ...prev,
+      [selectedPage.id]: optionId,
+    }));
   }
 
   async function handleNextPage() {
@@ -540,6 +552,8 @@ function CoursePlayer() {
                   pageLoading={pageLoading}
                   pageError={pageError}
                   selectedPage={selectedPage}
+                  selectedAssessmentAnswer={selectedAssessmentAnswer}
+                  onSelectAssessmentAnswer={handleSelectAssessmentAnswer}
                 />
               </section>
             </main>

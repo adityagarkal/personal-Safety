@@ -417,49 +417,142 @@ export function getUserTrainingProfile(userId) {
     return null;
   }
 
-  const courses = db.prepare(`
-    SELECT
-      ucp.id,
-      c.course_code,
-      c.course_name,
-      c.category,
-      ucp.status,
-      ucp.progress_percentage,
-      ucp.current_chapter,
-      ucp.current_page,
-      ucp.started_at,
-      ucp.completed_at,
-      ucp.last_accessed_at
-    FROM user_course_progress ucp
-    JOIN courses c ON c.id = ucp.course_id
-    WHERE ucp.user_id = ?
-    ORDER BY c.course_code ASC
-  `).all(id);
+  const courses = db
+    .prepare(`
+      SELECT
+        c.id AS course_id,
+        c.course_code,
+        c.course_name,
+        c.short_name,
+        c.category AS base_category,
 
-  const completions = db.prepare(`
-    SELECT
-      cc.id,
-      c.course_code,
-      c.course_name,
-      c.category,
-      cc.completion_date,
-      cc.certificate_generated
-    FROM course_completions cc
-    JOIN courses c ON c.id = cc.course_id
-    WHERE cc.user_id = ?
-    ORDER BY cc.completion_date DESC
-  `).all(id);
+        CASE
+          WHEN c.category = 'mandatory' THEN 'mandatory'
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm
+            WHERE rcm.course_id = c.id
+              AND rcm.rank_name = ?
+              AND rcm.assignment_type = 'recommended'
+          ) THEN 'recommended'
+          ELSE 'other'
+        END AS course_category,
+
+        COALESCE(ucp.status, 'not_started') AS status,
+        COALESCE(ucp.progress_percentage, 0) AS progress_percentage,
+        ucp.current_chapter,
+        ucp.current_page,
+        ucp.selected_language,
+        ucp.started_at,
+        ucp.completed_at,
+        ucp.last_accessed_at
+
+      FROM courses c
+
+      LEFT JOIN user_course_progress ucp
+        ON ucp.course_id = c.id
+        AND ucp.user_id = ?
+
+      WHERE c.is_active = 1
+
+      ORDER BY
+        CASE
+          WHEN c.category = 'mandatory' THEN 1
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm2
+            WHERE rcm2.course_id = c.id
+              AND rcm2.rank_name = ?
+              AND rcm2.assignment_type = 'recommended'
+          ) THEN 2
+          ELSE 3
+        END,
+        c.course_code ASC
+    `)
+    .all(user.rank || "", id, user.rank || "");
+
+  const completions = courses
+    .filter((course) => course.status === "completed")
+    .map((course) => ({
+      id: `${id}-${course.course_id}`,
+      course_id: course.course_id,
+      course_code: course.course_code,
+      course_name: course.course_name,
+      course_category: course.course_category,
+      completion_date: course.completed_at,
+      certificate_generated: 0,
+    }))
+    .sort((a, b) => {
+      const dateA = new Date(a.completion_date || 0).getTime();
+      const dateB = new Date(b.completion_date || 0).getTime();
+      return dateB - dateA;
+    });
+
+  const mandatoryCourses = courses.filter(
+    (course) => course.course_category === "mandatory"
+  );
+
+  const recommendedCourses = courses.filter(
+    (course) => course.course_category === "recommended"
+  );
+
+  const otherCourses = courses.filter(
+    (course) => course.course_category === "other"
+  );
+
+  const completedCourses = courses.filter(
+    (course) => course.status === "completed"
+  );
+
+  const inProgressCourses = courses.filter(
+    (course) => course.status === "in_progress"
+  );
+
+  const notStartedCourses = courses.filter(
+    (course) => course.status === "not_started"
+  );
+
+  const assignedCourses = [...mandatoryCourses, ...recommendedCourses];
 
   return {
     user,
     courses,
     completions,
     summary: {
-      assignedCourses: courses.length,
-      completedCourses: completions.length,
+      totalCourses: courses.length,
+
+      assignedCourses: assignedCourses.length,
+      assignedCompleted: assignedCourses.filter(
+        (course) => course.status === "completed"
+      ).length,
+
+      mandatoryTotal: mandatoryCourses.length,
+      mandatoryCompleted: mandatoryCourses.filter(
+        (course) => course.status === "completed"
+      ).length,
+
+      recommendedTotal: recommendedCourses.length,
+      recommendedCompleted: recommendedCourses.filter(
+        (course) => course.status === "completed"
+      ).length,
+
+      otherTotal: otherCourses.length,
+      otherCompleted: otherCourses.filter(
+        (course) => course.status === "completed"
+      ).length,
+
+      completedCourses: completedCourses.length,
+      inProgressCourses: inProgressCourses.length,
+      notStartedCourses: notStartedCourses.length,
+
       completionPercentage:
-        courses.length > 0
-          ? Math.round((completions.length / courses.length) * 100)
+        assignedCourses.length > 0
+          ? Math.round(
+              (assignedCourses.filter((course) => course.status === "completed")
+                .length /
+                assignedCourses.length) *
+                100
+            )
           : 0,
     },
   };
@@ -516,53 +609,258 @@ export function getAdminDashboardStats() {
     .get().total;
 
   const activeUsers = db
-    .prepare(
-      `SELECT COUNT(*) AS total FROM users WHERE role != 'admin' AND status = 'Active'`
-    )
+    .prepare(`
+      SELECT COUNT(*) AS total
+      FROM users
+      WHERE role != 'admin'
+        AND status = 'Active'
+    `)
     .get().total;
 
   const archivedUsers = db
-    .prepare(
-      `SELECT COUNT(*) AS total FROM users WHERE role != 'admin' AND status = 'Archived'`
-    )
-    .get().total;
-
-  const monthPrefix = new Date().toISOString().slice(0, 7);
-
-  const completedThisMonth = db
     .prepare(`
       SELECT COUNT(*) AS total
-      FROM course_completions
-      WHERE completion_date LIKE ?
+      FROM users
+      WHERE role != 'admin'
+        AND status = 'Archived'
     `)
-    .get(`${monthPrefix}%`).total;
+    .get().total;
 
-  const recentCompletions = db
+  const activeCourses = db
+    .prepare(`
+      SELECT COUNT(*) AS total
+      FROM courses
+      WHERE is_active = 1
+    `)
+    .get().total;
+
+  const mandatoryCourses = db
+    .prepare(`
+      SELECT COUNT(*) AS total
+      FROM courses
+      WHERE is_active = 1
+        AND category = 'mandatory'
+    `)
+    .get().total;
+
+  const nowDate = new Date();
+
+  const monthStart = new Date(nowDate.getFullYear(), nowDate.getMonth(), 1);
+  const monthEnd = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 1);
+
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  const todayEnd = new Date(todayStart);
+  todayEnd.setDate(todayEnd.getDate() + 1);
+
+  const monthStartIso = monthStart.toISOString();
+  const monthEndIso = monthEnd.toISOString();
+  const todayStartIso = todayStart.toISOString();
+  const todayEndIso = todayEnd.toISOString();
+
+  const completedThisMonthRows = db
     .prepare(`
       SELECT
-        cc.id,
-        cc.completion_date,
+        ucp.id AS progress_id,
+        ucp.user_id,
+        ucp.course_id,
+        ucp.completed_at,
+
         u.crew_id,
         u.first_name,
         u.last_name,
         u.full_name,
         u.rank,
-        c.course_name
-      FROM course_completions cc
-      JOIN users u ON u.id = cc.user_id
-      JOIN courses c ON c.id = cc.course_id
-      ORDER BY cc.completion_date DESC
-      LIMIT 10
+        u.department,
+        u.vessel,
+
+        c.course_code,
+        c.course_name,
+        c.category AS base_category,
+
+        CASE
+          WHEN c.category = 'mandatory' THEN 'mandatory'
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm
+            WHERE rcm.course_id = c.id
+              AND rcm.rank_name = u.rank
+              AND rcm.assignment_type = 'recommended'
+          ) THEN 'recommended'
+          ELSE 'other'
+        END AS course_category
+
+      FROM user_course_progress ucp
+      JOIN users u ON u.id = ucp.user_id
+      JOIN courses c ON c.id = ucp.course_id
+
+      WHERE ucp.status = 'completed'
+        AND ucp.completed_at >= ?
+        AND ucp.completed_at < ?
+        AND c.is_active = 1
+
+      ORDER BY ucp.completed_at DESC
+    `)
+    .all(monthStartIso, monthEndIso);
+
+  const todayCompletions = db
+    .prepare(`
+      SELECT COUNT(*) AS total
+      FROM user_course_progress ucp
+      JOIN courses c ON c.id = ucp.course_id
+      WHERE ucp.status = 'completed'
+        AND ucp.completed_at >= ?
+        AND ucp.completed_at < ?
+        AND c.is_active = 1
+    `)
+    .get(todayStartIso, todayEndIso).total;
+
+  const inProgressCount = db
+    .prepare(`
+      SELECT COUNT(*) AS total
+      FROM user_course_progress ucp
+      JOIN courses c ON c.id = ucp.course_id
+      WHERE ucp.status = 'in_progress'
+        AND c.is_active = 1
+    `)
+    .get().total;
+
+  const crewInProgress = db
+    .prepare(`
+      SELECT COUNT(DISTINCT ucp.user_id) AS total
+      FROM user_course_progress ucp
+      JOIN courses c ON c.id = ucp.course_id
+      WHERE ucp.status = 'in_progress'
+        AND c.is_active = 1
+    `)
+    .get().total;
+
+  const recentCompletions = db
+    .prepare(`
+      SELECT
+        ucp.id,
+        ucp.user_id,
+        ucp.course_id,
+        ucp.status,
+        ucp.progress_percentage,
+        ucp.completed_at AS completion_date,
+
+        u.crew_id,
+        u.first_name,
+        u.last_name,
+        u.full_name,
+        u.rank,
+        u.department,
+
+        c.course_code,
+        c.course_name,
+
+        CASE
+          WHEN c.category = 'mandatory' THEN 'mandatory'
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm
+            WHERE rcm.course_id = c.id
+              AND rcm.rank_name = u.rank
+              AND rcm.assignment_type = 'recommended'
+          ) THEN 'recommended'
+          ELSE 'other'
+        END AS course_category
+
+      FROM user_course_progress ucp
+      JOIN users u ON u.id = ucp.user_id
+      JOIN courses c ON c.id = ucp.course_id
+
+      WHERE ucp.status = 'completed'
+        AND c.is_active = 1
+
+      ORDER BY ucp.completed_at DESC
+      LIMIT 8
     `)
     .all();
+
+  const inProgressRows = db
+    .prepare(`
+      SELECT
+        ucp.id,
+        ucp.user_id,
+        ucp.course_id,
+        ucp.status,
+        ucp.progress_percentage,
+        ucp.started_at,
+        ucp.last_accessed_at,
+
+        u.crew_id,
+        u.first_name,
+        u.last_name,
+        u.full_name,
+        u.rank,
+        u.department,
+
+        c.course_code,
+        c.course_name,
+
+        CASE
+          WHEN c.category = 'mandatory' THEN 'mandatory'
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm
+            WHERE rcm.course_id = c.id
+              AND rcm.rank_name = u.rank
+              AND rcm.assignment_type = 'recommended'
+          ) THEN 'recommended'
+          ELSE 'other'
+        END AS course_category
+
+      FROM user_course_progress ucp
+      JOIN users u ON u.id = ucp.user_id
+      JOIN courses c ON c.id = ucp.course_id
+
+      WHERE ucp.status = 'in_progress'
+        AND c.is_active = 1
+
+      ORDER BY ucp.last_accessed_at DESC
+      LIMIT 8
+    `)
+    .all();
+
+  const mandatoryCompletionsThisMonth = completedThisMonthRows.filter(
+    (row) => row.course_category === "mandatory"
+  ).length;
+
+  const recommendedCompletionsThisMonth = completedThisMonthRows.filter(
+    (row) => row.course_category === "recommended"
+  ).length;
+
+  const otherCompletionsThisMonth = completedThisMonthRows.filter(
+    (row) => row.course_category === "other"
+  ).length;
+
+  const crewTrainedThisMonth = new Set(
+    completedThisMonthRows.map((row) => row.user_id)
+  ).size;
 
   return {
     totalUsers,
     activeUsers,
     archivedUsers,
-    completedThisMonth,
-    todayCompletions: 0,
+    activeCourses,
+    mandatoryCourses,
+
+    completedThisMonth: completedThisMonthRows.length,
+    crewTrainedThisMonth,
+    todayCompletions,
+
+    inProgressCount,
+    crewInProgress,
+
+    mandatoryCompletionsThisMonth,
+    recommendedCompletionsThisMonth,
+    otherCompletionsThisMonth,
+
     recentCompletions,
+    inProgressRows,
   };
 }
 
@@ -587,15 +885,21 @@ export function getUserWiseReports() {
 
   return users.map((user) => {
     const mandatoryTotal = db
-      .prepare(`SELECT COUNT(*) AS total FROM courses WHERE category = 'mandatory' AND is_active = 1`)
+      .prepare(`
+        SELECT COUNT(*) AS total
+        FROM courses
+        WHERE category = 'mandatory'
+          AND is_active = 1
+      `)
       .get().total;
 
     const mandatoryCompleted = db
       .prepare(`
         SELECT COUNT(*) AS total
-        FROM course_completions cc
-        JOIN courses c ON c.id = cc.course_id
-        WHERE cc.user_id = ?
+        FROM user_course_progress ucp
+        JOIN courses c ON c.id = ucp.course_id
+        WHERE ucp.user_id = ?
+          AND ucp.status = 'completed'
           AND c.category = 'mandatory'
           AND c.is_active = 1
       `)
@@ -615,18 +919,39 @@ export function getUserWiseReports() {
     const recommendedCompleted = db
       .prepare(`
         SELECT COUNT(*) AS total
-        FROM course_completions cc
-        JOIN courses c ON c.id = cc.course_id
-        JOIN rank_course_matrix rcm ON rcm.course_id = c.id
-        WHERE cc.user_id = ?
+        FROM user_course_progress ucp
+        JOIN courses c ON c.id = ucp.course_id
+        JOIN rank_course_matrix rcm
+          ON rcm.course_id = c.id
           AND rcm.rank_name = ?
           AND rcm.assignment_type = 'recommended'
+        WHERE ucp.user_id = ?
+          AND ucp.status = 'completed'
+          AND c.category != 'mandatory'
           AND c.is_active = 1
       `)
-      .get(user.id, user.rank || "").total;
+      .get(user.rank || "", user.id).total;
 
     const totalCbts = db
-      .prepare(`SELECT COUNT(*) AS total FROM course_completions WHERE user_id = ?`)
+      .prepare(`
+        SELECT COUNT(*) AS total
+        FROM user_course_progress ucp
+        JOIN courses c ON c.id = ucp.course_id
+        WHERE ucp.user_id = ?
+          AND ucp.status = 'completed'
+          AND c.is_active = 1
+      `)
+      .get(user.id).total;
+
+    const inProgressCbts = db
+      .prepare(`
+        SELECT COUNT(*) AS total
+        FROM user_course_progress ucp
+        JOIN courses c ON c.id = ucp.course_id
+        WHERE ucp.user_id = ?
+          AND ucp.status = 'in_progress'
+          AND c.is_active = 1
+      `)
       .get(user.id).total;
 
     return {
@@ -636,6 +961,7 @@ export function getUserWiseReports() {
       recommended_completed: recommendedCompleted,
       recommended_total: recommendedTotal,
       total_cbts: totalCbts,
+      in_progress_cbts: inProgressCbts,
     };
   });
 }
@@ -643,65 +969,124 @@ export function getUserWiseReports() {
 export function getMonthlyReportStats(month) {
   const monthPrefix = month || new Date().toISOString().slice(0, 7);
 
-  const totalCompletions = db
-    .prepare(`
-      SELECT COUNT(*) AS total
-      FROM course_completions
-      WHERE completion_date LIKE ?
-    `)
-    .get(`${monthPrefix}%`).total;
+  const monthStart = new Date(`${monthPrefix}-01T00:00:00.000Z`);
+  const monthEnd = new Date(monthStart);
+  monthEnd.setUTCMonth(monthEnd.getUTCMonth() + 1);
 
-  const crewTrained = db
-    .prepare(`
-      SELECT COUNT(DISTINCT user_id) AS total
-      FROM course_completions
-      WHERE completion_date LIKE ?
-    `)
-    .get(`${monthPrefix}%`).total;
+  const monthStartIso = monthStart.toISOString();
+  const monthEndIso = monthEnd.toISOString();
 
-  const mandatoryCompletions = db
-    .prepare(`
-      SELECT COUNT(*) AS total
-      FROM course_completions cc
-      JOIN courses c ON c.id = cc.course_id
-      WHERE cc.completion_date LIKE ?
-        AND c.category = 'mandatory'
-    `)
-    .get(`${monthPrefix}%`).total;
-
-  const recommendedCompletions = db
-    .prepare(`
-      SELECT COUNT(*) AS total
-      FROM course_completions cc
-      JOIN courses c ON c.id = cc.course_id
-      WHERE cc.completion_date LIKE ?
-        AND c.category = 'recommended'
-    `)
-    .get(`${monthPrefix}%`).total;
-
-  const crewRows = db
+  const completionRows = db
     .prepare(`
       SELECT
+        ucp.id AS progress_id,
+        ucp.user_id,
+        ucp.course_id,
+        ucp.status,
+        ucp.progress_percentage,
+        ucp.selected_language,
+        ucp.started_at,
+        ucp.completed_at,
+        ucp.last_accessed_at,
+
         u.crew_id,
-        u.full_name,
         u.first_name,
         u.last_name,
+        u.full_name,
         u.rank,
-        COUNT(cc.id) AS completed_count,
-        MAX(cc.completion_date) AS last_completion_date
-      FROM course_completions cc
-      JOIN users u ON u.id = cc.user_id
-      WHERE cc.completion_date LIKE ?
-      GROUP BY u.id
-      ORDER BY completed_count DESC
+        u.department,
+        u.vessel,
+        u.nationality,
+
+        c.course_code,
+        c.course_name,
+        c.short_name,
+        c.category AS base_category,
+
+        CASE
+          WHEN c.category = 'mandatory' THEN 'mandatory'
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm
+            WHERE rcm.course_id = c.id
+              AND rcm.rank_name = u.rank
+              AND rcm.assignment_type = 'recommended'
+          ) THEN 'recommended'
+          ELSE 'other'
+        END AS course_category
+
+      FROM user_course_progress ucp
+      JOIN users u ON u.id = ucp.user_id
+      JOIN courses c ON c.id = ucp.course_id
+      WHERE ucp.status = 'completed'
+        AND ucp.completed_at >= ?
+        AND ucp.completed_at < ?
+        AND c.is_active = 1
+      ORDER BY ucp.completed_at DESC, u.full_name ASC, c.course_code ASC
     `)
-    .all(`${monthPrefix}%`);
+    .all(monthStartIso, monthEndIso);
+
+  const totalCompletions = completionRows.length;
+
+  const crewTrained = new Set(
+    completionRows.map((row) => row.user_id)
+  ).size;
+
+  const mandatoryCompletions = completionRows.filter(
+    (row) => row.course_category === "mandatory"
+  ).length;
+
+  const recommendedCompletions = completionRows.filter(
+    (row) => row.course_category === "recommended"
+  ).length;
+
+  const otherCompletions = completionRows.filter(
+    (row) => row.course_category === "other"
+  ).length;
+
+  const crewMap = new Map();
+
+  for (const row of completionRows) {
+    const existing = crewMap.get(row.user_id);
+
+    if (!existing) {
+      crewMap.set(row.user_id, {
+        user_id: row.user_id,
+        crew_id: row.crew_id,
+        full_name: row.full_name,
+        first_name: row.first_name,
+        last_name: row.last_name,
+        rank: row.rank,
+        department: row.department,
+        vessel: row.vessel,
+        completed_count: 1,
+        last_completion_date: row.completed_at,
+      });
+    } else {
+      existing.completed_count += 1;
+
+      if (
+        row.completed_at &&
+        (!existing.last_completion_date ||
+          row.completed_at > existing.last_completion_date)
+      ) {
+        existing.last_completion_date = row.completed_at;
+      }
+    }
+  }
+
+  const crewRows = Array.from(crewMap.values()).sort(
+    (a, b) => b.completed_count - a.completed_count
+  );
 
   return {
+    month: monthPrefix,
     totalCompletions,
     crewTrained,
     mandatoryCompletions,
     recommendedCompletions,
+    otherCompletions,
+    completionRows,
     crewRows,
   };
 }
@@ -1099,16 +1484,37 @@ export function completeUserCourse(data = {}) {
       selectedLanguage,
     });
 
-    db.prepare(`
-      INSERT INTO course_completions
-      (
-        user_id,
-        course_id,
-        completion_date,
-        certificate_generated
-      )
-      VALUES (?, ?, ?, ?)
-    `).run(userId, courseId, completionDate, 0);
+    const existingCompletion = db
+    .prepare(`
+      SELECT id
+      FROM course_completions
+      WHERE user_id = ?
+        AND course_id = ?
+      ORDER BY completion_date DESC
+      LIMIT 1
+    `)
+    .get(userId, courseId);
+
+    if (existingCompletion) {
+      db.prepare(`
+        UPDATE course_completions
+        SET
+          completion_date = ?,
+          certificate_generated = ?
+        WHERE id = ?
+      `).run(completionDate, 0, existingCompletion.id);
+    } else {
+      db.prepare(`
+        INSERT INTO course_completions
+        (
+          user_id,
+          course_id,
+          completion_date,
+          certificate_generated
+        )
+        VALUES (?, ?, ?, ?)
+      `).run(userId, courseId, completionDate, 0);
+    }
   });
 
   tx();
