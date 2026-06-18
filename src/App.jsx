@@ -12,12 +12,12 @@ function App() {
       if (!isCourseImportShortcut) return;
 
       const currentHash = window.location.hash || "#/";
-      const isLoginPage =
-        currentHash === "#/" ||
-        currentHash === "" ||
-        currentHash === "#";
+      const currentRoute = currentHash.replace("#", "") || "/";
 
-      if (!isLoginPage) {
+      const isAdminRoute =
+        currentRoute === "/admin" || currentRoute.startsWith("/admin/");
+
+      if (!isAdminRoute) {
         return;
       }
 

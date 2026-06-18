@@ -21,6 +21,31 @@ import {
   selectCourseFolderFromSystem,
 } from "../../services/databaseService";
 
+const RANK_OPTIONS = [
+  "Master",
+  "Chief Off",
+  "2nd Off",
+  "3rd Off",
+  "Jr. Off",
+  "Cadet",
+  "Chief Eng",
+  "2nd Eng",
+  "3rd Eng",
+  "4th Eng",
+  "Jr. Eng",
+  "TME",
+  "Gas Eng",
+  "ETO",
+  "Bosun",
+  "Fitter",
+  "AB",
+  "Oiler",
+  "OS",
+  "Wiper",
+  "Chief Cook",
+  "Messman",
+];
+
 function SystemCourseImport() {
   const navigate = useNavigate();
 
@@ -32,8 +57,21 @@ function SystemCourseImport() {
   const [courses, setCourses] = useState([]);
   const [selectedCourseIds, setSelectedCourseIds] = useState([]);
 
+  const [assignmentType, setAssignmentType] = useState("other");
+  const [recommendedRanks, setRecommendedRanks] = useState([]);
+
   function showAlert(type, text) {
     setAlert({ type, text });
+  }
+
+  function toggleRecommendedRank(rank) {
+    setRecommendedRanks((prev) => {
+      if (prev.includes(rank)) {
+        return prev.filter((item) => item !== rank);
+      }
+
+      return [...prev, rank];
+    });
   }
 
   async function loadCourses() {
@@ -83,6 +121,9 @@ function SystemCourseImport() {
       }
 
       setSelectedCourse(response.data);
+      setAssignmentType("other");
+      setRecommendedRanks([]);
+      showAlert("success", "Course folder validated successfully.");
       showAlert("success", "Course folder validated successfully.");
     } catch (err) {
       console.error("Select folder error:", err);
@@ -102,7 +143,12 @@ function SystemCourseImport() {
       setAlert(null);
       setLoading(true);
 
-      const response = await importSelectedCourseToSystem(selectedCourse);
+      const response = await importSelectedCourseToSystem({
+        ...selectedCourse,
+        category: assignmentType === "mandatory" ? "mandatory" : "other",
+        recommendedRanks:
+          assignmentType === "other" ? recommendedRanks : [],
+      });
 
       if (!response?.success) {
         showAlert("error", response?.message || "Course import failed.");
@@ -246,11 +292,11 @@ function SystemCourseImport() {
 
           <button
             type="button"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/admin")}
             className="flex items-center gap-2 rounded-lg border border-[#DDE3EA] bg-white px-4 py-2 text-sm font-semibold text-[#163B6D] shadow-sm hover:bg-gray-50"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Login
+            Back to Admin
           </button>
         </div>
 
@@ -420,6 +466,102 @@ function SystemCourseImport() {
                 <p className="mt-1 break-all text-sm font-medium text-gray-800">
                   {selectedCourse.sourcePath}
                 </p>
+              </div>
+
+              <div className="mt-5 rounded-xl border border-[#DDE3EA] bg-white p-4">
+                <p className="text-sm font-semibold text-gray-500">
+                  Course Assignment
+                </p>
+
+                <div className="mt-3 grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAssignmentType("mandatory");
+                      setRecommendedRanks([]);
+                    }}
+                    className={`rounded-xl border px-4 py-4 text-left transition ${
+                      assignmentType === "mandatory"
+                        ? "border-[#2554C7] bg-blue-50 ring-2 ring-[#2554C7]/20"
+                        : "border-[#DDE3EA] bg-white hover:bg-[#F5F7FA]"
+                    }`}
+                  >
+                    <p className="font-bold text-[#163B6D]">Mandatory for all</p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      This course will appear as mandatory for every crew member.
+                    </p>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setAssignmentType("other")}
+                    className={`rounded-xl border px-4 py-4 text-left transition ${
+                      assignmentType === "other"
+                        ? "border-[#2554C7] bg-blue-50 ring-2 ring-[#2554C7]/20"
+                        : "border-[#DDE3EA] bg-white hover:bg-[#F5F7FA]"
+                    }`}
+                  >
+                    <p className="font-bold text-[#163B6D]">Other course</p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      Optionally recommend this course to selected ranks.
+                    </p>
+                  </button>
+                </div>
+
+                {assignmentType === "other" && (
+                  <div className="mt-5 rounded-xl border border-[#DDE3EA] bg-[#F5F7FA] p-4">
+                    <div className="mb-3 flex items-center justify-between gap-4">
+                      <div>
+                        <p className="font-semibold text-[#163B6D]">
+                          Recommended to ranks
+                        </p>
+                        <p className="mt-1 text-sm text-gray-500">
+                          Select one or more ranks. Leave empty if this course is not
+                          recommended for any rank.
+                        </p>
+                      </div>
+
+                      {recommendedRanks.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setRecommendedRanks([])}
+                          className="rounded-lg border border-[#DDE3EA] bg-white px-3 py-2 text-xs font-semibold text-[#163B6D] hover:bg-gray-50"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-3">
+                      {RANK_OPTIONS.map((rank) => (
+                        <label
+                          key={rank}
+                          className={`flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-3 text-sm font-semibold transition ${
+                            recommendedRanks.includes(rank)
+                              ? "border-[#2554C7] bg-white text-[#163B6D]"
+                              : "border-[#DDE3EA] bg-white text-gray-600 hover:bg-gray-50"
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={recommendedRanks.includes(rank)}
+                            onChange={() => toggleRecommendedRank(rank)}
+                          />
+                          {rank}
+                        </label>
+                      ))}
+                    </div>
+
+                    <p className="mt-3 text-xs text-gray-500">
+                      Selected ranks:{" "}
+                      <span className="font-semibold text-[#163B6D]">
+                        {recommendedRanks.length > 0
+                          ? recommendedRanks.join(", ")
+                          : "None"}
+                      </span>
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           )}

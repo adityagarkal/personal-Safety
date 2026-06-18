@@ -19,6 +19,10 @@ import {
   getMonthlyReportStats,
   getAdminDashboardStats,
   getUserTrainingProfile,
+  getUserCourses,
+  getUserCourseProgress,
+  saveUserCourseProgress,
+  completeUserCourse,
 } from "./database.js";
 
 import {
@@ -66,9 +70,68 @@ function getCourseFilePath(relativePath) {
   return path.join(app.getPath("userData"), cleanPath);
 }
 
+function getMimeType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+
+  const mimeTypes = {
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".gif": "image/gif",
+    ".webp": "image/webp",
+    ".bmp": "image/bmp",
+    ".mp3": "audio/mpeg",
+    ".wav": "audio/wav",
+    ".ogg": "audio/ogg",
+  };
+
+  return mimeTypes[ext] || "application/octet-stream";
+}
+
 ipcMain.handle("file:readCourseFile", (_event, relativePath) => {
   const filePath = getCourseFilePath(relativePath);
   return fs.readFileSync(filePath, "utf-8");
+});
+
+ipcMain.handle("file:readCourseAsset", (_event, assetPath) => {
+  try {
+    const resolvedPath = path.resolve(String(assetPath || ""));
+    const coursesDir = path.resolve(app.getPath("userData"), "courses");
+
+    if (!resolvedPath.startsWith(coursesDir + path.sep)) {
+      return {
+        success: false,
+        message: "Unsafe asset path.",
+        dataUrl: "",
+      };
+    }
+
+    if (!fs.existsSync(resolvedPath)) {
+      return {
+        success: false,
+        message: "Asset file not found.",
+        dataUrl: "",
+      };
+    }
+
+    const mime = getMimeType(resolvedPath);
+    const base64 = fs.readFileSync(resolvedPath).toString("base64");
+
+    return {
+      success: true,
+      mime,
+      fileName: path.basename(resolvedPath),
+      dataUrl: `data:${mime};base64,${base64}`,
+    };
+  } catch (error) {
+    console.error("Read course asset error:", error);
+
+    return {
+      success: false,
+      message: "Unable to read course asset.",
+      dataUrl: "",
+    };
+  }
 });
 
 ipcMain.handle("auth:validateLogin", (_event, data) => validateLogin(data));
@@ -80,6 +143,10 @@ ipcMain.handle("db:getUserById", (_event, id) => getUserById(id));
 ipcMain.handle("db:getAllUsers", () => getAllUsers());
 
 ipcMain.handle("db:getCourses", () => getCourses());
+
+ipcMain.handle("db:getUserCourses", (_event, data) => {
+  return getUserCourses(data);
+});
 
 ipcMain.handle("db:getUserWiseReports", () => getUserWiseReports());
 
@@ -172,6 +239,18 @@ ipcMain.handle("course:delete", async (_event, courseId) => {
       message: "Unable to delete course folder.",
     };
   }
+});
+
+ipcMain.handle("db:getUserCourseProgress", (_event, data) => {
+  return getUserCourseProgress(data);
+});
+
+ipcMain.handle("db:saveUserCourseProgress", (_event, data) => {
+  return saveUserCourseProgress(data);
+});
+
+ipcMain.handle("db:completeUserCourse", (_event, data) => {
+  return completeUserCourse(data);
 });
 
 app.whenReady().then(() => {

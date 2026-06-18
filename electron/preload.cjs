@@ -6,6 +6,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
   readCourseFile: (relativePath) =>
     ipcRenderer.invoke("file:readCourseFile", relativePath),
 
+  readCourseAsset: (assetPath) =>
+    ipcRenderer.invoke("file:readCourseAsset", assetPath),
+
   validateLogin: (data) =>
     ipcRenderer.invoke("auth:validateLogin", data),
 
@@ -27,6 +30,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
   getCourses: () =>
     ipcRenderer.invoke("db:getCourses"),
 
+  getUserCourses: (data) =>
+    ipcRenderer.invoke("db:getUserCourses", data),
+
   getUserWiseReports: () =>
     ipcRenderer.invoke("db:getUserWiseReports"),
 
@@ -46,4 +52,13 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
   deleteCourse: (courseId) =>
     ipcRenderer.invoke("course:delete", courseId),
+
+  getUserCourseProgress: (data) =>
+    ipcRenderer.invoke("db:getUserCourseProgress", data),
+
+  saveUserCourseProgress: (data) =>
+    ipcRenderer.invoke("db:saveUserCourseProgress", data),
+
+  completeUserCourse: (data) =>
+    ipcRenderer.invoke("db:completeUserCourse", data),
 });
