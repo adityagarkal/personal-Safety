@@ -8,9 +8,9 @@ import {
 } from "../../services/databaseService";
 
 const departmentRanks = {
-  Deck: ["MASTER", "CH OFF", "2ND OFF", "3RD OFF", "DECK CADET", "BOSUN", "AB", "OS"],
-  Engine: ["CH ENG", "2ND ENG", "3RD ENG", "4TH ENG", "TME", "ETO", "GAS ENGINEER", "FITTER", "OILER", "WIPER"],
-  Galley: ["CH COOK", "GENERAL STEWARD"],
+  Deck: ["Master", "Chief Off","2nd Off","3rd Off","Jr. Off","Cadet","Bosun","AB"],
+  Engine: ["Chief Eng","2nd Eng","3rd Eng","4th Eng","Jr. Eng","TME","Gas Eng","ETO","Fitter","Oiler","Wiper"],
+  Galley: ["Chief Cook", "Messman"],
 };
 
 const departments = ["Deck", "Engine", "Galley"];
