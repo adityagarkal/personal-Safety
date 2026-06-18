@@ -53,3 +53,14 @@ export async function getUserTrainingProfileFromDatabase(userId) {
 
   return window.electronAPI.getUserTrainingProfile(userId);
 }
+export async function selectCourseFolderFromSystem() {
+  return ensureElectronApi("selectCourseFolder")();
+}
+
+export async function importSelectedCourseToSystem(courseData) {
+  return ensureElectronApi("importSelectedCourse")(courseData);
+}
+
+export async function deleteCourseFromSystem(courseId) {
+  return ensureElectronApi("deleteCourse")(courseId);
+}

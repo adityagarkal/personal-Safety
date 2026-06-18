@@ -38,4 +38,12 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
   getUserTrainingProfile: (userId) =>
   ipcRenderer.invoke("db:getUserTrainingProfile", userId),
+  selectCourseFolder: () =>
+    ipcRenderer.invoke("course:selectFolder"),
+
+  importSelectedCourse: (courseData) =>
+    ipcRenderer.invoke("course:importSelected", courseData),
+
+  deleteCourse: (courseId) =>
+    ipcRenderer.invoke("course:delete", courseId),
 });

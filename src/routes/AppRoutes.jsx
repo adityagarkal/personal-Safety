@@ -1,8 +1,9 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
-
 import Login from "../pages/Login/Login";
 import UserDashboard from "../pages/UserDashboard/UserDashboard";
-
+import UserCourses from "../pages/UserCourses/UserCourses";
+import CourseLanguage from "../pages/CourseLanguage/CourseLanguage";
+import CoursePlayer from "../pages/CoursePlayer/CoursePlayer";
 import AdminLogin from "../pages/AdminLogin/AdminLogin";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import AdminUsers from "../pages/AdminUsers/AdminUsers";
@@ -11,6 +12,7 @@ import AdminRecords from "../pages/AdminRecords/AdminRecords";
 import MonthlyReport from "../pages/MonthlyReport/MonthlyReport";
 import UserProfile from "../pages/UserProfile/UserProfile";
 
+import SystemCourseImport from "../pages/SystemCourseImport/SystemCourseImport";
 
 function AppRoutes() {
   return (
@@ -18,10 +20,8 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<UserDashboard />} />
-
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminDashboard />} />
-
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/users/new" element={<AdminAddUser />} />
         <Route path="/admin/users/:id/edit" element={<AdminAddUser />} />
@@ -30,6 +30,12 @@ function AppRoutes() {
         <Route path="/admin/reports/users" element={<AdminRecords />} />
         <Route path="/admin/reports/users/:id" element={<AdminRecords />} />
         <Route path="/admin/reports/monthly" element={<MonthlyReport />} />
+
+        <Route path="/system/import-course" element={<SystemCourseImport />} />
+
+        <Route path="/user/courses" element={<UserCourses />} />
+        <Route path="/user/courses/:courseId/language" element={<CourseLanguage />} />
+        <Route path="/user/player/:courseId" element={<CoursePlayer />} />
       </Routes>
     </HashRouter>
   );

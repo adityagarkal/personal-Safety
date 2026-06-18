@@ -699,3 +699,158 @@ export function getMonthlyReportStats(month) {
     crewRows,
   };
 }
+
+export function createCourse(data) {
+  const courseCode = String(data.courseCode || "").trim();
+  const courseName = String(data.courseName || "").trim();
+
+  if (!courseCode || !courseName) {
+    return {
+      success: false,
+      message: "Course code and course name are required.",
+    };
+  }
+
+  const existingCourse = db
+    .prepare(`SELECT * FROM courses WHERE course_code = ?`)
+    .get(courseCode);
+
+  if (existingCourse) {
+    const category = data.category || existingCourse.category || "other";
+
+    db.prepare(`
+      UPDATE courses
+      SET
+        course_name = ?,
+        short_name = ?,
+        category = ?,
+        course_path = ?,
+        available_languages = ?,
+        total_chapters = ?,
+        total_pages = ?,
+        is_active = 1,
+        updated_at = ?
+      WHERE course_code = ?
+    `).run(
+      courseName,
+      data.shortName || "",
+      category,
+      data.destinationPath,
+      JSON.stringify(data.languages || ["EN"]),
+      Number(data.totalChapters || 0),
+      Number(data.totalPages || 0),
+      now(),
+      courseCode
+    );
+
+    db.prepare(`
+      UPDATE user_course_progress
+      SET
+        status = 'not_started',
+        progress_percentage = 0,
+        current_chapter = NULL,
+        current_page = NULL,
+        selected_language = 'EN',
+        started_at = NULL,
+        completed_at = NULL,
+        last_accessed_at = NULL
+      WHERE course_id = ?
+        AND status != 'completed'
+    `).run(existingCourse.id);
+
+    return {
+      success: true,
+      message: "Existing course replaced successfully.",
+      courseId: existingCourse.id,
+      replaced: true,
+    };
+  }
+
+  const result = db.prepare(`
+    INSERT INTO courses
+    (
+      course_code,
+      course_name,
+      short_name,
+      category,
+      course_path,
+      available_languages,
+      total_chapters,
+      total_pages,
+      is_active,
+      imported_at,
+      updated_at
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+    courseCode,
+    courseName,
+    data.shortName || "",
+    data.category || "other",
+    data.destinationPath,
+    JSON.stringify(data.languages || ["EN"]),
+    Number(data.totalChapters || 0),
+    Number(data.totalPages || 0),
+    1,
+    now(),
+    now()
+  );
+
+  return {
+    success: true,
+    message: "Course imported successfully.",
+    courseId: Number(result.lastInsertRowid),
+    replaced: false,
+  };
+}
+
+export function getCourseByCode(courseCode) {
+  return db
+    .prepare(`SELECT * FROM courses WHERE course_code = ?`)
+    .get(String(courseCode || "").trim());
+}
+
+export function getCourseById(courseId) {
+  return db
+    .prepare(`SELECT * FROM courses WHERE id = ?`)
+    .get(Number(courseId));
+}
+
+export function deleteCourseRecordById(courseId) {
+  const id = Number(courseId);
+
+  if (!id) {
+    return {
+      success: false,
+      message: "Valid course ID is required.",
+    };
+  }
+
+  db.prepare(`
+    UPDATE courses
+    SET
+      is_active = 0,
+      course_path = '',
+      updated_at = ?
+    WHERE id = ?
+  `).run(now(), id);
+
+  db.prepare(`
+    UPDATE user_course_progress
+    SET
+      status = 'not_started',
+      progress_percentage = 0,
+      current_chapter = NULL,
+      current_page = NULL,
+      started_at = NULL,
+      completed_at = NULL,
+      last_accessed_at = NULL
+    WHERE course_id = ?
+      AND status != 'completed'
+  `).run(id);
+
+  return {
+    success: true,
+    message: "Course removed successfully. Completion history remains saved.",
+  };
+}

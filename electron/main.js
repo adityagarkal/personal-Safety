@@ -11,11 +11,20 @@ import {
   getUserById,
   getAllUsers,
   getCourses,
+  getCourseByCode,
+  getCourseById,
+  createCourse,
+  deleteCourseRecordById,
   getUserWiseReports,
   getMonthlyReportStats,
   getAdminDashboardStats,
   getUserTrainingProfile,
 } from "./database.js";
+
+import {
+  selectCourseFolder,
+  importValidatedCourse,
+} from "./courseImport.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -83,6 +92,87 @@ ipcMain.handle("db:getAdminDashboardStats", () => getAdminDashboardStats());
 ipcMain.handle("db:getUserTrainingProfile", (_event, userId) =>
   getUserTrainingProfile(userId)
 );
+ipcMain.handle("course:selectFolder", async () => {
+  return selectCourseFolder();
+});
+
+ipcMain.handle("course:importSelected", async (_event, courseData) => {
+  try {
+    const existingCourse = getCourseByCode(courseData.courseCode);
+
+    const copiedResult = importValidatedCourse(
+      courseData,
+      existingCourse?.course_path || ""
+    );
+
+    if (!copiedResult.success) {
+      return copiedResult;
+    }
+
+    const dbResult = createCourse(copiedResult.data);
+
+    if (!dbResult.success) {
+      return dbResult;
+    }
+
+    return {
+      success: true,
+      message: dbResult.replaced
+        ? "Course replaced successfully."
+        : "Course imported and registered successfully.",
+      data: {
+        ...copiedResult.data,
+        courseId: dbResult.courseId,
+        replaced: dbResult.replaced,
+      },
+    };
+  } catch (error) {
+    console.error("Course import error:", error);
+
+    return {
+      success: false,
+      message: error.message || "Unable to import course.",
+    };
+  }
+});
+
+ipcMain.handle("course:delete", async (_event, courseId) => {
+  const course = getCourseById(courseId);
+
+  if (!course) {
+    return {
+      success: false,
+      message: "Course not found.",
+    };
+  }
+
+  try {
+    if (course.course_path && fs.existsSync(course.course_path)) {
+      if (!isSafeCoursePath(course.course_path)) {
+        return {
+          success: false,
+          message: "Unsafe course path detected. Delete cancelled.",
+        };
+      }
+
+      fs.rmSync(course.course_path, {
+        recursive: true,
+        force: true,
+      });
+    }
+
+    const dbResult = deleteCourseRecordById(courseId);
+
+    return dbResult;
+  } catch (error) {
+    console.error("Course delete error:", error);
+
+    return {
+      success: false,
+      message: "Unable to delete course folder.",
+    };
+  }
+});
 
 app.whenReady().then(() => {
   createWindow();
@@ -99,3 +189,12 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+function isSafeCoursePath(coursePath) {
+  if (!coursePath) return false;
+
+  const coursesDir = path.resolve(app.getPath("userData"), "courses");
+  const targetPath = path.resolve(coursePath);
+
+  return targetPath.startsWith(coursesDir + path.sep);
+}

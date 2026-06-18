@@ -61,7 +61,7 @@ function Login() {
         })
       );
 
-      navigate("/user-dashboard");
+      navigate("/dashboard");
     } catch (err) {
       console.error("Login Error:", err);
       setError("Login failed. Please check database connection.");
