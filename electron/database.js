@@ -496,10 +496,16 @@ export function getAllUsers() {
 export function getCourses() {
   return db
     .prepare(`
-      SELECT *
-      FROM courses
-      WHERE is_active = 1
-      ORDER BY course_code ASC
+      SELECT
+        c.*,
+        GROUP_CONCAT(rcm.rank_name) AS recommended_ranks
+      FROM courses c
+      LEFT JOIN rank_course_matrix rcm
+        ON rcm.course_id = c.id
+        AND rcm.assignment_type = 'recommended'
+      WHERE c.is_active = 1
+      GROUP BY c.id
+      ORDER BY c.course_code ASC
     `)
     .all();
 }
@@ -700,6 +706,39 @@ export function getMonthlyReportStats(month) {
   };
 }
 
+function saveRecommendedRanks(courseId, recommendedRanks = []) {
+  db.prepare(`
+    DELETE FROM rank_course_matrix
+    WHERE course_id = ?
+  `).run(courseId);
+
+  if (!Array.isArray(recommendedRanks) || recommendedRanks.length === 0) {
+    return;
+  }
+
+  const insertRank = db.prepare(`
+    INSERT INTO rank_course_matrix
+    (
+      rank_name,
+      course_id,
+      assignment_type
+    )
+    VALUES (?, ?, ?)
+  `);
+
+  const insertMany = db.transaction((ranks) => {
+    for (const rank of ranks) {
+      const rankName = String(rank || "").trim();
+
+      if (!rankName) continue;
+
+      insertRank.run(rankName, courseId, "recommended");
+    }
+  });
+
+  insertMany(recommendedRanks);
+}
+
 export function createCourse(data) {
   const courseCode = String(data.courseCode || "").trim();
   const courseName = String(data.courseName || "").trim();
@@ -711,13 +750,17 @@ export function createCourse(data) {
     };
   }
 
+  const category = data.category === "mandatory" ? "mandatory" : "other";
+  const recommendedRanks =
+    category === "other" && Array.isArray(data.recommendedRanks)
+      ? data.recommendedRanks
+      : [];
+
   const existingCourse = db
     .prepare(`SELECT * FROM courses WHERE course_code = ?`)
     .get(courseCode);
 
   if (existingCourse) {
-    const category = data.category || existingCourse.category || "other";
-
     db.prepare(`
       UPDATE courses
       SET
@@ -742,6 +785,8 @@ export function createCourse(data) {
       now(),
       courseCode
     );
+
+    saveRecommendedRanks(existingCourse.id, recommendedRanks);
 
     db.prepare(`
       UPDATE user_course_progress
@@ -786,7 +831,7 @@ export function createCourse(data) {
     courseCode,
     courseName,
     data.shortName || "",
-    data.category || "other",
+    category,
     data.destinationPath,
     JSON.stringify(data.languages || ["EN"]),
     Number(data.totalChapters || 0),
@@ -796,10 +841,14 @@ export function createCourse(data) {
     now()
   );
 
+  const courseId = Number(result.lastInsertRowid);
+
+  saveRecommendedRanks(courseId, recommendedRanks);
+
   return {
     success: true,
     message: "Course imported successfully.",
-    courseId: Number(result.lastInsertRowid),
+    courseId,
     replaced: false,
   };
 }
@@ -849,8 +898,224 @@ export function deleteCourseRecordById(courseId) {
       AND status != 'completed'
   `).run(id);
 
+  db.prepare(`
+    DELETE FROM rank_course_matrix
+    WHERE course_id = ?
+  `).run(id);
+
   return {
     success: true,
     message: "Course removed successfully. Completion history remains saved.",
+  };
+}
+
+export function getUserCourses(data = {}) {
+  const userId = Number(data.userId || 0);
+  const userRank = String(data.rank || "").trim();
+
+  const courses = db
+    .prepare(`
+      SELECT
+        c.*,
+
+        CASE
+          WHEN c.category = 'mandatory' THEN 'mandatory'
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm
+            WHERE rcm.course_id = c.id
+              AND rcm.rank_name = ?
+              AND rcm.assignment_type = 'recommended'
+          ) THEN 'recommended'
+          ELSE 'other'
+        END AS user_category,
+
+        COALESCE(ucp.status, 'not_started') AS progress_status,
+        COALESCE(ucp.progress_percentage, 0) AS progress_percentage,
+        ucp.current_chapter,
+        ucp.current_page,
+        ucp.started_at,
+        ucp.completed_at,
+        ucp.last_accessed_at
+
+      FROM courses c
+
+      LEFT JOIN user_course_progress ucp
+        ON ucp.course_id = c.id
+        AND ucp.user_id = ?
+
+      WHERE c.is_active = 1
+
+      ORDER BY
+        CASE
+          WHEN c.category = 'mandatory' THEN 1
+          WHEN EXISTS (
+            SELECT 1
+            FROM rank_course_matrix rcm2
+            WHERE rcm2.course_id = c.id
+              AND rcm2.rank_name = ?
+              AND rcm2.assignment_type = 'recommended'
+          ) THEN 2
+          ELSE 3
+        END,
+        c.course_code ASC
+    `)
+    .all(userRank, userId, userRank);
+
+  return courses;
+}
+
+export function getUserCourseProgress(data = {}) {
+  const userId = Number(data.userId || 0);
+  const courseId = Number(data.courseId || 0);
+
+  if (!userId || !courseId) {
+    return null;
+  }
+
+  return db
+    .prepare(`
+      SELECT *
+      FROM user_course_progress
+      WHERE user_id = ?
+        AND course_id = ?
+    `)
+    .get(userId, courseId);
+}
+
+export function saveUserCourseProgress(data = {}) {
+  const userId = Number(data.userId || 0);
+  const courseId = Number(data.courseId || 0);
+
+  if (!userId || !courseId) {
+    return {
+      success: false,
+      message: "User ID and Course ID are required.",
+    };
+  }
+
+  const status = data.status || "in_progress";
+  const progressPercentage = Number(data.progressPercentage || 0);
+
+  const currentChapter = String(data.currentChapter || "");
+  const currentPage = String(data.currentPage || "");
+  const selectedLanguage = String(data.selectedLanguage || "EN");
+
+  const existing = db
+    .prepare(`
+      SELECT id
+      FROM user_course_progress
+      WHERE user_id = ?
+        AND course_id = ?
+    `)
+    .get(userId, courseId);
+
+  if (existing) {
+    db.prepare(`
+      UPDATE user_course_progress
+      SET
+        status = ?,
+        progress_percentage = ?,
+        current_chapter = ?,
+        current_page = ?,
+        selected_language = ?,
+        last_accessed_at = ?,
+        completed_at = CASE
+          WHEN ? = 'completed' THEN ?
+          ELSE completed_at
+        END
+      WHERE user_id = ?
+        AND course_id = ?
+    `).run(
+      status,
+      progressPercentage,
+      currentChapter,
+      currentPage,
+      selectedLanguage,
+      now(),
+      status,
+      status === "completed" ? now() : null,
+      userId,
+      courseId
+    );
+  } else {
+    db.prepare(`
+      INSERT INTO user_course_progress
+      (
+        user_id,
+        course_id,
+        status,
+        progress_percentage,
+        current_chapter,
+        current_page,
+        selected_language,
+        started_at,
+        completed_at,
+        last_accessed_at
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      userId,
+      courseId,
+      status,
+      progressPercentage,
+      currentChapter,
+      currentPage,
+      selectedLanguage,
+      now(),
+      status === "completed" ? now() : null,
+      now()
+    );
+  }
+
+  return {
+    success: true,
+    message: "Progress saved successfully.",
+  };
+}
+
+export function completeUserCourse(data = {}) {
+  const userId = Number(data.userId || 0);
+  const courseId = Number(data.courseId || 0);
+  const selectedLanguage = String(data.selectedLanguage || "EN");
+
+  if (!userId || !courseId) {
+    return {
+      success: false,
+      message: "User ID and Course ID are required.",
+    };
+  }
+
+  const completionDate = now();
+
+  const tx = db.transaction(() => {
+    saveUserCourseProgress({
+      userId,
+      courseId,
+      status: "completed",
+      progressPercentage: 100,
+      currentChapter: data.currentChapter || "",
+      currentPage: data.currentPage || "",
+      selectedLanguage,
+    });
+
+    db.prepare(`
+      INSERT INTO course_completions
+      (
+        user_id,
+        course_id,
+        completion_date,
+        certificate_generated
+      )
+      VALUES (?, ?, ?, ?)
+    `).run(userId, courseId, completionDate, 0);
+  });
+
+  tx();
+
+  return {
+    success: true,
+    message: "Course completed successfully.",
+    completionDate,
   };
 }

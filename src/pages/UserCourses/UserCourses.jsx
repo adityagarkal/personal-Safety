@@ -4,10 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 import UserLayout from "../../components/user/UserLayout";
 import CourseCard from "../../components/user/CourseCard";
-import { getCoursesFromDatabase } from "../../services/databaseService";
+import { getUserCoursesFromDatabase } from "../../services/databaseService";
+
+function getLoggedInUser() {
+  try {
+    const storedUser = localStorage.getItem("gemini_login_user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  } catch {
+    return null;
+  }
+}
 
 function UserCourses() {
   const navigate = useNavigate();
+  const user = getLoggedInUser();
 
   const [courses, setCourses] = useState([]);
   const [activeTab, setActiveTab] = useState("all");
@@ -20,7 +30,10 @@ function UserCourses() {
       setLoading(true);
       setError("");
 
-      const response = await getCoursesFromDatabase();
+      const response = await getUserCoursesFromDatabase({
+        userId: user?.id,
+        rank: user?.rank,
+      });
 
       if (Array.isArray(response)) {
         setCourses(response);
@@ -41,12 +54,9 @@ function UserCourses() {
 
   const filteredCourses = useMemo(() => {
     return courses.filter((course) => {
-      const category = course.category || "other";
-
+      const category = course.user_category || "other";
       const matchesTab = activeTab === "all" || category === activeTab;
-
       const keyword = searchText.trim().toLowerCase();
-
       const matchesSearch =
         !keyword ||
         course.course_name?.toLowerCase().includes(keyword) ||
@@ -59,9 +69,9 @@ function UserCourses() {
   const counts = useMemo(() => {
     return {
       all: courses.length,
-      mandatory: courses.filter((course) => course.category === "mandatory").length,
-      recommended: courses.filter((course) => course.category === "recommended").length,
-      other: courses.filter((course) => !["mandatory", "recommended"].includes(course.category)).length,
+      mandatory: courses.filter((course) => course.user_category === "mandatory").length,
+      recommended: courses.filter((course) => course.user_category === "recommended").length,
+      other: courses.filter((course) => course.user_category === "other").length,
     };
   }, [courses]);
 

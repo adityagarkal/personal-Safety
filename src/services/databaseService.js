@@ -64,3 +64,19 @@ export async function importSelectedCourseToSystem(courseData) {
 export async function deleteCourseFromSystem(courseId) {
   return ensureElectronApi("deleteCourse")(courseId);
 }
+
+export async function getUserCoursesFromDatabase(data) {
+  return ensureElectronApi("getUserCourses")(data);
+}
+
+export async function getUserCourseProgressFromDatabase(data) {
+  return ensureElectronApi("getUserCourseProgress")(data);
+}
+
+export async function saveUserCourseProgressToDatabase(data) {
+  return ensureElectronApi("saveUserCourseProgress")(data);
+}
+
+export async function completeUserCourseInDatabase(data) {
+  return ensureElectronApi("completeUserCourse")(data);
+}

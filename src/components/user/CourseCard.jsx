@@ -35,7 +35,14 @@ function CourseCard({ course }) {
     navigate(`/user/courses/${course.id}/language`);
   }
 
-  const status = "Not Started";
+  const statusMap = {
+    not_started: "Not Started",
+    in_progress: "In Progress",
+    completed: "Completed",
+  };
+
+  const status = statusMap[course.progress_status] || "Not Started";
+  const progressPercentage = Number(course.progress_percentage || 0);
 
   return (
     <div className="rounded-2xl border border-[#DDE3EA] bg-white p-5 shadow-sm transition hover:shadow-md">
@@ -50,7 +57,7 @@ function CourseCard({ course }) {
           </h3>
         </div>
 
-        <StatusBadge status={getCategoryLabel(course.category)} />
+        <StatusBadge status={getCategoryLabel(course.user_category || course.category)} />
       </div>
 
       <div className="mb-5 space-y-3">
@@ -73,11 +80,11 @@ function CourseCard({ course }) {
       <div className="mb-5">
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="font-semibold text-gray-600">Progress</span>
-          <span className="font-semibold text-[#163B6D]">0%</span>
+          <span className="font-semibold text-[#163B6D]">{progressPercentage}%</span>
         </div>
 
         <div className="h-2 overflow-hidden rounded-full bg-gray-200">
-          <div className="h-full w-0 rounded-full bg-[#22C55E]" />
+          <div className="h-full rounded-full bg-[#22C55E]" style={{ width: `${progressPercentage}%` }}/>
         </div>
       </div>
 

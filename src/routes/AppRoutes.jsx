@@ -11,7 +11,8 @@ import AdminAddUser from "../pages/AdminAddUser/AdminAddUser";
 import AdminRecords from "../pages/AdminRecords/AdminRecords";
 import MonthlyReport from "../pages/MonthlyReport/MonthlyReport";
 import UserProfile from "../pages/UserProfile/UserProfile";
-
+import CompletedCourses from "../pages/CompletedCourses/CompletedCourses";
+import Certificates from "../pages/Certificates/Certificates";
 import SystemCourseImport from "../pages/SystemCourseImport/SystemCourseImport";
 
 function AppRoutes() {
@@ -36,6 +37,8 @@ function AppRoutes() {
         <Route path="/user/courses" element={<UserCourses />} />
         <Route path="/user/courses/:courseId/language" element={<CourseLanguage />} />
         <Route path="/user/player/:courseId" element={<CoursePlayer />} />
+        <Route path="/user/completed-courses" element={<CompletedCourses />} />
+        <Route path="/user/certificates" element={<Certificates />} />
       </Routes>
     </HashRouter>
   );

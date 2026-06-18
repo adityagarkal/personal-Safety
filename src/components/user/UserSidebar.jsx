@@ -12,10 +12,6 @@ function UserSidebar({ open, user, onClose }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function comingSoon(label) {
-    alert(`${label} screen will be added in upcoming steps.`);
-  }
-
   if (!open) return null;
 
   return (
@@ -69,13 +65,15 @@ function UserSidebar({ open, user, onClose }) {
         <SidebarButton
           icon={<CheckCircle className="h-5 w-5" />}
           label="Completed Courses"
-          onClick={() => comingSoon("Completed Courses")}
+          active={location.pathname === "/user/completed-courses"}
+          onClick={() => navigate("/user/completed-courses")}
         />
 
         <SidebarButton
           icon={<Award className="h-5 w-5" />}
           label="View Certificates"
-          onClick={() => comingSoon("Certificates")}
+          active={location.pathname === "/user/certificates"}
+          onClick={() => navigate("/user/certificates")}
         />
       </nav>
     </aside>
