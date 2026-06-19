@@ -101,6 +101,16 @@ function calculateProgressPercentage(chapters, chapterId, pageIndex) {
   );
 }
 
+function getAssessmentPages(chapters = []) {
+  return chapters.flatMap((chapter) =>
+    (chapter.pages || []).filter((page) => page.isAssessment)
+  );
+}
+
+function getAnsweredAssessmentCount(assessmentPages, answers) {
+  return assessmentPages.filter((page) => answers?.[page.id]).length;
+}
+
 function CoursePlayer() {
   const navigate = useNavigate();
   const { courseId } = useParams();
@@ -118,6 +128,7 @@ function CoursePlayer() {
   const [pageContent, setPageContent] = useState(null);
   const [pageLoading, setPageLoading] = useState(false);
   const [pageError, setPageError] = useState("");
+  const [assessmentAnswers, setAssessmentAnswers] = useState({});
 
   const selectedLanguage = selectedCourse?.language || "EN";
 
@@ -228,7 +239,16 @@ function CoursePlayer() {
 
   const currentPages = selectedChapter?.pages || [];
   const selectedPage = currentPages[selectedPageIndex] || currentPages[0] || null;
+  const selectedAssessmentAnswer = selectedPage
+    ? assessmentAnswers[selectedPage.id] || ""
+    : "";
 
+  const assessmentPages = getAssessmentPages(chapters);
+  const answeredAssessmentCount = getAnsweredAssessmentCount(
+    assessmentPages,
+    assessmentAnswers
+  );
+  const totalAssessmentQuestions = assessmentPages.length;
   const currentChapterIndex = selectedChapter
     ? chapters.findIndex((chapter) => chapter.id === selectedChapter.id)
     : -1;
@@ -309,7 +329,20 @@ function CoursePlayer() {
     }
   }
 
+  function handleSelectAssessmentAnswer(optionId) {
+    if (!selectedPage) return;
+
+    setAssessmentAnswers((prev) => ({
+      ...prev,
+      [selectedPage.id]: optionId,
+    }));
+  }
+
   async function handleNextPage() {
+    if (selectedPage?.isAssessment && !assessmentAnswers[selectedPage.id]) {
+      alert("Please select an answer before moving to the next question.");
+      return;
+    }
     if (!selectedChapter || !selectedPage) return;
 
     if (selectedPageIndex < currentPages.length - 1) {
@@ -329,6 +362,16 @@ function CoursePlayer() {
 
       await saveProgress(nextChapter.id, 0);
 
+      return;
+    }
+
+    if (
+      totalAssessmentQuestions > 0 &&
+      answeredAssessmentCount < totalAssessmentQuestions
+    ) {
+      alert(
+        `Please answer all assessment questions before completing the course. Answered ${answeredAssessmentCount} of ${totalAssessmentQuestions}.`
+      );
       return;
     }
 
@@ -540,6 +583,8 @@ function CoursePlayer() {
                   pageLoading={pageLoading}
                   pageError={pageError}
                   selectedPage={selectedPage}
+                  selectedAssessmentAnswer={selectedAssessmentAnswer}
+                  onSelectAssessmentAnswer={handleSelectAssessmentAnswer}
                 />
               </section>
             </main>
