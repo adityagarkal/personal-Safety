@@ -1388,13 +1388,29 @@ export function saveUserCourseProgress(data = {}) {
 
   const existing = db
     .prepare(`
-      SELECT id
+      SELECT id, status, progress_percentage, completed_at
       FROM user_course_progress
       WHERE user_id = ?
         AND course_id = ?
     `)
     .get(userId, courseId);
 
+  if (existing?.status === "completed" && status !== "completed") {
+    db.prepare(`
+      UPDATE user_course_progress
+      SET
+        last_accessed_at = ?,
+        selected_language = COALESCE(?, selected_language)
+      WHERE user_id = ?
+        AND course_id = ?
+    `).run(now(), selectedLanguage, userId, courseId);
+
+    return {
+      success: true,
+      message: "Course is already completed. Progress was not reset.",
+      alreadyCompleted: true,
+    };
+  }
   if (existing) {
     db.prepare(`
       UPDATE user_course_progress
@@ -1468,6 +1484,24 @@ export function completeUserCourse(data = {}) {
     return {
       success: false,
       message: "User ID and Course ID are required.",
+    };
+  }
+
+  const existingProgress = db
+    .prepare(`
+      SELECT id, status, completed_at
+      FROM user_course_progress
+      WHERE user_id = ?
+        AND course_id = ?
+    `)
+    .get(userId, courseId);
+
+  if (existingProgress?.status === "completed") {
+    return {
+      success: true,
+      message: "Course was already completed earlier. Retake was not recorded again.",
+      alreadyCompleted: true,
+      completionDate: existingProgress.completed_at,
     };
   }
 

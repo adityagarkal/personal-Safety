@@ -101,6 +101,16 @@ function calculateProgressPercentage(chapters, chapterId, pageIndex) {
   );
 }
 
+function getAssessmentPages(chapters = []) {
+  return chapters.flatMap((chapter) =>
+    (chapter.pages || []).filter((page) => page.isAssessment)
+  );
+}
+
+function getAnsweredAssessmentCount(assessmentPages, answers) {
+  return assessmentPages.filter((page) => answers?.[page.id]).length;
+}
+
 function CoursePlayer() {
   const navigate = useNavigate();
   const { courseId } = useParams();
@@ -232,6 +242,13 @@ function CoursePlayer() {
   const selectedAssessmentAnswer = selectedPage
     ? assessmentAnswers[selectedPage.id] || ""
     : "";
+
+  const assessmentPages = getAssessmentPages(chapters);
+  const answeredAssessmentCount = getAnsweredAssessmentCount(
+    assessmentPages,
+    assessmentAnswers
+  );
+  const totalAssessmentQuestions = assessmentPages.length;
   const currentChapterIndex = selectedChapter
     ? chapters.findIndex((chapter) => chapter.id === selectedChapter.id)
     : -1;
@@ -322,6 +339,10 @@ function CoursePlayer() {
   }
 
   async function handleNextPage() {
+    if (selectedPage?.isAssessment && !assessmentAnswers[selectedPage.id]) {
+      alert("Please select an answer before moving to the next question.");
+      return;
+    }
     if (!selectedChapter || !selectedPage) return;
 
     if (selectedPageIndex < currentPages.length - 1) {
@@ -341,6 +362,16 @@ function CoursePlayer() {
 
       await saveProgress(nextChapter.id, 0);
 
+      return;
+    }
+
+    if (
+      totalAssessmentQuestions > 0 &&
+      answeredAssessmentCount < totalAssessmentQuestions
+    ) {
+      alert(
+        `Please answer all assessment questions before completing the course. Answered ${answeredAssessmentCount} of ${totalAssessmentQuestions}.`
+      );
       return;
     }
 
