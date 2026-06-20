@@ -107,6 +107,12 @@ function getAssessmentPages(chapters = []) {
   );
 }
 
+function getValidAssessmentPages(chapters = [], invalidAssessmentPageIds = {}) {
+  return getAssessmentPages(chapters).filter(
+    (page) => !invalidAssessmentPageIds[page.id]
+  );
+}
+
 function getAnsweredAssessmentCount(assessmentPages, answers) {
   return assessmentPages.filter((page) => answers?.[page.id]).length;
 }
@@ -131,6 +137,7 @@ function CoursePlayer() {
   const [assessmentAnswers, setAssessmentAnswers] = useState({});
 
   const selectedLanguage = selectedCourse?.language || "EN";
+  const [invalidAssessmentPageIds, setInvalidAssessmentPageIds] = useState({});
 
   async function saveProgress(chapterId, pageIndex, status = "in_progress") {
     try {
@@ -244,11 +251,17 @@ function CoursePlayer() {
     : "";
 
   const assessmentPages = getAssessmentPages(chapters);
+  const validAssessmentPages = getValidAssessmentPages(
+    chapters,
+    invalidAssessmentPageIds
+  );
+
   const answeredAssessmentCount = getAnsweredAssessmentCount(
-    assessmentPages,
+    validAssessmentPages,
     assessmentAnswers
   );
-  const totalAssessmentQuestions = assessmentPages.length;
+
+  const totalAssessmentQuestions = validAssessmentPages.length;
   const currentChapterIndex = selectedChapter
     ? chapters.findIndex((chapter) => chapter.id === selectedChapter.id)
     : -1;
@@ -287,6 +300,29 @@ function CoursePlayer() {
     currentChapterIndex < chapters.length - 1 ||
     selectedPageIndex < currentPages.length - 1;
 
+
+  useEffect(() => {
+    if (!selectedPage || !pageContent?.isAssessment) return;
+
+    const isValidMcq = pageContent?.assessment?.isValid === true;
+
+    if (isValidMcq) return;
+
+    setInvalidAssessmentPageIds((prev) => ({
+      ...prev,
+      [selectedPage.id]: true,
+    }));
+
+    const timer = setTimeout(() => {
+      moveToNextPageWithoutAssessmentCheck();
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [
+    selectedPage?.id,
+    pageContent?.isAssessment,
+    pageContent?.assessment?.isValid,
+  ]);
 
   useEffect(() => {
     if (selectedPage) {
@@ -338,8 +374,60 @@ function CoursePlayer() {
     }));
   }
 
+  async function moveToNextPageWithoutAssessmentCheck() {
+    if (!selectedChapter || !selectedPage) return;
+
+    if (selectedPageIndex < currentPages.length - 1) {
+      const newPageIndex = selectedPageIndex + 1;
+
+      setSelectedPageIndex(newPageIndex);
+      await saveProgress(selectedChapter.id, newPageIndex);
+
+      return;
+    }
+
+    const nextChapter = chapters[currentChapterIndex + 1];
+
+    if (nextChapter) {
+      setSelectedChapterId(nextChapter.id);
+      setSelectedPageIndex(0);
+
+      await saveProgress(nextChapter.id, 0);
+
+      return;
+    }
+
+    // If unsupported assessment is the last page, allow normal completion flow.
+    const confirmed = window.confirm(
+      "You have reached the end of this CBT course. Do you want to mark this course as completed?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      const response = await completeUserCourseInDatabase({
+        userId: user?.id,
+        courseId: Number(courseId),
+        selectedLanguage,
+        currentChapter: selectedChapter.id,
+        currentPage: selectedPage.id,
+      });
+
+      if (!response?.success) {
+        alert(response?.message || "Unable to complete course.");
+        return;
+      }
+
+      alert("Course completed successfully.");
+      navigate("/user/courses");
+    } catch (err) {
+      console.error("Complete course error:", err);
+      alert("Unable to complete course.");
+    }
+  }
+
   async function handleNextPage() {
-    if (selectedPage?.isAssessment && !assessmentAnswers[selectedPage.id]) {
+    if (selectedPage?.isAssessment && pageContent?.assessment?.isValid && !assessmentAnswers[selectedPage.id]) {
       alert("Please select an answer before moving to the next question.");
       return;
     }

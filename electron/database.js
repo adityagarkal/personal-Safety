@@ -1380,22 +1380,38 @@ export function saveUserCourseProgress(data = {}) {
   }
 
   const status = data.status || "in_progress";
-  const progressPercentage = Number(data.progressPercentage || 0);
+  const incomingProgress =
+    status === "completed" ? 100 : Number(data.progressPercentage || 0);
 
   const currentChapter = String(data.currentChapter || "");
   const currentPage = String(data.currentPage || "");
   const selectedLanguage = String(data.selectedLanguage || "EN");
 
+  const currentTime = now();
+
   const existing = db
     .prepare(`
-      SELECT id, status, progress_percentage, completed_at
+      SELECT
+        id,
+        status,
+        progress_percentage,
+        current_chapter,
+        current_page,
+        selected_language,
+        started_at,
+        completed_at
       FROM user_course_progress
       WHERE user_id = ?
         AND course_id = ?
     `)
     .get(userId, courseId);
 
-  if (existing?.status === "completed" && status !== "completed") {
+  /*
+    Important rule:
+    Once a course is completed, retake should not reset progress,
+    should not change status, and should not change completed_at.
+  */
+  if (existing?.status === "completed") {
     db.prepare(`
       UPDATE user_course_progress
       SET
@@ -1403,7 +1419,7 @@ export function saveUserCourseProgress(data = {}) {
         selected_language = COALESCE(?, selected_language)
       WHERE user_id = ?
         AND course_id = ?
-    `).run(now(), selectedLanguage, userId, courseId);
+    `).run(currentTime, selectedLanguage, userId, courseId);
 
     return {
       success: true,
@@ -1411,7 +1427,29 @@ export function saveUserCourseProgress(data = {}) {
       alreadyCompleted: true,
     };
   }
+
   if (existing) {
+    const existingProgress = Number(existing.progress_percentage || 0);
+    const finalProgress = Math.max(existingProgress, incomingProgress);
+
+    /*
+      Progress position should update only when user moves forward.
+      Example:
+      Existing progress = 35%
+      User goes back to chapter 1 = 5%
+      We keep 35% and old highest page.
+    */
+    const isMovingForward =
+      status === "completed" || incomingProgress > existingProgress;
+
+    const finalChapter = isMovingForward
+      ? currentChapter
+      : existing.current_chapter;
+
+    const finalPage = isMovingForward ? currentPage : existing.current_page;
+
+    const finalStatus = status === "completed" ? "completed" : existing.status || "in_progress";
+
     db.prepare(`
       UPDATE user_course_progress
       SET
@@ -1428,14 +1466,14 @@ export function saveUserCourseProgress(data = {}) {
       WHERE user_id = ?
         AND course_id = ?
     `).run(
-      status,
-      progressPercentage,
-      currentChapter,
-      currentPage,
+      finalStatus,
+      finalProgress,
+      finalChapter,
+      finalPage,
       selectedLanguage,
-      now(),
-      status,
-      status === "completed" ? now() : null,
+      currentTime,
+      finalStatus,
+      finalStatus === "completed" ? currentTime : null,
       userId,
       courseId
     );
@@ -1459,13 +1497,13 @@ export function saveUserCourseProgress(data = {}) {
       userId,
       courseId,
       status,
-      progressPercentage,
+      incomingProgress,
       currentChapter,
       currentPage,
       selectedLanguage,
-      now(),
-      status === "completed" ? now() : null,
-      now()
+      currentTime,
+      status === "completed" ? currentTime : null,
+      currentTime
     );
   }
 

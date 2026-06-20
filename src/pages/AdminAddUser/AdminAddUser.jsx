@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  ArrowLeft,
+  BriefcaseBusiness,
+  CheckCircle2,
+  KeyRound,
+  Save,
+  Ship,
+  UserRound,
+  X,
+} from "lucide-react";
+
 import AdminLayout from "../../layouts/AdminLayout";
 import {
   createUserInDatabase,
@@ -8,95 +19,61 @@ import {
 } from "../../services/databaseService";
 
 const departmentRanks = {
-  Deck: ["Master", "Chief Off","2nd Off","3rd Off","Jr. Off","Cadet","Bosun","AB"],
-  Engine: ["Chief Eng","2nd Eng","3rd Eng","4th Eng","Jr. Eng","TME","Gas Eng","ETO","Fitter","Oiler","Wiper"],
+  Deck: [
+    "Master",
+    "Chief Off",
+    "2nd Off",
+    "3rd Off",
+    "Jr. Off",
+    "Cadet",
+    "Bosun",
+    "AB",
+  ],
+  Engine: [
+    "Chief Eng",
+    "2nd Eng",
+    "3rd Eng",
+    "4th Eng",
+    "Jr. Eng",
+    "TME",
+    "Gas Eng",
+    "ETO",
+    "Fitter",
+    "Oiler",
+    "Wiper",
+  ],
   Galley: ["Chief Cook", "Messman"],
 };
 
 const departments = ["Deck", "Engine", "Galley"];
 
-const vessels = [
-  "MV Pacific Endeavour",
-  "MV Gemini Star",
-  "MV Gemini Ocean",
-  "Sun Falcon",
-];
-
-function SectionHeader({ number, title, subtitle, color = "bg-[#173f9f]" }) {
-  return (
-    <div className="flex items-center gap-4 border-b pb-5 mb-5">
-      <div className={`h-11 w-11 rounded-full ${color} text-white flex items-center justify-center text-lg font-bold`}>
-        {number}
-      </div>
-      <div>
-        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
-        <p className="text-sm text-gray-500">{subtitle}</p>
-      </div>
-    </div>
-  );
-}
-
-function FieldLabel({ children, required = true }) {
-  return (
-    <label className="block text-sm font-semibold text-gray-900 mb-2">
-      {children} {required && <span className="text-red-500">*</span>}
-    </label>
-  );
-}
-
-function TextInput({
-  name,
-  value,
-  onChange,
-  placeholder,
-  required = true,
-  type = "text",
-  autoComplete,
-  minLength,
-}) {
-  return (
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={required}
-      autoComplete={autoComplete}
-      minLength={minLength}
-      className="w-full h-12 rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#173f9f] focus:ring-2 focus:ring-blue-100"
-    />
-  );
-}
+const emptyForm = {
+  crewId: "",
+  firstName: "",
+  lastName: "",
+  rank: "",
+  department: "",
+  nationality: "",
+  passportNumber: "",
+  cdcNumber: "",
+  vessel: "Sun Falcon",
+  joiningDate: "",
+  contractEndDate: "",
+  username: "",
+  password: "",
+  status: "Active",
+  role: "user",
+};
 
 function AdminAddUser() {
   const navigate = useNavigate();
   const { id } = useParams();
   const isEditMode = Boolean(id);
 
+  const [form, setForm] = useState(emptyForm);
   const [message, setMessage] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-
-  const emptyForm = {
-    crewId: "",
-    firstName: "",
-    lastName: "",
-    rank: "",
-    department: "",
-    nationality: "",
-    passportNumber: "",
-    cdcNumber: "",
-    vessel: "",
-    joiningDate: "",
-    contractEndDate: "",
-    username: "",
-    password: "",
-    status: "Active",
-    role: "user",
-  };
-
-  const [form, setForm] = useState(emptyForm);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -125,7 +102,7 @@ function AdminAddUser() {
         nationality: user.nationality || "",
         passportNumber: user.passport_number || "",
         cdcNumber: user.cdc_number || "",
-        vessel: user.vessel || "",
+        vessel: "Sun Falcon",
         joiningDate: user.joining_date || "",
         contractEndDate: user.contract_end_date || "",
         username: user.username || "",
@@ -142,17 +119,22 @@ function AdminAddUser() {
     event.preventDefault();
     setMessage("");
 
+    const payload = {
+      ...form,
+      vessel: "Sun Falcon",
+    };
+
     let response;
 
     if (isEditMode) {
-      response = await updateUserInDatabase(id, form);
+      response = await updateUserInDatabase(id, payload);
     } else {
       if (form.password !== confirmPassword) {
         setMessage("Password and Confirm Password do not match.");
         return;
       }
 
-      response = await createUserInDatabase(form);
+      response = await createUserInDatabase(payload);
     }
 
     if (response?.success) {
@@ -170,23 +152,21 @@ function AdminAddUser() {
   if (showSuccess) {
     return (
       <AdminLayout>
-        <div className="max-w-3xl mx-auto mt-20 bg-white rounded-xl border shadow-sm p-12 text-center">
-          <div className="mx-auto mb-8 h-20 w-20 rounded-full bg-green-50 flex items-center justify-center">
-            <div className="h-12 w-12 rounded-full border-4 border-green-500 flex items-center justify-center text-green-600 text-3xl">
-              ✓
-            </div>
+        <div className="mx-auto mt-16 max-w-3xl rounded-2xl border border-[#DDE3EA] bg-white p-12 text-center shadow-sm">
+          <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-green-50">
+            <CheckCircle2 className="h-12 w-12 text-green-600" />
           </div>
 
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900">
             Crew Member Registered
           </h2>
 
-          <p className="text-gray-500 text-lg max-w-xl mx-auto mb-8">
-            The new crew member has been successfully added to the system.
-            They can now log in and access their assigned CBT courses.
+          <p className="mx-auto mb-8 max-w-xl text-lg leading-7 text-gray-500">
+            The new crew member has been successfully added to the system. They
+            can now log in and access their assigned CBT courses.
           </p>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <button
               type="button"
               onClick={() => {
@@ -195,23 +175,23 @@ function AdminAddUser() {
                 setMessage("");
                 setForm(emptyForm);
               }}
-              className="px-8 py-3 rounded-lg border bg-white font-semibold"
+              className="rounded-xl border border-[#DDE3EA] bg-white px-8 py-3 font-semibold text-gray-700 hover:bg-[#F5F7FA]"
             >
               Add Another Member
             </button>
 
             <button
-  type="button"
-  onClick={() => {
-    setShowSuccess(false);
-    setTimeout(() => {
-      navigate("/admin/users");
-    }, 100);
-  }}
-  className="px-8 py-3 rounded-lg bg-[#2554C7] text-white font-semibold"
->
-  View Crew List
-</button>
+              type="button"
+              onClick={() => {
+                setShowSuccess(false);
+                setTimeout(() => {
+                  navigate("/admin/users");
+                }, 100);
+              }}
+              className="rounded-xl bg-[#2554C7] px-8 py-3 font-semibold text-white hover:bg-[#163B6D]"
+            >
+              View Crew List
+            </button>
           </div>
         </div>
       </AdminLayout>
@@ -220,42 +200,65 @@ function AdminAddUser() {
 
   return (
     <AdminLayout>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
-          {isEditMode ? "Edit Crew Member" : "Add New Crew Member"}
-        </h1>
-        <p className="text-sm text-gray-500 mt-1">
-          Register a new crew member and configure their training access
-        </p>
+      <div className="mb-6 rounded-2xl border border-[#DDE3EA] bg-white p-6 shadow-sm">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-[#2554C7]">
+              Crew Management
+            </p>
+
+            <h1 className="mt-2 text-3xl font-bold text-gray-900">
+              {isEditMode ? "Edit Crew Member" : "Add New Crew Member"}
+            </h1>
+
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-500">
+              Register crew details, vessel assignment, rank information, and
+              CBT login credentials.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => navigate("/admin/users")}
+            className="flex items-center gap-2 rounded-xl border border-[#DDE3EA] bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-[#F5F7FA]"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Crew List
+          </button>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="max-w-5xl mx-auto space-y-6">
-        <section className="bg-white rounded-xl border border-gray-300 shadow-sm p-6">
-          <SectionHeader
-            number="1"
-            title="Personal Information"
-            subtitle="Crew member identity and travel documents"
-          />
+      <form onSubmit={handleSubmit} className="mx-auto max-w-6xl space-y-6">
+        <FormSection
+          number="1"
+          icon={<UserRound className="h-5 w-5" />}
+          title="Personal Information"
+          subtitle="Crew member identity and travel document details"
+        >
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <FormField label="First Name">
+              <TextInput
+                name="firstName"
+                value={form.firstName}
+                onChange={handleChange}
+                placeholder="e.g. Eduardo"
+              />
+            </FormField>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <FieldLabel>First Name</FieldLabel>
-              <TextInput name="firstName" value={form.firstName} onChange={handleChange} placeholder="e.g. Eduardo" />
-            </div>
+            <FormField label="Last Name">
+              <TextInput
+                name="lastName"
+                value={form.lastName}
+                onChange={handleChange}
+                placeholder="e.g. Ramos"
+              />
+            </FormField>
 
-            <div>
-              <FieldLabel>Last Name</FieldLabel>
-              <TextInput name="lastName" value={form.lastName} onChange={handleChange} placeholder="e.g. Ramos" />
-            </div>
-
-            <div>
-              <FieldLabel>Nationality</FieldLabel>
-              <select
+            <FormField label="Nationality">
+              <SelectInput
                 name="nationality"
                 value={form.nationality}
                 onChange={handleChange}
-                required
-                className="w-full h-12 rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#173f9f] focus:ring-2 focus:ring-blue-100"
               >
                 <option value="">Select nationality</option>
                 <option value="INDIAN">INDIAN</option>
@@ -264,52 +267,61 @@ function AdminAddUser() {
                 <option value="SRI LANKAN">SRI LANKAN</option>
                 <option value="BANGLADESHI">BANGLADESHI</option>
                 <option value="OTHER">OTHER</option>
-              </select>
-            </div>
+              </SelectInput>
+            </FormField>
 
-            <div>
-              <FieldLabel>Passport Number</FieldLabel>
-              <p className="text-xs text-gray-500 mb-2">
-                International travel document number
-              </p>
-              <TextInput name="passportNumber" value={form.passportNumber} onChange={handleChange} placeholder="e.g. P1234567A" />
-            </div>
+            <FormField
+              label="Passport Number"
+              helper="International travel document number"
+            >
+              <TextInput
+                name="passportNumber"
+                value={form.passportNumber}
+                onChange={handleChange}
+                placeholder="e.g. P1234567A"
+              />
+            </FormField>
 
-            <div className="md:col-span-2">
-              <FieldLabel>CDC Number (Continuous Discharge Certificate)</FieldLabel>
-              <p className="text-xs text-gray-500 mb-2">
-                Seafarer's official document number issued by the flag state maritime authority
-              </p>
-              <TextInput name="cdcNumber" value={form.cdcNumber} onChange={handleChange} placeholder="e.g. CDC-MNL-2024-084521" />
-            </div>
+            <FormField
+              label="CDC Number"
+              helper="Continuous Discharge Certificate number"
+              className="md:col-span-2"
+            >
+              <TextInput
+                name="cdcNumber"
+                value={form.cdcNumber}
+                onChange={handleChange}
+                placeholder="e.g. CDC-MNL-2024-084521"
+              />
+            </FormField>
           </div>
-        </section>
+        </FormSection>
 
-        <section className="bg-white rounded-xl border border-gray-300 shadow-sm p-6">
-          <SectionHeader
-            number="2"
-            title="Employment Details"
-            subtitle="Vessel assignment, rank, and contract information"
-            color="bg-[#2554C7]"
-          />
+        <FormSection
+          number="2"
+          icon={<BriefcaseBusiness className="h-5 w-5" />}
+          title="Employment Details"
+          subtitle="Rank, department, vessel, and contract information"
+          accentColor="#2554C7"
+        >
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <FormField
+              label="Crew ID"
+              helper="Unique internal identifier for this crew member"
+            >
+              <TextInput
+                name="crewId"
+                value={form.crewId}
+                onChange={handleChange}
+                placeholder="e.g. C-1086"
+              />
+            </FormField>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <FieldLabel>Crew ID</FieldLabel>
-              <p className="text-xs text-gray-500 mb-2">
-                Unique internal identifier for this crew member
-              </p>
-              <TextInput name="crewId" value={form.crewId} onChange={handleChange} placeholder="e.g. C-1086" />
-            </div>
-
-            <div>
-              <FieldLabel>Department</FieldLabel>
-              <select
+            <FormField label="Department">
+              <SelectInput
                 name="department"
                 value={form.department}
                 onChange={handleChange}
-                required
-                className="w-full h-12 rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#173f9f] focus:ring-2 focus:ring-blue-100"
               >
                 <option value="">Select department</option>
                 {departments.map((department) => (
@@ -317,18 +329,15 @@ function AdminAddUser() {
                     {department}
                   </option>
                 ))}
-              </select>
-            </div>
+              </SelectInput>
+            </FormField>
 
-            <div>
-              <FieldLabel>Rank</FieldLabel>
-              <select
+            <FormField label="Rank">
+              <SelectInput
                 name="rank"
                 value={form.rank}
                 onChange={handleChange}
-                required
                 disabled={!form.department}
-                className="w-full h-12 rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#173f9f] focus:ring-2 focus:ring-blue-100 disabled:bg-gray-100 disabled:text-gray-400"
               >
                 <option value="">
                   {form.department ? "Select rank" : "Select department first"}
@@ -339,86 +348,80 @@ function AdminAddUser() {
                     {rank}
                   </option>
                 ))}
-              </select>
-            </div>
+              </SelectInput>
+            </FormField>
 
-            <div>
-              <FieldLabel>Vessel Assignment</FieldLabel>
-              <select
-                name="vessel"
-                value={form.vessel}
+            <FormField label="Vessel Assignment">
+              <div className="flex h-12 items-center gap-3 rounded-xl border border-[#DDE3EA] bg-[#F5F7FA] px-4">
+                <Ship className="h-5 w-5 text-[#2554C7]" />
+                <span className="text-sm font-bold text-[#163B6D]">
+                  Sun Falcon
+                </span>
+              </div>
+
+              <p className="mt-2 text-xs text-gray-500">
+                Vessel is fixed for all crew members.
+              </p>
+            </FormField>
+
+            <FormField label="Joining Date">
+              <TextInput
+                type="date"
+                name="joiningDate"
+                value={form.joiningDate}
                 onChange={handleChange}
-                required
-                className="w-full h-12 rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#173f9f] focus:ring-2 focus:ring-blue-100"
-              >
-                <option value="">Select vessel</option>
-                {vessels.map((vessel) => (
-                  <option key={vessel} value={vessel}>
-                    {vessel}
-                  </option>
-                ))}
-              </select>
-            </div>
+              />
+            </FormField>
 
-            <div>
-              <FieldLabel>Joining Date</FieldLabel>
-              <p className="text-xs text-gray-500 mb-2">
-                Date crew member joined the vessel
-              </p>
-              <TextInput type="date" name="joiningDate" value={form.joiningDate} onChange={handleChange} />
-            </div>
-
-            <div>
-              <FieldLabel>Contract End Date</FieldLabel>
-              <p className="text-xs text-gray-500 mb-2">
-                Scheduled sign-off date
-              </p>
-              <TextInput type="date" name="contractEndDate" value={form.contractEndDate} onChange={handleChange} />
-            </div>
+            <FormField label="Contract End Date">
+              <TextInput
+                type="date"
+                name="contractEndDate"
+                value={form.contractEndDate}
+                onChange={handleChange}
+              />
+            </FormField>
           </div>
-        </section>
+        </FormSection>
 
-        <section className="bg-white rounded-xl border border-gray-300 shadow-sm p-6">
-          <SectionHeader
-            number="3"
-            title="Login Credentials"
-            subtitle="System access credentials for the crew member's CBT login"
-            color="bg-[#334155]"
-          />
+        <FormSection
+          number="3"
+          icon={<KeyRound className="h-5 w-5" />}
+          title="Login Credentials"
+          subtitle="CBT login access and account status"
+          accentColor="#334155"
+        >
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <FormField
+              label="Username"
+              helper="Use lowercase letters, numbers, dots, or underscores"
+            >
+              <TextInput
+                name="username"
+                value={form.username}
+                onChange={handleChange}
+                placeholder="e.g. e.ramos or c1086"
+                autoComplete="off"
+              />
+            </FormField>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <FieldLabel>Username</FieldLabel>
-              <p className="text-xs text-gray-500 mb-2">
-                Used to log in to the CBT system. Lowercase letters, numbers, and underscores only.
-              </p>
-              <TextInput name="username" value={form.username} onChange={handleChange} placeholder="e.g. e.ramos or c1086" autoComplete="off" />
-            </div>
-
-            <div>
-              <FieldLabel>Account Status</FieldLabel>
-              <p className="text-xs text-gray-500 mb-2">
-                Active accounts can log in. Archived accounts cannot access the system.
-              </p>
-              <select
+            <FormField label="Account Status">
+              <SelectInput
                 name="status"
                 value={form.status}
                 onChange={handleChange}
-                required
-                className="w-full h-12 rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#173f9f] focus:ring-2 focus:ring-blue-100"
               >
                 <option value="Active">Active</option>
                 <option value="Archived">Archived</option>
-              </select>
-            </div>
+              </SelectInput>
+            </FormField>
 
             {!isEditMode && (
               <>
-                <div>
-                  <FieldLabel>Password</FieldLabel>
-                  <p className="text-xs text-gray-500 mb-2">
-                    Minimum 6 characters. Share securely with the crew member.
-                  </p>
+                <FormField
+                  label="Password"
+                  helper="Minimum 6 characters"
+                >
                   <TextInput
                     type="password"
                     name="password"
@@ -427,59 +430,161 @@ function AdminAddUser() {
                     placeholder="Enter password"
                     minLength={6}
                   />
-                </div>
+                </FormField>
 
-                <div>
-                  <FieldLabel>Confirm Password</FieldLabel>
-                  <p className="text-xs text-gray-500 mb-2">
-                    Re-enter the password to confirm
-                  </p>
+                <FormField label="Confirm Password">
                   <input
                     type="password"
                     value={confirmPassword}
-                    onChange={(event) => setConfirmPassword(event.target.value)}
+                    onChange={(event) =>
+                      setConfirmPassword(event.target.value)
+                    }
                     placeholder="Confirm password"
                     required
                     minLength={6}
-                    className="w-full h-12 rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#173f9f] focus:ring-2 focus:ring-blue-100"
+                    className="h-12 w-full rounded-xl border border-[#DDE3EA] px-4 text-sm outline-none transition focus:border-[#2554C7] focus:ring-2 focus:ring-blue-100"
                   />
-                </div>
+                </FormField>
               </>
             )}
           </div>
-        </section>
-
-        <div className="rounded-xl border border-blue-300 bg-blue-50 p-4 text-sm text-blue-700">
-          <strong>ⓘ All fields marked with * are required</strong>
-          <p className="mt-1">
-            Ensure passport and CDC numbers are accurate — these are used for compliance records.
-          </p>
-        </div>
+        </FormSection>
 
         {message && (
-          <div className="rounded-xl border bg-blue-50 p-4 text-sm text-blue-800">
+          <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">
             {message}
           </div>
         )}
 
-        <div className="bg-white rounded-xl border border-gray-300 shadow-sm p-5">
-          <button
-            type="submit"
-            className="w-full h-11 rounded-lg bg-[#2554C7] text-white font-semibold"
-          >
-            {isEditMode ? "Update Crew Member" : "Save Crew Member"}
-          </button>
+        <div className="sticky bottom-4 z-20 rounded-2xl border border-[#DDE3EA] bg-white/95 p-4 shadow-lg backdrop-blur">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="text-sm text-gray-500">
+              <strong className="text-gray-800">Note:</strong> All fields marked
+              with <span className="font-bold text-red-500">*</span> are required
+              for crew registration.
+            </div>
 
-          <button
-            type="button"
-            onClick={() => navigate("/admin/users")}
-            className="mt-3 w-full h-11 rounded-lg border bg-white font-medium"
-          >
-            ← Cancel
-          </button>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => navigate("/admin/users")}
+                className="flex items-center gap-2 rounded-xl border border-[#DDE3EA] bg-white px-6 py-3 font-semibold text-gray-700 hover:bg-[#F5F7FA]"
+              >
+                <X className="h-4 w-4" />
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                className="flex items-center gap-2 rounded-xl bg-[#2554C7] px-7 py-3 font-semibold text-white shadow-sm hover:bg-[#163B6D]"
+              >
+                <Save className="h-4 w-4" />
+                {isEditMode ? "Update Crew Member" : "Save Crew Member"}
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </AdminLayout>
+  );
+}
+
+function FormSection({
+  number,
+  icon,
+  title,
+  subtitle,
+  children,
+  accentColor = "#173f9f",
+}) {
+  return (
+    <section className="overflow-hidden rounded-2xl border border-[#DDE3EA] bg-white shadow-sm">
+      <div className="border-b border-[#DDE3EA] bg-[#F8FAFC] px-6 py-5">
+        <div className="flex items-center gap-4">
+          <div
+            className="flex h-12 w-12 items-center justify-center rounded-2xl text-white"
+            style={{ backgroundColor: accentColor }}
+          >
+            {icon}
+          </div>
+
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-gray-500">
+                Section {number}
+              </span>
+
+              <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+            </div>
+
+            <p className="mt-1 text-sm text-gray-500">{subtitle}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-6">{children}</div>
+    </section>
+  );
+}
+
+function FormField({ label, helper, children, required = true, className = "" }) {
+  return (
+    <div className={className}>
+      <label className="mb-2 block text-sm font-semibold text-gray-900">
+        {label} {required && <span className="text-red-500">*</span>}
+      </label>
+
+      {helper && <p className="mb-2 text-xs text-gray-500">{helper}</p>}
+
+      {children}
+    </div>
+  );
+}
+
+function TextInput({
+  name,
+  value,
+  onChange,
+  placeholder,
+  required = true,
+  type = "text",
+  autoComplete,
+  minLength,
+}) {
+  return (
+    <input
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      required={required}
+      autoComplete={autoComplete}
+      minLength={minLength}
+      className="h-12 w-full rounded-xl border border-[#DDE3EA] px-4 text-sm outline-none transition focus:border-[#2554C7] focus:ring-2 focus:ring-blue-100"
+    />
+  );
+}
+
+function SelectInput({
+  name,
+  value,
+  onChange,
+  children,
+  required = true,
+  disabled = false,
+}) {
+  return (
+    <select
+      name={name}
+      value={value}
+      onChange={onChange}
+      required={required}
+      disabled={disabled}
+      className="h-12 w-full rounded-xl border border-[#DDE3EA] px-4 text-sm outline-none transition focus:border-[#2554C7] focus:ring-2 focus:ring-blue-100 disabled:bg-gray-100 disabled:text-gray-400"
+    >
+      {children}
+    </select>
   );
 }
 

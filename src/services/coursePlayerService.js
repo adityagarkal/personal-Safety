@@ -60,6 +60,7 @@ function buildChapterPages(chapter, coursePath) {
       relativePath,
       filePath: joinCoursePath(coursePath, relativePath),
       coursePath,
+      chapterBackground: chapter.background || "",
       isAssessment: chapter.isAssessment,
       displayLabel: chapter.isAssessment
         ? `Question ${index}`
@@ -159,8 +160,11 @@ function parseAssessmentQuestion(page) {
 
   if (rawTexts.length === 0) {
     return {
+      isValid: false,
+      type: "unsupported",
       question: "",
       options: [],
+      reason: "No assessment text found.",
     };
   }
 
@@ -178,9 +182,18 @@ function parseAssessmentQuestion(page) {
     }))
     .filter((item) => item.label);
 
+  const question = getTextValue(questionItem);
+
+  const isValid = Boolean(question && options.length >= 2);
+
   return {
-    question: getTextValue(questionItem),
+    isValid,
+    type: isValid ? "mcq" : "unsupported",
+    question,
     options,
+    reason: isValid
+      ? ""
+      : "Unsupported assessment format. This question may be drag-drop, match-pair, or non-MCQ.",
   };
 }
 
@@ -227,6 +240,31 @@ async function parsePictures(page, coursePath) {
   );
 
   return pictures.filter(Boolean);
+}
+
+async function parseBackgroundImage(pageFile) {
+  const fileName = String(pageFile?.chapterBackground || "").trim();
+
+  if (!fileName) {
+    return null;
+  }
+
+  if (!isSupportedImage(fileName)) {
+    return null;
+  }
+
+  const assetPath = buildAssetPath(pageFile.coursePath, "pic", fileName);
+  const dataUrl = await readAssetDataUrl(assetPath);
+
+  if (!dataUrl) {
+    return null;
+  }
+
+  return {
+    fileName,
+    assetPath,
+    dataUrl,
+  };
 }
 
 async function parseSounds(page, coursePath) {
@@ -350,6 +388,7 @@ export async function loadCoursePageContent(pageFile, selectedLanguage = "EN") {
   const textBlocks = isAssessment ? [] : parseTextBlocks(selectedPage);
   const images = await parsePictures(selectedPage, pageFile.coursePath);
   const audios = await parseSounds(selectedPage, pageFile.coursePath);
+  const background = await parseBackgroundImage(pageFile);
 
   return {
     title,
@@ -357,6 +396,7 @@ export async function loadCoursePageContent(pageFile, selectedLanguage = "EN") {
     language: getPageLanguage(selectedPage),
     isAssessment,
     assessment,
+    background,
     textBlocks,
     images,
     audios,
