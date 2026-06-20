@@ -159,8 +159,11 @@ function parseAssessmentQuestion(page) {
 
   if (rawTexts.length === 0) {
     return {
+      isValid: false,
+      type: "unsupported",
       question: "",
       options: [],
+      reason: "No assessment text found.",
     };
   }
 
@@ -178,9 +181,18 @@ function parseAssessmentQuestion(page) {
     }))
     .filter((item) => item.label);
 
+  const question = getTextValue(questionItem);
+
+  const isValid = Boolean(question && options.length >= 2);
+
   return {
-    question: getTextValue(questionItem),
+    isValid,
+    type: isValid ? "mcq" : "unsupported",
+    question,
     options,
+    reason: isValid
+      ? ""
+      : "Unsupported assessment format. This question may be drag-drop, match-pair, or non-MCQ.",
   };
 }
 

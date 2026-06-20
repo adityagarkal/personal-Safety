@@ -1,6 +1,24 @@
-import { FileText, ImageIcon, Volume2 } from "lucide-react";function AssessmentSlide({ assessment, selectedAnswer, onSelectAnswer }) {
+import { useEffect, useRef } from "react";
+import { FileText, ImageIcon, Volume2 } from "lucide-react";
+
+function AssessmentSlide({ assessment, selectedAnswer, onSelectAnswer }) {
   const question = assessment?.question || "";
   const options = assessment?.options || [];
+
+  if (!assessment?.isValid) {
+    return (
+      <div className="mx-auto max-w-4xl rounded-2xl border border-[#F59E0B]/30 bg-[#FFFBEB] p-8 text-center">
+        <h3 className="text-xl font-bold text-[#163B6D]">
+          Skipping unsupported assessment question
+        </h3>
+
+        <p className="mt-2 text-sm leading-6 text-gray-700">
+          This question format is not MCQ-based, so it will be skipped
+          automatically.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-4xl">
@@ -76,6 +94,105 @@ function CoursePageRenderer({
   selectedAssessmentAnswer,
   onSelectAssessmentAnswer,
 }) {
+  const audioRefs = useRef([]);
+  const autoPlayTimerRef = useRef(null);
+
+const audioSignature = (pageContent?.audios || [])
+  .map((audio) => audio.dataUrl)
+  .join("|");
+
+useEffect(() => {
+  let cancelled = false;
+  const timeoutIds = [];
+
+  function wait(ms) {
+    return new Promise((resolve) => {
+      const timeoutId = setTimeout(resolve, ms);
+      timeoutIds.push(timeoutId);
+    });
+  }
+
+  function resetAudio(audio) {
+    if (!audio) return;
+
+    audio.pause();
+    audio.currentTime = 0;
+    audio.onended = null;
+    audio.onerror = null;
+  }
+
+  function playAudio(audio, index) {
+    return new Promise((resolve) => {
+      if (!audio || cancelled) {
+        resolve();
+        return;
+      }
+
+      audio.currentTime = 0;
+
+      audio.onended = () => {
+        audio.onended = null;
+        audio.onerror = null;
+        resolve();
+      };
+
+      audio.onerror = () => {
+        audio.onended = null;
+        audio.onerror = null;
+        resolve();
+      };
+
+      const playPromise = audio.play();
+
+      if (playPromise?.catch) {
+        playPromise.catch((error) => {
+          console.warn(`Audio ${index + 1} autoplay failed:`, error);
+
+          audio.onended = null;
+          audio.onerror = null;
+          resolve();
+        });
+      }
+    });
+  }
+
+  async function playAudioSequence() {
+    const audioElements = audioRefs.current.filter(Boolean);
+
+    audioElements.forEach(resetAudio);
+
+    if (!pageContent?.audios?.length || audioElements.length === 0) {
+      return;
+    }
+
+    // Wait 1 second after page opens
+    await wait(500);
+
+    for (let index = 0; index < audioElements.length; index += 1) {
+      if (cancelled) return;
+
+      await playAudio(audioElements[index], index);
+
+      if (cancelled) return;
+
+      // Wait 0.5 second before next audio
+      if (index < audioElements.length - 1) {
+        await wait(400);
+      }
+    }
+  }
+
+  playAudioSequence();
+
+  return () => {
+    cancelled = true;
+
+    timeoutIds.forEach((timeoutId) => clearTimeout(timeoutId));
+
+    audioRefs.current.forEach(resetAudio);
+  };
+}, [selectedPage?.id, audioSignature]);
+
   if (pageLoading) {
     return (
       <div className="rounded-2xl border border-[#DDE3EA] bg-[#F5F7FA] p-14 text-center">
@@ -127,43 +244,43 @@ function CoursePageRenderer({
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-8 py-6">
-            {pageContent.isAssessment ? (
-                <AssessmentSlide
-                    assessment={pageContent.assessment}
-                    selectedAnswer={selectedAssessmentAnswer}
-                    onSelectAnswer={onSelectAssessmentAnswer}
-                />
-                ) : textBlocks.length === 0 && supportedImages.length === 0 ? (
-                <EmptyContent />
+          {pageContent.isAssessment ? (
+            <AssessmentSlide
+              assessment={pageContent.assessment}
+              selectedAnswer={selectedAssessmentAnswer}
+              onSelectAnswer={onSelectAssessmentAnswer}
+            />
+          ) : textBlocks.length === 0 && supportedImages.length === 0 ? (
+            <EmptyContent />
+          ) : (
+            <div
+              className={`grid gap-8 ${
+                supportedImages.length > 0
+                  ? "grid-cols-[minmax(0,1fr)_360px]"
+                  : "grid-cols-1"
+              }`}
+            >
+              <div className="min-w-0 space-y-4">
+                {textBlocks.length === 0 ? (
+                  <div className="rounded-xl border border-dashed border-[#DDE3EA] bg-[#F5F7FA] p-6 text-center text-sm text-gray-600">
+                    No visible text found on this page.
+                  </div>
                 ) : (
-                <div
-                    className={`grid gap-8 ${
-                    supportedImages.length > 0
-                        ? "grid-cols-[minmax(0,1fr)_360px]"
-                        : "grid-cols-1"
-                    }`}
-                >
-                    <div className="min-w-0 space-y-4">
-                    {textBlocks.length === 0 ? (
-                        <div className="rounded-xl border border-dashed border-[#DDE3EA] bg-[#F5F7FA] p-6 text-center text-sm text-gray-600">
-                        No visible text found on this page.
-                        </div>
-                    ) : (
-                        textBlocks.map((block, index) => (
-                        <TextBlock key={block.id} block={block} index={index} />
-                        ))
-                    )}
-                    </div>
+                  textBlocks.map((block, index) => (
+                    <TextBlock key={block.id} block={block} index={index} />
+                  ))
+                )}
+              </div>
 
-                    {supportedImages.length > 0 && (
-                    <div className="space-y-4">
-                        {supportedImages.map((image, index) => (
-                        <ImageBlock key={image.id} image={image} index={index} />
-                        ))}
-                    </div>
-                    )}
+              {supportedImages.length > 0 && (
+                <div className="space-y-4">
+                  {supportedImages.map((image, index) => (
+                    <ImageBlock key={image.id} image={image} index={index} />
+                  ))}
                 </div>
-            )}
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -175,11 +292,15 @@ function CoursePageRenderer({
           </div>
 
           <div className="space-y-3">
-            {audios.map((audio) => (
+            {audios.map((audio, index) => (
               <audio
                 key={audio.id}
+                ref={(element) => {
+                  audioRefs.current[index] = element;
+                }}
                 src={audio.dataUrl}
                 controls
+                preload="auto"
                 className="w-full"
               />
             ))}
@@ -219,7 +340,7 @@ function TextBlock({ block, index }) {
       }`}
       style={{
         animation: "fadeInUp 0.35s ease both",
-        animationDelay: `${index * 0.35}s`,
+        animationDelay: `${1 + index * 0.35}s`,
         fontSize: block.size === "1" ? "15px" : "17px",
         whiteSpace: "pre-line",
         wordBreak: "break-word",

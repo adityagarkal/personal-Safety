@@ -33,6 +33,8 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
+
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1200,
