@@ -60,6 +60,7 @@ function buildChapterPages(chapter, coursePath) {
       relativePath,
       filePath: joinCoursePath(coursePath, relativePath),
       coursePath,
+      chapterBackground: chapter.background || "",
       isAssessment: chapter.isAssessment,
       displayLabel: chapter.isAssessment
         ? `Question ${index}`
@@ -241,6 +242,31 @@ async function parsePictures(page, coursePath) {
   return pictures.filter(Boolean);
 }
 
+async function parseBackgroundImage(pageFile) {
+  const fileName = String(pageFile?.chapterBackground || "").trim();
+
+  if (!fileName) {
+    return null;
+  }
+
+  if (!isSupportedImage(fileName)) {
+    return null;
+  }
+
+  const assetPath = buildAssetPath(pageFile.coursePath, "pic", fileName);
+  const dataUrl = await readAssetDataUrl(assetPath);
+
+  if (!dataUrl) {
+    return null;
+  }
+
+  return {
+    fileName,
+    assetPath,
+    dataUrl,
+  };
+}
+
 async function parseSounds(page, coursePath) {
   const rawSounds = normalizeArray(page?.sounds?.snd);
 
@@ -362,6 +388,7 @@ export async function loadCoursePageContent(pageFile, selectedLanguage = "EN") {
   const textBlocks = isAssessment ? [] : parseTextBlocks(selectedPage);
   const images = await parsePictures(selectedPage, pageFile.coursePath);
   const audios = await parseSounds(selectedPage, pageFile.coursePath);
+  const background = await parseBackgroundImage(pageFile);
 
   return {
     title,
@@ -369,6 +396,7 @@ export async function loadCoursePageContent(pageFile, selectedLanguage = "EN") {
     language: getPageLanguage(selectedPage),
     isAssessment,
     assessment,
+    background,
     textBlocks,
     images,
     audios,

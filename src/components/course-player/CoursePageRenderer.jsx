@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { FileText, ImageIcon, Volume2 } from "lucide-react";
+import { FileText, Volume2 } from "lucide-react";
 
 function AssessmentSlide({ assessment, selectedAnswer, onSelectAnswer }) {
   const question = assessment?.question || "";
@@ -243,7 +243,18 @@ useEffect(() => {
           </h3>
         </div>
 
-        <div className="min-h-0 flex-1 overflow-y-auto px-8 py-6">
+        <div className="min-h-0 flex-1 overflow-y-auto px-8 py-6"
+          style={
+            pageContent.background?.dataUrl
+              ? {
+                  backgroundImage: `linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.78)), url(${pageContent.background.dataUrl})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }
+              : undefined
+          }
+        >
           {pageContent.isAssessment ? (
             <AssessmentSlide
               assessment={pageContent.assessment}
@@ -353,22 +364,17 @@ function TextBlock({ block, index }) {
 
 function ImageBlock({ image, index }) {
   return (
-    <div
-      className="rounded-xl border border-[#DDE3EA] bg-[#F5F7FA] p-3"
+    <div className="rounded-xl border border-[#DDE3EA] bg-white/40 p-3"
       style={{
         animation: "fadeInUp 0.35s ease both",
-        animationDelay: `${index * 0.25}s`,
+        animationDelay: `${1 + index * 0.35}s`,
       }}
     >
-      <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-gray-500">
-        <ImageIcon className="h-4 w-4 text-[#2554C7]" />
-        Image
-      </div>
-
       <img
         src={image.dataUrl}
-        alt={image.fileName}
-        className="mx-auto max-h-[300px] max-w-full object-contain"
+        alt=""
+        className="mx-auto max-h-[300px] max-w-full rounded-lg object-contain"
+        draggable={false}
       />
     </div>
   );
