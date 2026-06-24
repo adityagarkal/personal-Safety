@@ -18,7 +18,7 @@ import {
   deleteCourseFromSystem,
   getCoursesFromDatabase,
   importSelectedCourseToSystem,
-  selectCourseFolderFromSystem,
+  selectCoursePackageFromSystem,
 } from "../../services/databaseService";
 
 const RANK_OPTIONS = [
@@ -99,20 +99,20 @@ function SystemCourseImport() {
     }
   }, [showCourses]);
 
-  async function handleSelectFolder() {
+  async function handleSelectPackage() {
     try {
       setAlert(null);
       setSelectedCourse(null);
       setShowCourses(false);
       setLoading(true);
 
-      const response = await selectCourseFolderFromSystem();
+      const response = await selectCoursePackageFromSystem();
 
       if (!response?.success) {
-        const message = response?.message || "Course folder selection failed.";
+        const message = response?.message || "Course package selection failed.";
 
         if (message.toLowerCase().includes("cancel")) {
-          showAlert("info", "Folder selection cancelled.");
+          showAlert("info", "Package selection cancelled.");
         } else {
           showAlert("error", message);
         }
@@ -123,11 +123,10 @@ function SystemCourseImport() {
       setSelectedCourse(response.data);
       setAssignmentType("other");
       setRecommendedRanks([]);
-      showAlert("success", "Course folder validated successfully.");
-      showAlert("success", "Course folder validated successfully.");
+      showAlert("success", "Course package validated successfully.");
     } catch (err) {
-      console.error("Select folder error:", err);
-      showAlert("error", "Unable to select course folder.");
+      console.error("Select package error:", err);
+      showAlert("error", "Unable to select course package.");
     } finally {
       setLoading(false);
     }
@@ -136,7 +135,7 @@ function SystemCourseImport() {
   async function handleImportCourse() {
     try {
       if (!selectedCourse) {
-        showAlert("error", "Please select a valid course folder first.");
+        showAlert("error", "Please select a valid .gcbt course package first.");
         return;
       }
 
@@ -284,9 +283,7 @@ function SystemCourseImport() {
             </h1>
 
             <p className="mt-2 max-w-3xl text-gray-600">
-              Select an extracted CBT folder. The system will locate{" "}
-              <span className="font-semibold text-gray-800">cbt.xml</span>,
-              detect metadata, copy the course, and register it for users.
+              Select an encrypted .gcbt course package. The system will validate the package, detect metadata, store it securely, and register it for users.
             </p>
           </div>
 
@@ -301,9 +298,9 @@ function SystemCourseImport() {
         </div>
 
         <div className="mb-6 grid grid-cols-4 gap-4">
-          <StepCard number="1" title="Select Folder" />
-          <StepCard number="2" title="Validate CBT" />
-          <StepCard number="3" title="Copy Course" />
+          <StepCard number="1" title="Select Package" />
+          <StepCard number="2" title="Validate Package" />
+          <StepCard number="3" title="Store Package" />
           <StepCard number="4" title="Register DB" />
         </div>
 
@@ -322,12 +319,12 @@ function SystemCourseImport() {
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
-              onClick={handleSelectFolder}
+              onClick={handleSelectPackage}
               disabled={loading}
               className="flex items-center gap-2 rounded-xl bg-[#2554C7] px-5 py-3 font-semibold text-white shadow-sm hover:bg-[#163B6D] disabled:cursor-not-allowed disabled:opacity-60"
             >
               <FolderOpen className="h-5 w-5" />
-              {loading ? "Processing..." : "Select Course Folder"}
+              {loading ? "Processing..." : "Select .gcbt Package"}
             </button>
 
             {selectedCourse && (
@@ -389,15 +386,11 @@ function SystemCourseImport() {
               </div>
 
               <h2 className="text-lg font-semibold text-[#163B6D]">
-                No course folder selected
+                No course package selected
               </h2>
 
               <p className="mt-2 text-sm text-gray-600">
-                Select an extracted CBT folder like{" "}
-                <span className="font-semibold">001</span> or{" "}
-                <span className="font-semibold">p_safety</span>. The importer
-                will find <span className="font-semibold">cbt.xml</span>{" "}
-                automatically.
+                Select a .gcbt encrypted package. The importer will read metadata from the package and register it without storing readable CBT folders.
               </p>
             </div>
           )}
@@ -416,7 +409,7 @@ function SystemCourseImport() {
                 </div>
 
                 <span className="rounded-full bg-green-100 px-4 py-1 text-sm font-semibold text-green-700">
-                  Valid CBT Folder
+                  Valid GCBT Package
                 </span>
               </div>
 
@@ -460,7 +453,7 @@ function SystemCourseImport() {
 
               <div className="mt-5 rounded-xl border border-[#DDE3EA] bg-white p-4">
                 <p className="text-sm font-semibold text-gray-500">
-                  Source Folder
+                  Source Package
                 </p>
 
                 <p className="mt-1 break-all text-sm font-medium text-gray-800">

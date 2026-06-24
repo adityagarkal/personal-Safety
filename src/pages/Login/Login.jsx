@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import isoLogo from "../../assets/iso-logo.png";
 import nauticalLogo from "../../assets/nautical-institute.png";
-
 import shipBg from "../../assets/ship-bg.png";
 import { validateLoginFromDatabase } from "../../services/databaseService";
 

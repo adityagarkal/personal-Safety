@@ -27,8 +27,15 @@ import {
 
 import {
   selectCourseFolder,
+  selectCoursePackage,
   importValidatedCourse,
 } from "./courseImport.js";
+
+import {
+  readGcbtTextFile,
+  readGcbtBinaryFile,
+  clearGcbtPackageCache,
+} from "./gcbtPackage.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -72,6 +79,40 @@ function getCourseFilePath(relativePath) {
   return path.join(app.getPath("userData"), cleanPath);
 }
 
+function normalizeInternalPackagePath(value) {
+  return String(value || "")
+    .replace(/^[\\/]+/, "")
+    .replace(/\\/g, "/");
+}
+
+function isSafeCoursePackagePath(packagePath) {
+  if (!packagePath) return false;
+
+  const packagesDir = path.resolve(app.getPath("userData"), "course-packages");
+  const targetPath = path.resolve(packagePath);
+
+  return targetPath.startsWith(packagesDir + path.sep);
+}
+
+function parseGcbtReference(inputPath) {
+  const rawPath = String(inputPath || "");
+  const lowerPath = rawPath.toLowerCase();
+  const packageIndex = lowerPath.indexOf(".gcbt");
+
+  if (packageIndex === -1) {
+    return null;
+  }
+
+  const packageEndIndex = packageIndex + ".gcbt".length;
+  const packagePath = rawPath.slice(0, packageEndIndex);
+  const internalPath = normalizeInternalPackagePath(rawPath.slice(packageEndIndex));
+
+  return {
+    packagePath,
+    internalPath,
+  };
+}
+
 function getMimeType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
 
@@ -91,12 +132,47 @@ function getMimeType(filePath) {
 }
 
 ipcMain.handle("file:readCourseFile", (_event, relativePath) => {
+  const packageRef = parseGcbtReference(relativePath);
+
+  if (packageRef) {
+    if (!isSafeCoursePackagePath(packageRef.packagePath)) {
+      throw new Error("Unsafe course package path.");
+    }
+
+    return readGcbtTextFile(packageRef.packagePath, packageRef.internalPath);
+  }
+
   const filePath = getCourseFilePath(relativePath);
   return fs.readFileSync(filePath, "utf-8");
 });
 
 ipcMain.handle("file:readCourseAsset", (_event, assetPath) => {
   try {
+    const packageRef = parseGcbtReference(assetPath);
+
+    if (packageRef) {
+      if (!isSafeCoursePackagePath(packageRef.packagePath)) {
+        return {
+          success: false,
+          message: "Unsafe course package path.",
+          dataUrl: "",
+        };
+      }
+
+      const mime = getMimeType(packageRef.internalPath);
+      const buffer = readGcbtBinaryFile(
+        packageRef.packagePath,
+        packageRef.internalPath
+      );
+
+      return {
+        success: true,
+        mime,
+        fileName: path.basename(packageRef.internalPath),
+        dataUrl: `data:${mime};base64,${buffer.toString("base64")}`,
+      };
+    }
+
     const resolvedPath = path.resolve(String(assetPath || ""));
     const coursesDir = path.resolve(app.getPath("userData"), "courses");
 
@@ -161,6 +237,10 @@ ipcMain.handle("db:getAdminDashboardStats", () => getAdminDashboardStats());
 ipcMain.handle("db:getUserTrainingProfile", (_event, userId) =>
   getUserTrainingProfile(userId)
 );
+ipcMain.handle("course:selectPackage", async () => {
+  return selectCoursePackage();
+});
+
 ipcMain.handle("course:selectFolder", async () => {
   return selectCourseFolder();
 });
@@ -224,10 +304,18 @@ ipcMain.handle("course:delete", async (_event, courseId) => {
         };
       }
 
-      fs.rmSync(course.course_path, {
-        recursive: true,
-        force: true,
-      });
+      const stat = fs.statSync(course.course_path);
+
+      if (stat.isDirectory()) {
+        fs.rmSync(course.course_path, {
+          recursive: true,
+          force: true,
+        });
+      } else {
+        fs.rmSync(course.course_path, { force: true });
+      }
+
+      clearGcbtPackageCache(course.course_path);
     }
 
     const dbResult = deleteCourseRecordById(courseId);
@@ -274,8 +362,12 @@ app.on("window-all-closed", () => {
 function isSafeCoursePath(coursePath) {
   if (!coursePath) return false;
 
-  const coursesDir = path.resolve(app.getPath("userData"), "courses");
   const targetPath = path.resolve(coursePath);
+  const coursesDir = path.resolve(app.getPath("userData"), "courses");
+  const packagesDir = path.resolve(app.getPath("userData"), "course-packages");
 
-  return targetPath.startsWith(coursesDir + path.sep);
+  return (
+    targetPath.startsWith(coursesDir + path.sep) ||
+    targetPath.startsWith(packagesDir + path.sep)
+  );
 }

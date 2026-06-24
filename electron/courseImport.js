@@ -1,264 +1,143 @@
 import fs from "fs";
 import path from "path";
 import { app, dialog } from "electron";
-import { XMLParser } from "fast-xml-parser";
+import { readGcbtMetadata, clearGcbtPackageCache } from "./gcbtPackage.js";
 
-const parser = new XMLParser({
-  ignoreAttributes: false,
-  attributeNamePrefix: "@_",
-  textNodeName: "#text",
-  trimValues: true,
-});
+function ensureCoursePackagesDirectory() {
+  const packagesDir = path.join(app.getPath("userData"), "course-packages");
 
-function normalizeArray(value) {
-  if (!value) return [];
-  return Array.isArray(value) ? value : [value];
-}
-
-function ensureCoursesDirectory() {
-  const coursesDir = path.join(app.getPath("userData"), "courses");
-
-  if (!fs.existsSync(coursesDir)) {
-    fs.mkdirSync(coursesDir, { recursive: true });
+  if (!fs.existsSync(packagesDir)) {
+    fs.mkdirSync(packagesDir, { recursive: true });
   }
 
-  return coursesDir;
-}
-
-function findCbtXml(startDir) {
-  const entries = fs.readdirSync(startDir, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const fullPath = path.join(startDir, entry.name);
-
-    if (entry.isFile() && entry.name.toLowerCase() === "cbt.xml") {
-      return fullPath;
-    }
-
-    if (entry.isDirectory()) {
-      const result = findCbtXml(fullPath);
-
-      if (result) {
-        return result;
-      }
-    }
-  }
-
-  return null;
-}
-
-function readXmlFile(filePath) {
-  const xmlText = fs.readFileSync(filePath, "utf-8");
-  return parser.parse(xmlText);
-}
-
-function extractCourseMetadata(cbtXmlPath) {
-  const parsed = readXmlFile(cbtXmlPath);
-  const module = parsed?.module;
-
-  if (!module) {
-    throw new Error("Invalid cbt.xml: module tag not found.");
-  }
-
-  const courseCode = String(module["@_OBLnr"] || "").padStart(3, "0");
-  const courseName = String(module["@_name"] || "Untitled Course").trim();
-  const shortName = String(module["@_shortName"] || "").trim();
-
-  if (!courseCode || !courseName) {
-    throw new Error("Course code or course name not found in cbt.xml.");
-  }
-
-  const chapters = normalizeArray(module?.chapters?.chap);
-
-  return {
-    courseCode,
-    courseName,
-    shortName,
-    totalChapters: chapters.length,
-    chapters,
-  };
-}
-
-function detectLanguages(courseRootPath) {
-  const languages = new Set();
-
-  function walk(dir) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
-
-      if (entry.isDirectory()) {
-        walk(fullPath);
-        continue;
-      }
-
-      if (!entry.isFile()) continue;
-      if (!entry.name.toLowerCase().endsWith(".xml")) continue;
-
-      try {
-        const parsed = readXmlFile(fullPath);
-        const pages = normalizeArray(parsed?.pages?.page);
-
-        for (const page of pages) {
-          const level = page?.["@_level"];
-
-          if (level) {
-            languages.add(String(level).trim());
-          }
-        }
-      } catch {
-        // Ignore invalid/non-page XML files.
-      }
-    }
-  }
-
-  walk(courseRootPath);
-
-  if (languages.size === 0) {
-    languages.add("EN");
-  }
-
-  return Array.from(languages).sort();
-}
-
-function countXmlPages(courseRootPath) {
-  let count = 0;
-
-  function walk(dir) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
-
-      if (entry.isDirectory()) {
-        walk(fullPath);
-        continue;
-      }
-
-      if (
-        entry.isFile() &&
-        entry.name.toLowerCase().endsWith(".xml") &&
-        entry.name.toLowerCase() !== "cbt.xml"
-      ) {
-        count += 1;
-      }
-    }
-  }
-
-  walk(courseRootPath);
-
-  return count;
+  return packagesDir;
 }
 
 function safeFolderName(value) {
   return String(value || "")
     .trim()
     .replace(/[^a-zA-Z0-9-_]/g, "-")
-    .replace(/-+/g, "-");
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
-export async function selectCourseFolder() {
+function isSafeCourseStoragePath(coursePath) {
+  if (!coursePath) return false;
+
+  const targetPath = path.resolve(coursePath);
+  const userDataPath = path.resolve(app.getPath("userData"));
+  const coursesDir = path.join(userDataPath, "courses");
+  const packagesDir = path.join(userDataPath, "course-packages");
+
+  return (
+    targetPath.startsWith(coursesDir + path.sep) ||
+    targetPath.startsWith(packagesDir + path.sep)
+  );
+}
+
+function removeExistingCourseStorage(existingCoursePath = "") {
+  if (!existingCoursePath) return;
+  if (!fs.existsSync(existingCoursePath)) return;
+
+  if (!isSafeCourseStoragePath(existingCoursePath)) {
+    throw new Error("Unsafe existing course path detected.");
+  }
+
+  const stat = fs.statSync(existingCoursePath);
+
+  if (stat.isDirectory()) {
+    fs.rmSync(existingCoursePath, { recursive: true, force: true });
+    return;
+  }
+
+  fs.rmSync(existingCoursePath, { force: true });
+}
+
+export async function selectCoursePackage() {
   const result = await dialog.showOpenDialog({
-    title: "Select Extracted CBT Course Folder",
-    properties: ["openDirectory"],
+    title: "Select Encrypted GCBT Course Package",
+    properties: ["openFile"],
+    filters: [
+      { name: "Gemini CBT Package", extensions: ["gcbt"] },
+      { name: "All Files", extensions: ["*"] },
+    ],
   });
 
   if (result.canceled || !result.filePaths?.length) {
     return {
       success: false,
-      message: "Folder selection cancelled.",
+      message: "Package selection cancelled.",
       data: null,
     };
   }
 
   const selectedPath = result.filePaths[0];
-  const cbtXmlPath = findCbtXml(selectedPath);
 
-  if (!cbtXmlPath) {
+  if (path.extname(selectedPath).toLowerCase() !== ".gcbt") {
     return {
       success: false,
-      message: "Invalid CBT folder. cbt.xml not found.",
+      message: "Invalid file selected. Please select a .gcbt course package.",
       data: null,
     };
   }
 
-  const courseRootPath = path.dirname(cbtXmlPath);
-  const metadata = extractCourseMetadata(cbtXmlPath);
-  const languages = detectLanguages(courseRootPath);
-  const totalPages = countXmlPages(courseRootPath);
+  try {
+    const metadata = readGcbtMetadata(selectedPath);
 
-  return {
-    success: true,
-    message: "Course folder validated successfully.",
-    data: {
-      sourcePath: courseRootPath,
-      cbtXmlPath,
-      courseCode: metadata.courseCode,
-      courseName: metadata.courseName,
-      shortName: metadata.shortName,
-      totalChapters: metadata.totalChapters,
-      totalPages,
-      languages,
-    },
-  };
+    return {
+      success: true,
+      message: "GCBT package validated successfully.",
+      data: {
+        sourcePath: selectedPath,
+        packagePath: selectedPath,
+        packageType: "gcbt",
+        courseCode: metadata.courseCode,
+        courseName: metadata.courseName,
+        shortName: metadata.shortName,
+        totalChapters: metadata.totalChapters,
+        totalPages: metadata.totalPages,
+        languages: metadata.languages || ["EN"],
+      },
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message || "Invalid or unreadable GCBT package.",
+      data: null,
+    };
+  }
 }
 
-function isSafeCoursePath(coursePath) {
-  if (!coursePath) return false;
-
-  const coursesDir = path.resolve(app.getPath("userData"), "courses");
-  const targetPath = path.resolve(coursePath);
-
-  return targetPath.startsWith(coursesDir + path.sep);
+// Backward-compatible name used by the existing renderer service.
+export async function selectCourseFolder() {
+  return selectCoursePackage();
 }
 
-function copyCourseFolder(sourceRootPath, metadata, existingCoursePath = "") {
-  const coursesDir = ensureCoursesDirectory();
+function copyCoursePackage(sourcePackagePath, metadata, existingCoursePath = "") {
+  const packagesDir = ensureCoursePackagesDirectory();
 
-  const folderName = `${metadata.courseCode}-${safeFolderName(
+  const fileName = `${metadata.courseCode}-${safeFolderName(
     metadata.shortName || metadata.courseName
-  )}`;
+  )}.gcbt`;
 
-  const destinationPath = path.join(coursesDir, folderName);
-
-  const resolvedSourcePath = path.resolve(sourceRootPath);
+  const destinationPath = path.join(packagesDir, fileName);
+  const resolvedSourcePath = path.resolve(sourcePackagePath);
   const resolvedDestinationPath = path.resolve(destinationPath);
 
   if (resolvedSourcePath === resolvedDestinationPath) {
     throw new Error(
-      "Selected folder is already inside the application course storage. Please select the original extracted CBT folder."
+      "Selected package is already inside the application course storage. Please select the original .gcbt file."
     );
   }
 
-  // If old course path exists in DB, remove old physical folder first
-  if (
-    existingCoursePath &&
-    fs.existsSync(existingCoursePath) &&
-    isSafeCoursePath(existingCoursePath)
-  ) {
-    fs.rmSync(existingCoursePath, {
-      recursive: true,
-      force: true,
-    });
-  }
+  removeExistingCourseStorage(existingCoursePath);
 
-  // If same destination folder already exists, remove it and replace
   if (fs.existsSync(destinationPath)) {
-    if (!isSafeCoursePath(destinationPath)) {
-      throw new Error("Unsafe course destination path detected.");
-    }
-
-    fs.rmSync(destinationPath, {
-      recursive: true,
-      force: true,
-    });
+    removeExistingCourseStorage(destinationPath);
   }
 
-  fs.cpSync(sourceRootPath, destinationPath, {
-    recursive: true,
-    force: true,
-  });
+  fs.copyFileSync(sourcePackagePath, destinationPath);
+  clearGcbtPackageCache(destinationPath);
 
   return destinationPath;
 }
@@ -267,12 +146,20 @@ export function importValidatedCourse(courseData, existingCoursePath = "") {
   if (!courseData?.sourcePath) {
     return {
       success: false,
-      message: "Course source path is required.",
+      message: "Course package path is required.",
       data: null,
     };
   }
 
-  const destinationPath = copyCourseFolder(
+  if (path.extname(courseData.sourcePath).toLowerCase() !== ".gcbt") {
+    return {
+      success: false,
+      message: "Only encrypted .gcbt course packages are supported.",
+      data: null,
+    };
+  }
+
+  const destinationPath = copyCoursePackage(
     courseData.sourcePath,
     courseData,
     existingCoursePath
@@ -280,7 +167,7 @@ export function importValidatedCourse(courseData, existingCoursePath = "") {
 
   return {
     success: true,
-    message: "Course copied successfully.",
+    message: "Course package copied successfully.",
     data: {
       ...courseData,
       destinationPath,
